@@ -292,29 +292,37 @@
   <!--START SECTION REVIEWS-->
   <section class="section section--pb-medium section--pt-large s-reviews">
     <div class="container">
-      <div class="reviews">
-        <div class="review">
-          <div class="review__text">
-            <div class="review__text-wrapper">
-              Решил жене сделать небольшой подарок во время ее отсутствия, она придя
-              домой не могла понять что вообще произошло))) Все сияло, блестело и остался
-              приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!
-              <div class="review__text-full-btn-block">
-                <button type="button" class="btn btn--link review__text-full-btn">
-                  Читать полностью</button>
+      <swiper
+          :moduless="swiperModules"
+          navigation
+          :slides-per-view="1"
+          :space-between="50"
+          loop
+      >
+        <swiper-slide
+            v-for="review in reviews" :key="review"
+        >
+          <div class="review">
+            <div class="review__text">
+              <div class="review__text-wrapper">
+                {{ review.text }}
+<!--                <div class="review__text-full-btn-block">-->
+<!--                  <button type="button" class="btn btn&#45;&#45;link review__text-full-btn">-->
+<!--                    Читать полностью</button>-->
+<!--                </div>-->
               </div>
+              <div class="review__text-arrow"></div>
             </div>
-            <div class="review__text-arrow"></div>
-          </div>
-          <div class="review__info">
-            <div class="review__photo-block">
-              <div class="review__photo"
-                   style="background-image: url(/images/reviews/reviewer-01.jpg)"></div>
+            <div class="review__info">
+              <div class="review__photo-block">
+                <div class="review__photo"
+                     :style="{'background-image': `url(${review.author.avatar})`}"></div>
+              </div>
+              <div class="review__name">{{ review.author.name }}</div>
             </div>
-            <div class="review__name">Андрей Ли</div>
           </div>
-        </div>
-      </div>
+        </swiper-slide>
+      </swiper>
 
       <div class="reviews__slider-control navigation">
         <div class="reviews__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
@@ -585,7 +593,50 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
+import { Pagination } from 'swiper';
+import 'swiper/swiper.scss';
+import 'swiper/modules/pagination/pagination.scss';
+import { SwiperModule } from 'swiper/types/shared';
 
-@Options({})
-export default class Home extends Vue {}
+interface ReviewProps {
+  text: string,
+  author: {
+    name: string,
+    avatar: string,
+  },
+}
+
+@Options({
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+})
+export default class Home extends Vue {
+  swiperModules: SwiperModule[] = [Pagination];
+  reviews: ReviewProps[] = [
+    {
+      text: 'Решил жене сделать небольшой подарок во время ее отсутствия, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!',
+      author: {
+        name: 'Андрей Ли',
+        avatar: '/images/reviews/reviewer-01.jpg',
+      },
+    },
+    {
+      text: 'Решил жене сделать, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было !',
+      author: {
+        name: 'Андрей Ли2',
+        avatar: '/images/reviews/reviewer-01.jpg',
+      },
+    },
+    {
+      text: 'Все сияло, блестело и остался приятный свежий запах, это было ! Решил жене сделать, она придя домой не могла понять что вообще произошло)))',
+      author: {
+        name: 'Андрей Ли3',
+        avatar: '/images/reviews/reviewer-01.jpg',
+      },
+    },
+  ];
+}
 </script>
