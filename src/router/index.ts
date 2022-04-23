@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../views/Home.vue';
+import ProfileLayout from '@/layouts/ProfileLayout.vue';
+import Home from '@/views/Home.vue';
+import About from '@/views/About.vue';
+import Order from '@/views/Order.vue';
+import ProfileOrders from '@/views/Profile/ProfileOrders.vue';
+import ProfileFreeOrders from '@/views/Profile/ProfileFreeOrders.vue';
+import ProfileSettings from '@/views/Profile/ProfileSettings.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,10 +16,38 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: About,
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: Order,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    redirect: (to) => ({
+      path: '/profile/orders',
+      query: to.query,
+    }),
+    component: ProfileLayout,
+    children: [
+      {
+        path: '/profile/orders',
+        name: 'ProfileOrders',
+        component: ProfileOrders,
+      },
+      {
+        path: '/profile/free-orders',
+        name: 'ProfileFreeOrders',
+        component: ProfileFreeOrders,
+      },
+      {
+        path: '/profile/settings',
+        name: 'ProfileSettings',
+        component: ProfileSettings,
+      },
+    ],
   },
 ];
 

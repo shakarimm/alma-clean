@@ -1,0 +1,370 @@
+@import "mixins";
+@import "vars";
+
+// AUTHORIZATION FORM
+.authorization-form{
+	&__input-block{
+		width: 48.5%;
+	}
+	&__inputs, &__buttons{
+		@include display-flex;
+	}
+	&__inputs{
+		@include flex-direction(row);
+		@include justify-content(space-between);
+		@include flex-wrap(wrap);
+	}
+	&__buttons{
+		margin-top: 10%;
+		@include justify-content(center);
+		@include align-items(center);
+		@include flex-direction(column);
+	}
+	&__submit-btn{
+		width: 100%;
+	}
+	&__change-from-btn{
+		margin-top: 3.2%;
+	}
+}
+
+// PROFILE MENU
+.profile-menu{
+	font-size: 1.2em;
+	background: #fff;
+	@include border-radius-default;
+	@include box-shadow-default;
+	&__items{
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(space-between);
+		@include align-items(center);
+	}
+	&__item{
+		padding: 2em 2.2em;
+		text-decoration: none;
+		color: $color_violet;
+		font-weight: 500;
+		@include transition;
+		&:active, &:focus{
+			color: $color_violet;
+		}
+		&--active, &:hover{
+			color: $color_primary;
+			&:active, &:focus{
+				color: $color_primary;
+			}
+		}
+	}
+}
+
+// LIST ITEM
+.list-item{
+	padding: 30px;
+	background: #fff;
+	border: solid 1px $color_gray_light_20;
+	@include display-flex;
+	@include flex-direction(row);
+	@include justify-content(space-between);
+	@include align-items(stretch);
+	@include border-radius-default;
+}
+
+// DATE CARD
+.date-card{
+	font-size: 1.7em;
+	width: 2em;
+	text-align: center;
+	font-weight: 500;
+	background: #fff;
+	@include box-shadow-default;
+	&__day{
+		color: $color_gray_dark_27;
+		padding: 0.1em 0;
+	}
+	&__month{
+		font-size: 0.6em;
+		background: $color_primary;
+		color: #fff;
+		text-transform: uppercase;
+		padding: 0.1em 0;
+	}
+}
+
+// HUMAN SHORT CARD
+.human-short-card{
+	@include display-flex;
+	@include flex-direction(row);
+	@include justify-content(flex-start);
+	@include align-items(center);
+	&__avatar{
+		width: 2.65em;
+		height: 2.65em;
+		background-position: center center;
+		@include background-size(cover);
+		@include border-radius(2.65em);
+	}
+	&__name{
+		margin-left: 1em;
+	}
+}
+
+// CLEANER CARD
+.cleaner-card{
+	font-size: 1.2em;
+	& + &{
+		margin-top: 2%;
+	}
+	&__btn{
+		text-transform: none;
+		font-weight: 400;
+	}
+	&__cleanings-count{
+		color: $color_gray_dark_15;
+	}
+	&__col{
+		@include box-sizing;
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(flex-start);
+		@include align-items(center);
+		&--one{
+			width: 33%;
+		}
+		&--two{
+			width: 20%;
+		}
+		&--three{
+			width: 37%;
+			@include justify-content(space-between);
+		}
+		&--two, &--three{
+			font-size: 0.8em;
+		}
+	}
+}
+
+// ORDER CARD
+.order-card{
+	font-size: 0.95em;
+	& + &{
+		margin-top: 2%;
+	}
+	&__col{
+		@include box-sizing;
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(flex-start);
+		@include align-items(center);
+		&--one{
+			width: 34%;
+		}
+		&--two{
+			width: 26%;
+		}
+		&--three{
+			width: 40%;
+			@include justify-content(space-between);
+		}
+		&--one, &--two{
+			padding-right: 1.9%;
+			border-right: solid 1px $color_gray_light_20;
+		}
+		&--two, &--three{
+			padding-left: 1.9%;
+		}
+	}
+	&__address{
+		color: $color_violet;
+	}
+	&__number{
+		color: $color_gray_light;
+	}
+	&__row{
+		> * + *{
+			margin-top: 0.3em;
+		}
+	}
+	&__date{
+		margin-right: 6%;
+		@include flex-shrink;
+	}
+	&__type{
+		font-weight: 500;
+	}
+}
+
+// HOR TABS
+.hor-tabs{
+	@include display-flex;
+	@include flex-direction(row);
+	@include justify-content(flex-start);
+	@include align-items(center);
+}
+.hor-tab{
+	padding: 0.7em 1.6em;
+	text-decoration: none;
+	color: $color_gray_dark_27;
+	@include transition;
+	span{
+		position: relative;
+		display: inline-block;
+		&::after{
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 0;
+			left: 0;
+			bottom: -0.5em;
+			background: $color_primary;
+			@include transition;
+		}
+	}
+	&--active{
+		color: $color_primary;
+		span::after{
+			height: 0.21em;
+		}
+	}
+	&:hover{
+		color: $color_primary;
+	}
+}
+.profile-hor-tabs{
+	font-size: 1.2em;
+}
+
+// SHORT ORDER FORM
+.short-order-form{
+	border: solid 1px $color_gray_light_15;
+	&__container{
+		padding: 3.8% 3.6%;
+		& + &{
+			border-top: solid 1px $color_gray_light_15;
+		}
+	}
+	&__option{
+		width: 29%;
+		margin-right: 4%;
+	}
+	&__modal-btn-block{
+		width: 29%;
+	}
+	&__modal-btn{
+		height: 100%;
+		width: 100%;
+	}
+	&__options{
+		margin-top: 5%;
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(flex-start);
+		@include align-items(stretch);
+	}
+	&__result{
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(space-between);
+		@include align-items(center);
+	}
+	&__info{
+		width: 42%;
+	}
+	&__price{
+		font-size: 1.7em;
+		font-weight: 500;
+		color: $color_primary;
+	}
+}
+
+// SUBSCRIBE FORM
+.subscribe-form{
+	@include display-flex;
+	@include flex-direction(row);
+	@include justify-content(flex-start);
+	@include align-items(stretch);
+	&__email-block{
+		width: 40%;
+	}
+	&__checkbox-block{
+		margin-left: 7.5%;
+		padding-top: 0.9em;
+		font-size: 1.4em;
+		@include display-flex;
+		@include flex-direction(column);
+		@include justify-content(center);
+		.checkbox{
+			line-height: 1.2;
+			&__check{
+				font-weight: 500;
+			}
+			&__text{
+				font-size: 0.7em;
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+// SEPARATED BLOCK
+.separated-block{
+	padding: 4.8% 3.7%;
+	color: $color_violet;
+	& + &{
+		border-top: solid 1px $color_primary;
+	}
+	&__title{
+		font-size: 1.85em;
+		margin-bottom: 0.3em;
+	}
+	&__subtitle{
+		color: $color_gray_dark_27;
+		margin-bottom: 1.7em;
+	}
+	&__text{
+		font-size: 1.15em;
+		line-height: 1.4;
+		max-width: 500px;
+		&--full{
+			max-width: none;
+		}
+	}
+	&__form{
+		width: 100%;
+		margin-top: -1.3em;
+		@include display-flex;
+		@include flex-direction(row);
+		@include justify-content(flex-start);
+		@include align-items(stretch);
+		@include flex-wrap(wrap);
+		&-separate-line{
+			width: 100%;
+			height: 1px;
+		}
+		&--mt-0{
+			margin-top: 0;
+		}
+	}
+	&__input-block{
+		width: 30.5%;
+		margin-top: 1.3em !important;
+		&--double{
+			width: 65.2%;
+		}
+		& + &{
+			margin-left: 4.25%;
+		}
+	}
+	&__btn-secondary{
+		width: 32.5%;
+		margin-top: 5%;
+	}
+}
+
+// SECTIONS
+// SECTION PROFILE MENU
+.s-profile-menu{
+	margin-top: -100px;
+	position: relative;
+	z-index: 3;
+}

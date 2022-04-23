@@ -1,0 +1,159 @@
+@font-face {
+  font-family: 'Almaclean-Icons';
+  src:  url('/fonts/Almaclean-Icons/Almaclean-Icons.eot?qlllzg');
+  src:  url('/fonts/Almaclean-Icons/Almaclean-Icons.eot?qlllzg#iefix') format('embedded-opentype'),
+    url('/fonts/Almaclean-Icons/Almaclean-Icons.ttf?qlllzg') format('truetype'),
+    url('/fonts/Almaclean-Icons/Almaclean-Icons.woff?qlllzg') format('woff'),
+    url('/fonts/Almaclean-Icons/Almaclean-Icons.svg?qlllzg#Almaclean-Icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.ac-icon{
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Almaclean-Icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ac-icon-check:before {
+  content: "\e92b";
+}
+.ac-icon-apartment-building:before {
+  content: "\e929";
+}
+.ac-icon-house:before {
+  content: "\e92a";
+}
+.ac-icon-fridge:before {
+  content: "\e900";
+}
+.ac-icon-hand-with-money:before {
+  content: "\e901";
+}
+.ac-icon-jalousie:before {
+  content: "\e902";
+}
+.ac-icon-kitchen:before {
+  content: "\e903";
+}
+.ac-icon-kitchen-staff:before {
+  content: "\e904";
+}
+.ac-icon-laundry:before {
+  content: "\e905";
+}
+.ac-icon-lustre:before {
+  content: "\e906";
+}
+.ac-icon-man:before {
+  content: "\e907";
+}
+.ac-icon-medal:before {
+  content: "\e908";
+}
+.ac-icon-oven:before {
+  content: "\e909";
+}
+.ac-icon-quote:before {
+  content: "\e90a";
+}
+.ac-icon-social-facebook:before {
+  content: "\e90b";
+}
+.ac-icon-social-google:before {
+  content: "\e90c";
+}
+.ac-icon-social-instagram:before {
+  content: "\e90d";
+}
+.ac-icon-social-odnoklassniki:before {
+  content: "\e90e";
+}
+.ac-icon-social-twitter:before {
+  content: "\e90f";
+}
+.ac-icon-social-vkontakte:before {
+  content: "\e910";
+}
+.ac-icon-sofa:before {
+  content: "\e911";
+}
+.ac-icon-sofa-with-nightstand:before {
+  content: "\e912";
+}
+.ac-icon-sponge:before {
+  content: "\e913";
+}
+.ac-icon-star:before {
+  content: "\e914";
+}
+.ac-icon-tag:before {
+  content: "\e915";
+}
+.ac-icon-time:before {
+  content: "\e916";
+}
+.ac-icon-trading:before {
+  content: "\e917";
+}
+.ac-icon-truck:before {
+  content: "\e918";
+}
+.ac-icon-wall:before {
+  content: "\e919";
+}
+.ac-icon-wallet:before {
+  content: "\e91a";
+}
+.ac-icon-window:before {
+  content: "\e91b";
+}
+.ac-icon-arrow-down:before {
+  content: "\e91c";
+}
+.ac-icon-balcony:before {
+  content: "\e91d";
+}
+.ac-icon-bed:before {
+  content: "\e91e";
+}
+.ac-icon-calendar:before {
+  content: "\e91f";
+}
+.ac-icon-card:before {
+  content: "\e920";
+}
+.ac-icon-carpet:before {
+  content: "\e921";
+}
+.ac-icon-chair:before {
+  content: "\e922";
+}
+.ac-icon-circle-man:before {
+  content: "\e923";
+}
+.ac-icon-cleaning:before {
+  content: "\e924";
+}
+.ac-icon-clothes-rack:before {
+  content: "\e925";
+}
+.ac-icon-dishes:before {
+  content: "\e926";
+}
+.ac-icon-document:before {
+  content: "\e927";
+}
+.ac-icon-eco:before {
+  content: "\e928";
+}
