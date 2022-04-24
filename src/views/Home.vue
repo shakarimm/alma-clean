@@ -435,46 +435,17 @@
     <div class="container">
       <div class="title">Наше оборудование</div>
       <div class="equipments">
-
-        <div class="equipment">
+        <div
+            v-for="equipment in equipments" :key="equipment"
+            class="equipment">
           <div class="equipment__photo-block">
-            <img src="/images/equipments/puzzi-10-1.png" alt="Puzzi 10/1" class="equipment__photo">
+            <img :src="equipment.photo" :alt="equipment.name" class="equipment__photo">
           </div>
-          <div class="equipment__name">Puzzi 10/1</div>
-          <div class="equipment__type">Моющий пылесос</div>
-          <button type="button" class="btn btn--primary equipment__btn-about">Описание</button>
+          <div class="equipment__name">{{ equipment.name }}</div>
+          <div class="equipment__type">{{ equipment.type }}</div>
+          <button type="button" class="btn btn--primary equipment__btn-about"
+            @click="showedEquipmentModal = equipment">Описание</button>
         </div>
-
-        <div class="equipment">
-          <div class="equipment__photo-block">
-            <img src="/images/equipments/ipc-soteco-fox.png"
-                 alt="IPC Soteco Fox" class="equipment__photo">
-          </div>
-          <div class="equipment__name">IPC Soteco Fox</div>
-          <div class="equipment__type">Пылесос</div>
-          <button type="button" class="btn btn--primary equipment__btn-about">Описание</button>
-        </div>
-
-        <div class="equipment">
-          <div class="equipment__photo-block">
-            <img src="/images/equipments/kirby-sentria.png"
-                 alt="Kirby Sentria" class="equipment__photo">
-          </div>
-          <div class="equipment__name">Kirby Sentria</div>
-          <div class="equipment__type">Пылесос</div>
-          <button type="button" class="btn btn--primary equipment__btn-about">Описание</button>
-        </div>
-
-        <div class="equipment">
-          <div class="equipment__photo-block">
-            <img src="/images/equipments/sc-2-premium.png"
-                 alt="SC 2 Premium" class="equipment__photo">
-          </div>
-          <div class="equipment__name">SC 2 Premium</div>
-          <div class="equipment__type">Пароочиститель</div>
-          <button type="button" class="btn btn--primary equipment__btn-about">Описание</button>
-        </div>
-
       </div>
     </div>
   </section>
@@ -628,12 +599,19 @@
     </div>
   </section>
   <!--END SECTION CONTACT US-->
+  <Modal
+      :is-active="showedEquipmentModal != null"
+      @close="showedEquipmentModal = null;"
+  >
+    <div v-html="showedEquipmentModal?.description"/>
+  </Modal>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
 import { Pagination, Navigation, SwiperOptions } from 'swiper';
+import Modal from '@/components/Modal.vue';
 import 'swiper/swiper.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import 'swiper/modules/navigation/navigation.scss';
@@ -647,15 +625,24 @@ interface ReviewProps {
   },
 }
 
+interface EquipmentProps {
+  name: string,
+  type: string,
+  photo: string,
+  description: string,
+}
+
 type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
 
 @Options({
   components: {
     Swiper,
     SwiperSlide,
+    Modal,
   },
 })
 export default class Home extends Vue {
+  showedEquipmentModal: EquipmentProps|null = null;
   specialOfferTabActive: SpecialOfferTabType = 'furniture';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
   reviews: ReviewProps[] = [
@@ -685,6 +672,33 @@ export default class Home extends Vue {
   reviewsSliderOptions: SwiperOptions = {
     modules: this.swiperModules,
     loop: true,
-  }
+  };
+
+  equipments: EquipmentProps[] = [
+    {
+      name: 'Puzzi 10/1',
+      type: 'Моющий пылесос',
+      photo: '/images/equipments/puzzi-10-1.png',
+      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+    },
+    {
+      name: 'IPC Soteco Fox',
+      type: 'Пылесос',
+      photo: '/images/equipments/ipc-soteco-fox.png',
+      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+    },
+    {
+      name: 'Kirby Sentria',
+      type: 'Пылесос',
+      photo: '/images/equipments/kirby-sentria.png',
+      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+    },
+    {
+      name: 'SC 2 Premium',
+      type: 'Пароочиститель',
+      photo: '/images/equipments/sc-2-premium.png',
+      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+    },
+  ];
 }
 </script>
