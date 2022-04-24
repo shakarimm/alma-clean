@@ -1032,6 +1032,7 @@ img{
 	height: 24px;
 	cursor: pointer;
 	background: $color_gray_light_25;
+	display: inline-block;
 	@include border-radius(50%);
 	@include transition;
 	& + &{

@@ -293,11 +293,20 @@
   <section class="section section--pb-medium section--pt-large s-reviews">
     <div class="container">
       <swiper
-          :moduless="swiperModules"
-          navigation
-          :slides-per-view="1"
-          :space-between="50"
           loop
+          :spaceBetween="30"
+          :navigation="{
+            prevEl: '#reviews-slider-prev-button',
+            nextEl: '#reviews-slider-next-button',
+          }"
+          :pagination="{
+            el: '#reviews-slider-pagination',
+            type: 'bullets',
+            bulletClass: 'dot',
+            bulletActiveClass: 'dot--active',
+            clickable: true,
+          }"
+          :modules="swiperModules"
       >
         <swiper-slide
             v-for="review in reviews" :key="review"
@@ -325,17 +334,17 @@
       </swiper>
 
       <div class="reviews__slider-control navigation">
-        <div class="reviews__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
+        <div
+            id="reviews-slider-prev-button"
+            class="reviews__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
           <i class="ac-icon ac-icon-arrow-down"></i>
         </div>
         <div class="reviews__dots dots">
-          <div class="dot"></div>
-          <div class="dot dot--active"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+          <div id="reviews-slider-pagination"></div>
         </div>
-        <div class="reviews__navigation-arrow-next navigation__arrow navigation__arrow--next">
+        <div
+            id="reviews-slider-next-button"
+            class="reviews__navigation-arrow-next navigation__arrow navigation__arrow--next">
           <i class="ac-icon ac-icon-arrow-down"></i>
         </div>
       </div>
@@ -351,19 +360,27 @@
         <div class="special-offer__subtitle">услуги и предложения</div>
 
         <div class="special-offer__tabs vertical-tabs">
-          <div class="vertical-tab vertical-tab--active">
+          <div class="vertical-tab"
+               :class="{ 'vertical-tab--active': specialOfferTabActive === 'furniture' }"
+               @click="specialOfferTabActive = 'furniture'">
             Химчистка мягкой мебели <br>и ковровых покрытий
             <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
           </div>
-          <div class="vertical-tab">
+          <div class="vertical-tab"
+               :class="{ 'vertical-tab--active': specialOfferTabActive === 'cabinet' }"
+               @click="specialOfferTabActive = 'cabinet'">
             Личный кабинет для <br>клиентов
             <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
           </div>
-          <div class="vertical-tab">
+          <div class="vertical-tab"
+               :class="{ 'vertical-tab--active': specialOfferTabActive === 'repair' }"
+               @click="specialOfferTabActive = 'repair'">
             Уборка после ремонта
             <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
           </div>
-          <div class="vertical-tab">
+          <div class="vertical-tab"
+               :class="{ 'vertical-tab--active': specialOfferTabActive === 'mobile_app' }"
+               @click="specialOfferTabActive = 'mobile_app'">
             Удобное мобильное <br>приложение
             <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
           </div>
@@ -372,14 +389,36 @@
 
       <div class="special-offer__block special-offer__block--right">
         <div class="special-offer__text">
-          <p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются
-            различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид,
-            а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели
-            является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки
-            сидений очистить самостоятельно очень трудно.</p>
-          <p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как
-            в виде отдельной услуги, так и в составе мероприятий по комплексной уборке
-            ваших помещений.</p>
+          <template v-if="specialOfferTabActive === 'furniture'">
+            <p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются
+              различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид,
+              а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели
+              является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки
+              сидений очистить самостоятельно очень трудно.</p>
+            <p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как
+              в виде отдельной услуги, так и в составе мероприятий по комплексной уборке
+              ваших помещений.</p>
+          </template>
+          <template v-if="specialOfferTabActive === 'cabinet'">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
+              doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
+              quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cupiditate
+              necessitatibus nemo quibusdam ratione. Accusamus consequatur error facere iure magni
+              nihil optio repudiandae, veritatis? Animi beatae est facere illo numquam!</p>
+          </template>
+          <template v-if="specialOfferTabActive === 'repair'">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
+              doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
+              quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
+          </template>
+          <template v-if="specialOfferTabActive === 'mobile_app'">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cupiditate
+              necessitatibus nemo quibusdam ratione.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
+              doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
+              quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
+          </template>
           <div class="special-offer__text-btn-block">
             <button type="button"
                     class="btn btn--white special-offer__text-btn">Заказать услугу</button>
@@ -594,9 +633,10 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
-import { Pagination } from 'swiper';
+import { Pagination, Navigation, SwiperOptions } from 'swiper';
 import 'swiper/swiper.scss';
 import 'swiper/modules/pagination/pagination.scss';
+import 'swiper/modules/navigation/navigation.scss';
 import { SwiperModule } from 'swiper/types/shared';
 
 interface ReviewProps {
@@ -607,6 +647,8 @@ interface ReviewProps {
   },
 }
 
+type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
+
 @Options({
   components: {
     Swiper,
@@ -614,7 +656,8 @@ interface ReviewProps {
   },
 })
 export default class Home extends Vue {
-  swiperModules: SwiperModule[] = [Pagination];
+  specialOfferTabActive: SpecialOfferTabType = 'furniture';
+  swiperModules: SwiperModule[] = [Pagination, Navigation];
   reviews: ReviewProps[] = [
     {
       text: 'Решил жене сделать небольшой подарок во время ее отсутствия, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!',
@@ -638,5 +681,10 @@ export default class Home extends Vue {
       },
     },
   ];
+
+  reviewsSliderOptions: SwiperOptions = {
+    modules: this.swiperModules,
+    loop: true,
+  }
 }
 </script>
