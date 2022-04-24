@@ -16,6 +16,9 @@ body{
 	color: #000;
 	padding-top: 78px;
 	line-height: 1.3;
+	&.modal-showed{
+		overflow: hidden;
+	}
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -1683,6 +1686,73 @@ img{
 	}
 	&:hover{
 		background: $color_primary_dark;
+	}
+}
+
+.modal{
+	$modal: &;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.6);
+	z-index: 99999;
+	overflow: auto;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.7s;
+	&__window{
+		background: #fff;
+		width: 90%;
+		max-width: 690px;
+		padding: 30px;
+		box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
+		position: relative;
+		margin: 30px auto;
+		transform: translateY(-30px);
+		transition: all 0.4s;
+		box-sizing: border-box;
+	}
+	&__close-btn{
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		background: none;
+		padding: 0;
+		border: none;
+		font-size: 1.6em;
+		width: 1em;
+		height: 1em;
+		color: $color_violet_dark;
+		transition: all 0.4s;
+		cursor: pointer;
+		&::before, &::after{
+			position: absolute;
+			content: '';
+			display: block;
+			width: 80%;
+			height: 1px;
+			background: currentColor;
+			top: 50%;
+			left: 50%;
+		}
+		&::before{
+			transform: translateX(-50%) rotate(45deg);
+		}
+		&::after{
+			transform: translateX(-50%) rotate(-45deg);
+		}
+		&:hover{
+			color: $color_primary;
+		}
+	}
+	&--active{
+		opacity: 1;
+		pointer-events: auto;
+		#{$modal}__window{
+			transform: translateY(0);
+		}
 	}
 }
 
