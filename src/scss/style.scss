@@ -1571,9 +1571,9 @@ img{
 // COLLAPSE
 .collapse{
 	border-bottom: solid 1px $color_gray_light_25;
-	padding-bottom: 1.8em;
 	padding-right: 3.3em;
 	position: relative;
+	@include transition;
 	&:not(&--active){
 		cursor: pointer;
 	}
@@ -1597,6 +1597,11 @@ img{
 		position: relative;
 		color: $color_violet;
 		@include fs-large;
+		&-wrapper{
+			font-size: 1rem;
+			padding-bottom: 1.8em;
+			@include transition;
+		}
 	}
 	&__arrow{
 		position: absolute;
@@ -1632,9 +1637,15 @@ img{
 	&--active &{
 		&__label{
 			cursor: pointer;
+			&-wrapper{
+				padding-bottom: 0.4em;
+			}
 		}
 		&__arrow{
 			@include transform(rotate(180deg) translateY(50%));
+		}
+		&__content{
+			padding-bottom: 1.4em;
 		}
 	}
 }

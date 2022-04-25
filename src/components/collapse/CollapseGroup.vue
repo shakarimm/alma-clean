@@ -1,30 +1,24 @@
 <template>
-  <div ref="children2" @v-on:test="apcho">
-    <slot></slot>
-  </div>
+  <slot></slot>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { computed } from 'vue';
 
-@Options({})
+@Options({
+  provide() {
+    return {
+      activeInGroup: computed(() => this.activeInGroup),
+      onClickCallback: this.onClickCallback,
+    };
+  },
+})
 export default class CollapseGroup extends Vue {
-  created(): void {
-    // this.$on('test', (message: any) => {
-    //   alert('AGAAAAA');
-    // });
-    // (this.$refs.children2 as any).$on('test', (message: any) => {
-    //   alert('AGAAAAA22222');
-    // });
-    // this.$refs.children.getElementsByClassName('collapse');
-  }
-  mounted(): void {
-    // (this.$refs.children2 as any).addEventListener('test', (message: any) => {
-    //   alert('AGAAAAA22222');
-    // });
-  }
-  apcho(): void {
-    alert('sd');
+  activeInGroup: HTMLElement|null = null;
+
+  onClickCallback(element: HTMLElement): void {
+    this.activeInGroup = element;
   }
 }
 </script>

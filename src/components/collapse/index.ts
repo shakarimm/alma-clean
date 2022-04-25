@@ -1,2 +1,4 @@
-export * as Collapse from './Collapse.vue';
-export * as CollapseGroup from './CollapseGroup.vue';
+import Collapse from './Collapse.vue';
+import CollapseGroup from './CollapseGroup.vue';
+
+export { Collapse, CollapseGroup };

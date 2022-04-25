@@ -1,17 +1,15 @@
 <template>
-  <div class="collapse" :class="{ 'collapse--active': isActive }">
-    <div class="collapse__label" @click="onClick">
-      Нужно ли мне быть дома во время уборки?
-      <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
+  <div ref="collapse" class="collapse" :class="{ 'collapse--active': isActive }">
+    <div class="collapse__label-wrapper" @click="onClick">
+      <div class="collapse__label">
+        {{ title }}
+        <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
+      </div>
     </div>
-    <div class="collapse__content">
-      <div class="collapse__content-wrapper">
+    <div class="collapse__content" :style="{ height: `${contentHeight}px` }">
+      <div class="collapse__content-wrapper" ref="contentWrapper">
         <div class="collapse__text">
-          <p>Многие клиенты остаются дома, когда впервые заказывают уборку
-            на WOW SERVICE. Но в следующий раз они предпочитают оставить
-            клинера одного, чтобы заниматься своими делами. Для этого есть
-            дополнительная услуга «Доставка ключей» — когда уборка будет
-            закончена, клинер просто привозит ключи туда, куда удобно клиенту.</p>
+          <slot/>
         </div>
       </div>
     </div>
@@ -20,16 +18,50 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { ComputedRef } from 'vue';
 
 @Options({
-  emits: ['test'],
+  inject: ['activeInGroup', 'onClickCallback'],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
+  watch: {
+    activeInGroup: {
+      handler() {
+        this.checkIsActiveInGroup();
+      },
+      deep: true,
+    },
+  },
 })
 export default class Collapse extends Vue {
+  readonly activeInGroup!: ComputedRef<null|HTMLElement>;
+  readonly onClickCallback!: null|CallableFunction;
+  readonly title!: string;
   isActive = false;
 
+  mounted(): void {
+    this.checkIsActiveInGroup();
+  }
+
+  checkIsActiveInGroup(): void {
+    if (this.activeInGroup === undefined || this.activeInGroup.value === null) return;
+    this.isActive = this.activeInGroup.value === this.$refs.collapse;
+  }
+
+  get contentHeight(): number {
+    if (!this.isActive) return 0;
+    return (this.$refs.contentWrapper as HTMLElement).offsetHeight;
+  }
+
   onClick(): void {
-    this.$emit('test');
     this.isActive = !this.isActive;
+    if (this.onClickCallback !== null && this.onClickCallback !== undefined) {
+      this.onClickCallback(this.$refs.collapse);
+    }
   }
 }
 </script>
