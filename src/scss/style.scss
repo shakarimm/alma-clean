@@ -1749,6 +1749,52 @@ img{
 	}
 }
 
+.work-examples-gallery-slider{
+	$self: &;
+	overflow: hidden;
+	&__wrapper{
+		margin-left: -32%;
+		margin-right: -32%;
+		position: relative;
+	}
+	.swiper{
+		#{$self}__image{
+			filter: grayscale(1);
+			opacity: 0.5;
+			transition: all 0.4s;
+			width: 100%;
+			background-size: cover;
+			background-position: center center;
+			&::before{
+				display: block;
+				content: '';
+				padding-bottom: 42%;
+			}
+		}
+		&-slide{
+			&-active, &-duplicate-active{
+				#{$self}__image{
+					filter: grayscale(0);
+					opacity: 1;
+				}
+			}
+		}
+	}
+	&__prev-button, &__next-button{
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+	}
+	&__prev-button{
+		transform: translate(-50%, -50%);
+		left: 33.3%;
+	}
+	&__next-button{
+		transform: translate(50%, -50%);
+		right: 33.3%;
+	}
+}
+
 // GOTOP BTN
 .gotop-btn{
 	background: $color_primary;
