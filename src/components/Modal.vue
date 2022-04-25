@@ -10,6 +10,9 @@
       <button type="button"
               @click="close"
               class="modal__close-btn"></button>
+      <div class="modal__title" v-if="title !== null">
+        {{ title }}
+      </div>
       <slot/>
     </div>
   </div>
@@ -24,6 +27,11 @@ import { Options, Vue } from 'vue-class-component';
       type: Boolean,
       required: false,
       default: false,
+    },
+    title: {
+      type: String,
+      required: false,
+      default: null,
     },
   },
   emits: ['close'],
@@ -46,6 +54,7 @@ import { Options, Vue } from 'vue-class-component';
 })
 export default class Modal extends Vue {
   readonly isActive!: boolean;
+  readonly title!: string|null;
   localIsActive = false;
   closeEmitDelayMs = 0;
 

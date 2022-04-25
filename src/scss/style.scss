@@ -1885,6 +1885,14 @@ img{
 			color: $color_primary;
 		}
 	}
+	&__title{
+		text-align: center;
+		font-size: 1.4em;
+		font-weight: 500;
+		color: $color_violet;
+		margin-bottom: 1.1em;
+		padding: 0 1em;
+	}
 	&--active{
 		opacity: 1;
 		pointer-events: auto;
