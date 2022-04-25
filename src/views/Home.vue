@@ -134,13 +134,97 @@
       <div class="about-cleaning__text">
         Клинер приезжает со всем необходимым и сразу же приступает к уборке.</div>
       <div class="about-cleaning__tabs tabs">
-        <button type="button" class="tab">Комнаты</button>
-        <button type="button" class="tab">Кухня</button>
-        <button type="button" class="tab tab--active">Ванная</button>
-        <button type="button" class="tab">Коридор</button>
+        <button type="button" class="tab"
+                @click="cleaningTypesTabActive = 'rooms'"
+                :class="{ 'tab--active': cleaningTypesTabActive === 'rooms' }"
+        >Комнаты</button>
+        <button type="button" class="tab"
+                @click="cleaningTypesTabActive = 'kitchen'"
+                :class="{ 'tab--active': cleaningTypesTabActive === 'kitchen' }"
+        >Кухня</button>
+        <button type="button" class="tab"
+                @click="cleaningTypesTabActive = 'bathroom'"
+                :class="{ 'tab--active': cleaningTypesTabActive === 'bathroom' }"
+        >Ванная</button>
+        <button type="button" class="tab"
+                @click="cleaningTypesTabActive = 'corridor'"
+                :class="{ 'tab--active': cleaningTypesTabActive === 'corridor' }"
+        >Коридор</button>
       </div>
       <div class="about-cleaning__tabs-content tabs-content">
-        <div class="tab-content">
+        <div class="tab-content" v-if="cleaningTypesTabActive === 'rooms'">
+          <div class="cleaning-interactive cleaning-interactive--rooms">
+            <div class="cleaning-interactive__point cleaning-interactive__point--01">
+              <div class="cleaning-interactive__point-text">
+                Уберём пыль со всех <br>доступных повернхностей
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--02">
+              <div class="cleaning-interactive__point-text">
+                Помоем пол
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--03">
+              <div class="cleaning-interactive__point-text">
+                Очистим зеркала <br>и стеклянные поверхности
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--04">
+              <div class="cleaning-interactive__point-text">
+                Протрём дверные ручки, <br>радиаторы, выключатели
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--05">
+              <div class="cleaning-interactive__point-text">
+                Вынесем мусор
+              </div>
+            </div>
+            <img src="/images/cleaning-interactive/rooms-bg.jpg"
+                 alt="Комнаты" class="cleaning-interactive__img">
+          </div>
+        </div>
+        <div class="tab-content" v-if="cleaningTypesTabActive === 'kitchen'">
+          <div class="cleaning-interactive cleaning-interactive--kitchen">
+            <div class="cleaning-interactive__point cleaning-interactive__point--01">
+              <div class="cleaning-interactive__point-text">
+                Протрём технику <br>снаружи
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--02">
+              <div class="cleaning-interactive__point-text">
+                Вынесем мусор
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--03">
+              <div class="cleaning-interactive__point-text">
+                Удалим пыль <br>с вентиляционных <br>решеток и <br>кондиционеров
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--04">
+              <div class="cleaning-interactive__point-text">
+                Помоему плиту
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--05">
+              <div class="cleaning-interactive__point-text">
+                Моем раковину
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--06">
+              <div class="cleaning-interactive__point-text">
+                Помоем плинтуса и пол
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--07">
+              <div class="cleaning-interactive__point-text">
+                Моем верхние <br>и нижние фасады кухни
+              </div>
+            </div>
+            <img src="/images/cleaning-interactive/kitchen-bg.jpg"
+                 alt="Кухня" class="cleaning-interactive__img">
+          </div>
+        </div>
+        <div class="tab-content" v-if="cleaningTypesTabActive === 'bathroom'">
           <div class="cleaning-interactive cleaning-interactive--bathroom">
             <div class="cleaning-interactive__point cleaning-interactive__point--01">
               <div class="cleaning-interactive__point-text">
@@ -180,6 +264,37 @@
             </div>
             <img src="/images/cleaning-interactive/bathroom-bg.jpg"
                  alt="Ванная" class="cleaning-interactive__img">
+          </div>
+        </div>
+        <div class="tab-content" v-if="cleaningTypesTabActive === 'corridor'">
+          <div class="cleaning-interactive cleaning-interactive--corridor">
+            <div class="cleaning-interactive__point cleaning-interactive__point--01">
+              <div class="cleaning-interactive__point-text">
+                Помоем пол
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--02">
+              <div class="cleaning-interactive__point-text">
+                Очистим зеркала <br>и стеклянные поверхности
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--03">
+              <div class="cleaning-interactive__point-text">
+                Протрём дверные ручки, <br>радиаторы, выключатели
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--04">
+              <div class="cleaning-interactive__point-text">
+                Уберём пыль со всех <br>доступных повернхностей
+              </div>
+            </div>
+            <div class="cleaning-interactive__point cleaning-interactive__point--05">
+              <div class="cleaning-interactive__point-text">
+                Вынесем мусор
+              </div>
+            </div>
+            <img src="/images/cleaning-interactive/corridor-bg.jpg"
+                 alt="Коридор" class="cleaning-interactive__img">
           </div>
         </div>
       </div>
@@ -576,6 +691,7 @@ interface EquipmentProps {
 }
 
 type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
+type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
 
 @Options({
   components: {
@@ -589,6 +705,7 @@ type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
 export default class Home extends Vue {
   showedEquipmentModal: EquipmentProps|null = null;
   specialOfferTabActive: SpecialOfferTabType = 'furniture';
+  cleaningTypesTabActive: CleaningTypesTabType = 'rooms';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
   reviews: ReviewProps[] = [
     {

@@ -1230,6 +1230,30 @@ img{
 			opacity: 1;
 		}
 	}
+	&--rooms{
+		#{$self}__point{
+			&--01{
+				left: 17%;
+				top: 36%;
+			}
+			&--02{
+				left: 35%;
+				bottom: 9%
+			}
+			&--03{
+				right: 23%;
+				top: 10%;
+			}
+			&--04{
+				right: 34%;
+				top: 43%;
+			}
+			&--05{
+				right: 13%;
+				bottom: 5%;
+			}
+		}
+	}
 	&--bathroom{
 		#{$self}__point{
 			&--01{
@@ -1255,6 +1279,62 @@ img{
 			&--06{
 				right: 10%;
 				top: 41%;
+			}
+		}
+	}
+	&--kitchen{
+		#{$self}__point{
+			&--01{
+				left: 5%;
+				top: 42%;
+			}
+			&--02{
+				left: 2%;
+				bottom: 7%;
+			}
+			&--03{
+				left: 49%;
+				top: 12%;
+			}
+			&--04{
+				left: 49%;
+				top: 34%;
+			}
+			&--05{
+				right: 34%;
+				top: 41%;
+			}
+			&--06{
+				right: 32%;
+				bottom: 4%;
+			}
+			&--07{
+				right: 20%;
+				top: 15%;
+			}
+		}
+	}
+	&--corridor{
+		#{$self}__point{
+			&--01{
+				left: 24%;
+				bottom: 24%;
+			}
+			&--02{
+				left: 27%;
+				top: 35%;
+			}
+			&--03{
+				left: 43%;
+				top: 25%;
+			}
+			&--04{
+				right: 46%;
+				bottom: 24%;
+			}
+			&--05{
+				right: 13%;
+				bottom: 5%;
 			}
 		}
 	}
