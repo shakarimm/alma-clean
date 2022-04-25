@@ -539,6 +539,7 @@
   </section>
   <!--END SECTION EQUIPMENT-->
   <FaqSection class="section--pb-medium"/>
+  <WorkExamplesGallerySection/>
   <ContactUsSection/>
   <Modal
       :is-active="showedEquipmentModal != null"
@@ -551,7 +552,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
-import { Pagination, Navigation, SwiperOptions } from 'swiper';
+import { Pagination, Navigation } from 'swiper';
 import Modal from '@/components/Modal.vue';
 import 'swiper/swiper.scss';
 import 'swiper/modules/pagination/pagination.scss';
@@ -560,6 +561,7 @@ import { SwiperModule } from 'swiper/types/shared';
 import FaqSection from '@/components/sections/FaqSection.vue';
 import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
+import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
 
 interface ReviewProps {
   text: string,
@@ -587,6 +589,7 @@ type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
     FaqSection,
     ContactUsSection,
     CountersSection,
+    WorkExamplesGallerySection,
   },
 })
 export default class Home extends Vue {
@@ -617,11 +620,6 @@ export default class Home extends Vue {
       },
     },
   ];
-
-  reviewsSliderOptions: SwiperOptions = {
-    modules: this.swiperModules,
-    loop: true,
-  };
 
   equipments: EquipmentProps[] = [
     {
