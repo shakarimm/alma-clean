@@ -491,16 +491,18 @@ img{
 		@include display-flex;
 		@include flex-direction(row);
 		@include justify-content(flex-start);
-		@include align-items(center);
-		@include flex-wrap(wrap);
 		&__prepend{
 			border: $border;
 			border-right: none;
 			padding: 0.73em 1em;
-			display: inline-block;
 			color: $color_violet;
+			line-height: 0;
 			@include flex-shrink;
 			@include border-radius($border-radius 0 0 $border-radius);
+			@include display-flex;
+			@include flex-direction(row);
+			@include justify-content(center);
+			@include align-items(center);
 			& ~ #{$control}{
 				padding-left: 1em;
 				@include border-radius(0 $border-radius $border-radius 0);
