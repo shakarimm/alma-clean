@@ -25,8 +25,8 @@ import { Options, Vue } from 'vue-class-component';
       required: false,
       default: false,
     },
-    emits: ['close'],
   },
+  emits: ['close'],
   watch: {
     localIsActive() {
       if (this.localIsActive) {
