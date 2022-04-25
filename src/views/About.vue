@@ -180,6 +180,7 @@
   <!--END SECTION OFFER WORK-->
   <CountersSection/>
   <FaqSection class="section--pt-medium section--pb-medium"/>
+  <WorkExamplesGallerySection/>
   <ContactUsSection/>
 </template>
 
@@ -188,12 +189,14 @@ import { Options, Vue } from 'vue-class-component';
 import FaqSection from '@/components/sections/FaqSection.vue';
 import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
+import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
 
 @Options({
   components: {
     CountersSection,
     ContactUsSection,
     FaqSection,
+    WorkExamplesGallerySection,
   },
 })
 export default class About extends Vue {}
