@@ -185,9 +185,6 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-// import { CollapseGroup, Collapse } from '@/components/collapse';
-import CollapseGroup from '@/components/collapse/CollapseGroup.vue';
-import Collapse from '@/components/collapse/Collapse.vue';
 import FaqSection from '@/components/sections/FaqSection.vue';
 import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
@@ -197,8 +194,6 @@ import CountersSection from '@/components/sections/CountersSection.vue';
     CountersSection,
     ContactUsSection,
     FaqSection,
-    CollapseGroup,
-    Collapse,
   },
 })
 export default class About extends Vue {}
