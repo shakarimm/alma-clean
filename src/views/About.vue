@@ -178,185 +178,9 @@
     </div>
   </section>
   <!--END SECTION OFFER WORK-->
-
-  <!--START SECTION COUNTERS-->
-  <section class="section section--p-small s-counters">
-    <div class="container">
-      <div class="counters">
-        <div class="counter">
-          <div class="counter__value">2 345</div>
-          <div class="counter__title">убранных квартир</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">873</div>
-          <div class="counter__title">чистых офисов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">473</div>
-          <div class="counter__title">клиентов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">122</div>
-          <div class="counter__title">отзыва клиентов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">14</div>
-          <div class="counter__title">заказов в день</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--END SECTION COUNTERS-->
-
-  <!--START SECTION FAQ-->
-  <section class="section section--p-medium s-faq">
-    <div class="container container--flex">
-      <div class="title">Часто задаваемые вопросы</div>
-      <div class="s-faq__block">
-        <div class="collapse">
-          <div class="collapse__label">
-            Нужно ли мне быть дома во время уборки?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>Многие клиенты остаются дома, когда впервые заказывают уборку
-                  на WOW SERVICE. Но в следующий раз они предпочитают оставить
-                  клинера одного, чтобы заниматься своими делами. Для этого есть
-                  дополнительная услуга «Доставка ключей» — когда уборка будет
-                  закончена, клинер просто привозит ключи туда, куда удобно клиенту.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="collapse">
-          <div class="collapse__label">
-            У меня раздельный санузел, сколько у меня ванных комнат?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>В калькуляции мы учитываем только количество полных ванных комнат,
-                  в которых стоит душевая кабина или ванна. Это значит, что если
-                  у вас раздельный санузел, а именно: ванная комната и отдельный
-                  туалет, то вы в процессе оформления заказа должны выбрать одну ванную комнату.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="collapse">
-          <div class="collapse__label">
-            Из чего состоит стандартная уборка?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>Стандартная уборка - это уборка, поддерживающая Ваш дом в чистоте и порядке.
-                  И вот из чего стандартная уборка состоит: Жилые комнаты Протираем все
-                  доступные поверхности, выключатели и дверные ручки; Чистим зеркала и стеклянные
-                  поверхности; Складываем одежду и расставляем вещи; Застилаем кровать;
-                  Моем пол, протираем плинтусы и пылесосим ковёр; Убираем мусор. Ванная комната
-                  и туалет Протираем все доступные поверхности, выключатели и дверные ручки;
-                  Моем и дезинфицируем унитаз; Моем душевую кабину и ванную; Чистим зеркала
-                  и стеклянные поверхности; Моем пол, протираем плинтусы и пылесосим коврики;
-                  Протираем шкафы с внешней стороны; Выносим мусор. Кухня Протираем все
-                  доступные поверхности, выключатели и дверные ручки; Моем снаружи бытовую
-                  технику, кухонный фартук; Чистим раковину; Моем пол и протираем плинтусы;
-                  Выносим бытовой мусор. Коридор Протираем все доступные поверхности;
-                  Чистим зеркала и стеклянные поверхности; Моем пол, протираем плинтусы
-                  и пылесосим коврики; Протираем двери, дверные косяки и ручки;
-                  Расставляем обувь.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="s-faq__block">
-        <div class="collapse">
-          <div class="collapse__label">
-            Клинер приезжает с необходимым инвентарем и средствами?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>Клинер приедет со всем необходимым. Ведра, швабра, салфетки или тряпки
-                  для очищения поверхностей, губки с абразивной стороной, а также мусорные
-                  пакеты. Чистящие средства — для ванной, стекла, пола и универсальное — мы
-                  тоже привозим с собой.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="collapse">
-          <div class="collapse__label">
-            Делаете ли вы уборку после ремонта?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>Да, мы также специализируемся на уборке после ремонта. Вам только
-                  требуется выбрать вид уборки "после ремонта" данная услуга стоит
-                  дороже обычной. Дело в том, что уборка после ремонта сильно
-                  отличается от простой уборки. Даже если вы уже убрали крупный мусор,
-                  остаётся много пыли, разводов и пятен от краски, шпатлёвки, лака
-                  и так далее. Чтобы убрать их, требуется много сил. Также Вы
-                  можете проконсультироваться по телефону:
-                  <a href="tel:87778310808" class="link link--gray">+7 777 831 08 08</a>.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="collapse">
-          <div class="collapse__label">
-            Делаете ли вы уборку в частных домах, коттеджах, таунхаусах и на дачах?
-            <i class="ac-icon ac-icon-arrow-down collapse__arrow"></i>
-          </div>
-          <div class="collapse__content">
-            <div class="collapse__content-wrapper">
-              <div class="collapse__text">
-                <p>Да мы выполняем уборку в частных домах, коттеджах и в больших особняках.
-                  В зависимости от обьема работы прикрепляем необходимое количество
-                  клинеров для выполнения уборки в течении одного дня.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="s-faq__feedback-link feedback-link">
-      Если вы не нашли свой вопрос
-      <a href="mailto:#" class="link link--green link--bordered">напишите нам</a>
-    </div>
-
-    <CollapseGroup>
-      <Collapse></Collapse>
-    </CollapseGroup>
-  </section>
-  <!--END SECTION FAQ-->
-
-  <!--START SECTION CONTACT US-->
-  <section class="section section--p-medium s-contact-us">
-    <div class="container">
-      <div class="contact-us">
-        <a href="tel:" class="link link--violet contact-us__phone">+7 (777) 831-08-08</a>
-        <button type="button" class="btn btn--primary contact-us__order-btn">
-          Закажите уборку сейчас</button>
-        <div class="contact-us__text">Мы готовы приехать к вам уже сегодня</div>
-      </div>
-    </div>
-  </section>
-  <!--END SECTION CONTACT US-->
+  <CountersSection/>
+  <FaqSection class="section--pt-medium section--pb-medium"/>
+  <ContactUsSection/>
 </template>
 
 <script lang="ts">
@@ -364,9 +188,15 @@ import { Options, Vue } from 'vue-class-component';
 // import { CollapseGroup, Collapse } from '@/components/collapse';
 import CollapseGroup from '@/components/collapse/CollapseGroup.vue';
 import Collapse from '@/components/collapse/Collapse.vue';
+import FaqSection from '@/components/sections/FaqSection.vue';
+import ContactUsSection from '@/components/sections/ContactUsSection.vue';
+import CountersSection from '@/components/sections/CountersSection.vue';
 
 @Options({
   components: {
+    CountersSection,
+    ContactUsSection,
+    FaqSection,
     CollapseGroup,
     Collapse,
   },
