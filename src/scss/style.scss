@@ -473,6 +473,7 @@ img{
 	$border: solid 1px $color_gray_light_20;
 	$control: #{$input}-control;
 	&-control{
+		resize: none;
 		border: $border;
 		padding: 0.8em 1.7em;
 		font-size: initial;
@@ -486,11 +487,16 @@ img{
 		&--short{
 			padding: 0.6em 1.3em;
 		}
+		@at-root textarea#{&}{
+			@include border-radius($border-radius / 1.6);
+		}
 	}
 	&-block{
-		@include display-flex;
-		@include flex-direction(row);
-		@include justify-content(flex-start);
+		&__wrapper{
+			@include display-flex;
+			@include flex-direction(row);
+			@include justify-content(flex-start);
+		}
 		&__prepend{
 			border: $border;
 			border-right: none;
@@ -503,6 +509,7 @@ img{
 			@include flex-direction(row);
 			@include justify-content(center);
 			@include align-items(center);
+			@include transition;
 			& ~ #{$control}{
 				padding-left: 1em;
 				@include border-radius(0 $border-radius $border-radius 0);
@@ -515,17 +522,30 @@ img{
 			margin-bottom: 0.5em;
 			color: $color_gray_dark;
 		}
-		&--phone #{$control}{
-			@include input-placeholder{
-				color: $color_gray_light;
+		&__error{
+			color: $color_danger_dark_15;
+			font-size: 15px;
+			width: 100%;
+			margin-top: 4px;
+			display: none;
+		}
+		&--mt{
+			&-sm{
+				margin-top: 10px;
+			}
+			&-md{
+				margin-top: 20px;
+			}
+			&-lg{
+				margin-top: 30px;
 			}
 		}
-		& + &{
-			margin-top: 10px;
-		}
 	}
-	&-block--focus &__prepend, &-block--focus &-control, &-control:focus{
+	&-block--focused &-block__prepend, &-block--focused &-control, &-control:focus{
 		border-color: $color_primary;
+	}
+	&-block--invalid &-block__prepend, &-block--invalid &-control{
+		border-color: $color_danger_dark_15;
 	}
 }
 
