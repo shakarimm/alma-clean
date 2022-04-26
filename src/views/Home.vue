@@ -538,7 +538,8 @@
     </div>
   </section>
   <!--END SECTION EQUIPMENT-->
-  <FaqSection class="section--pb-medium"/>
+  <FaqSection class="section--pb-medium"
+              @contactUsClick="feedbackModalIsActive = true"/>
   <WorkExamplesGallerySection/>
   <ContactUsSection/>
   <Modal
@@ -546,6 +547,32 @@
       @close="showedEquipmentModal = null;"
   >
     <div v-html="showedEquipmentModal?.description"/>
+  </Modal>
+  <Modal
+      size="sm"
+      :is-active="feedbackModalIsActive"
+      title="Написать нам"
+      class="feedback-modal"
+      @close="feedbackModalIsActive = false"
+  >
+    <form @submit.prevent="false">
+      <AInput class="quick-order-form__input-block"
+              placeholder="Ваше имя"/>
+      <AInput class="quick-order-form__input-block"
+              margin-top="md"
+              placeholder="(777) ХХХ-ХХ-ХХ">
+        <template #prepend>+7</template>
+      </AInput>
+      <AInput class="quick-order-form__input-block"
+              margin-top="md"
+              placeholder="E-Mail"/>
+      <AInput :is-textarea="true"
+              margin-top="md"
+              class="quick-order-form__input-block"
+              placeholder="Сообщение"/>
+      <button type="submit" class="btn btn--full-width btn--primary feedback-modal__submit-btn">
+        Быстрый заказ</button>
+    </form>
   </Modal>
 </template>
 
@@ -562,6 +589,7 @@ import FaqSection from '@/components/sections/FaqSection.vue';
 import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
 import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
+import AInput from '@/components/AInput.vue';
 
 interface ReviewProps {
   text: string,
@@ -590,6 +618,7 @@ type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
     ContactUsSection,
     CountersSection,
     WorkExamplesGallerySection,
+    AInput,
   },
 })
 export default class Home extends Vue {
@@ -597,6 +626,7 @@ export default class Home extends Vue {
   specialOfferTabActive: SpecialOfferTabType = 'furniture';
   cleaningTypesTabActive: CleaningTypesTabType = 'rooms';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
+  feedbackModalIsActive = false;
   reviews: ReviewProps[] = [
     {
       text: 'Решил жене сделать небольшой подарок во время ее отсутствия, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!',
