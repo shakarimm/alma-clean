@@ -387,6 +387,9 @@ img{
 	&--circle{
 		@include border-radius(2em);
 	}
+	&--full-width{
+		width: 100%;
+	}
 	&--link{
 		color: $color_primary;
 		&, &-secondary{
