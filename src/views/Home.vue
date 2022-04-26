@@ -45,13 +45,15 @@
         <div class="s-first-screen__form-block quick-order-form">
           <div class="quick-order-form__title title title--primary title--small title--center">
             Для быстрого оформления заказа заполните форму</div>
-          <div class="quick-order-form__input-block input-block">
-            <input type="text" class="input-control" placeholder="Ваше имя">
-          </div>
-          <div class="quick-order-form__input-block input-block input-block--phone">
-            <div class="input-block__prepend">+7</div>
-            <input type="text" class="input-control" placeholder="(777) ХХХ-ХХ-ХХ">
-          </div>
+          <AInput
+              class="quick-order-form__input-block"
+              placeholder="Ваше имя"/>
+          <AInput
+              class="quick-order-form__input-block"
+              margin-top="sm"
+              placeholder="(777) ХХХ-ХХ-ХХ">
+            <template #prepend>+7</template>
+          </AInput>
           <button type="button" class="btn btn--primary quick-order-form__btn">
             Быстрый заказ</button>
         </div>
