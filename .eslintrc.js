@@ -17,6 +17,7 @@ module.exports = {
     'lines-between-class-members': 'off',
     'class-methods-use-this': 'off',
     'import/no-unresolved': 'off',
+    'no-param-reassign': 'off',
     camelcase: 'off',
     'no-shadow': 'off',
     'import/extensions': [
