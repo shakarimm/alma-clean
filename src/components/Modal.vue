@@ -3,7 +3,11 @@
       tabindex="999"
       ref="modal"
       class="modal"
-      :class="{ 'modal--active': localIsActive }"
+      :class="{
+        'modal--active': localIsActive,
+        'modal--sized-sm': size === 'sm',
+        'modal--sized-lg': size === 'lg',
+      }"
       @keydown.esc="close"
       @click.self="close">
     <div class="modal__window">
@@ -21,6 +25,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+declare type ModalSizeTypes = 'sm' | 'lg';
+
 @Options({
   props: {
     isActive: {
@@ -32,6 +38,15 @@ import { Options, Vue } from 'vue-class-component';
       type: String,
       required: false,
       default: null,
+    },
+    /**
+     * @values 'sm', 'lg'
+     */
+    size: {
+      type: String,
+      default: 'lg',
+      required: false,
+      validator: (value: string) => ['sm', 'lg'].includes(value),
     },
   },
   emits: ['close'],
@@ -55,6 +70,7 @@ import { Options, Vue } from 'vue-class-component';
 export default class Modal extends Vue {
   readonly isActive!: boolean;
   readonly title!: string|null;
+  readonly size!: ModalSizeTypes;
   localIsActive = false;
   closeEmitDelayMs = 0;
 
