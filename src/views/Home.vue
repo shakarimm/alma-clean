@@ -556,19 +556,15 @@
       @close="feedbackModalIsActive = false"
   >
     <form @submit.prevent="false">
-      <AInput class="quick-order-form__input-block"
-              placeholder="Ваше имя"/>
-      <AInput class="quick-order-form__input-block"
-              margin-top="md"
+      <AInput placeholder="Ваше имя"/>
+      <AInput margin-top="md"
               placeholder="(777) ХХХ-ХХ-ХХ">
         <template #prepend>+7</template>
       </AInput>
-      <AInput class="quick-order-form__input-block"
-              margin-top="md"
+      <AInput margin-top="md"
               placeholder="E-Mail"/>
       <AInput :is-textarea="true"
               margin-top="md"
-              class="quick-order-form__input-block"
               placeholder="Сообщение"/>
       <button type="submit" class="btn btn--full-width btn--primary feedback-modal__submit-btn">
         Быстрый заказ</button>
