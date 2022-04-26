@@ -68,7 +68,9 @@
     </div>
     <div class="s-faq__feedback-link feedback-link">
       Если вы не нашли свой вопрос
-      <a href="mailto:#" class="link link--green link--bordered">напишите нам</a>
+      <a href="#"
+         @click.prevent="$emit('contactUsClick')"
+         class="link link--green link--bordered">напишите нам</a>
     </div>
   </section>
   <!--END SECTION FAQ-->
@@ -83,6 +85,7 @@ import { Collapse, CollapseGroup } from '@/components/collapse';
     CollapseGroup,
     Collapse,
   },
+  emits: ['contactUsClick'],
 })
 export default class FaqSection extends Vue {}
 </script>
