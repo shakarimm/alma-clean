@@ -18,6 +18,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'import/no-unresolved': 'off',
     camelcase: 'off',
+    'no-shadow': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
