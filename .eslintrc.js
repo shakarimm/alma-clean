@@ -20,6 +20,7 @@ module.exports = {
     'no-param-reassign': 'off',
     camelcase: 'off',
     'no-shadow': 'off',
+    'no-plusplus': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
