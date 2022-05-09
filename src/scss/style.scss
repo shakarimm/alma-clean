@@ -46,6 +46,12 @@ img{
 	}
 }
 
+.color{
+	&-primary{
+		color: $color_primary;
+	}
+}
+
 .container{
 	width: 100%;
 	max-width: 1170px;
@@ -184,27 +190,6 @@ img{
 	}
 }
 
-.tooltip{
-	position: relative;
-	padding-right: 1.9em;
-	&__icon{
-		position: absolute;
-		right: 0;
-		top: -0.1em;
-		width: 1.3em;
-		height: 1.3em;
-		background: #fff;
-		@include box-shadow-default;
-		@include border-radius(50%);
-		&-text{
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			@include transform(translate(-50%, -50%));
-		}
-	}
-}
-
 .switch{
 	$self: &;
 	position: relative;
@@ -289,6 +274,7 @@ img{
 		height: 0;
 		border: none;
 		padding: 0;
+		opacity: 0;
 	}
 	&__button{
 		color: $color_primary;
@@ -324,8 +310,26 @@ img{
 	text-transform: uppercase;
 	font-weight: bold;
 	cursor: pointer;
+	position: relative;
 	@include border-radius-default;
 	@include transition;
+	&__text, &__loader{
+		@include transition;
+	}
+	&__loader{
+		position: absolute;
+		display: inline-block;
+		width: 45px;
+		height: 45px;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		svg{
+			width: 100%;
+			height: 100%;
+		}
+	}
 	&--small{
 		padding: 0.45em 1.4em;
 		text-transform: none;
@@ -420,6 +424,20 @@ img{
 			}
 		}
 	}
+	&--loading &{
+		&__text{
+			opacity: 0;
+		}
+		&__loader{
+			opacity: 1;
+		}
+	}
+	&--loading, &:disabled{
+		background: $color_gray_light;
+		border-color: $color_gray_light;
+		pointer-events: none;
+		@include box-shadow(0px 2px 22px rgba(55, 55, 55, 0.5));
+	}
 }
 
 .checkbox{
@@ -434,6 +452,7 @@ img{
 		width: 0;
 		height: 0;
 		border: none;
+		opacity: 0;
 	}
 	&__check, &__icon{
 		position: absolute;
@@ -472,26 +491,32 @@ img{
 
 .input{
 	$input: &;
-	$border-radius: 2em;
+	$border-radius: 1.5em;
 	$border: solid 1px $color_gray_light_20;
 	$control: #{$input}-control;
+	$vs-select: ".v-select";
+	$vs: ".vs";
 	&-control{
 		resize: none;
 		border: $border;
 		padding: 0.8em 1.7em;
-		font-size: initial;
+		font-size: inherit;
 		color: $color_violet;
 		width: 100%;
 		@include border-radius($border-radius);
 		@include transition;
 		@include input-placeholder{
 			color: $color_violet;
+			opacity: 1;
 		}
 		&--short{
 			padding: 0.6em 1.3em;
 		}
 		@at-root textarea#{&}{
 			@include border-radius($border-radius / 1.6);
+		}
+		&:disabled{
+			background: $color_gray_light_30;
 		}
 	}
 	&-block{
@@ -513,7 +538,7 @@ img{
 			@include justify-content(center);
 			@include align-items(center);
 			@include transition;
-			& ~ #{$control}{
+			& ~ #{$control}, & ~ #{$vs-select} #{$vs}__dropdown-toggle{
 				padding-left: 1em;
 				@include border-radius(0 $border-radius $border-radius 0);
 			}
@@ -543,12 +568,25 @@ img{
 				margin-top: 30px;
 			}
 		}
+		&--readonly{
+			.input-control{
+				cursor: default;
+			}
+		}
 	}
-	&-block--focused &-block__prepend, &-block--focused &-control, &-control:focus{
+	&-block--focused:not(&-block--readonly) &-block__prepend,
+	&-block--focused:not(&-block--readonly) &-control,
+	&:not(&-block--readonly) &-control:focus{
 		border-color: $color_primary;
 	}
-	&-block--invalid &-block__prepend, &-block--invalid &-control{
+	&-block--invalid &-block__prepend,
+	&-block--invalid &-control,
+	&-block--invalid .vs__dropdown-toggle,
+	&-block--invalid .vs__dropdown-menu{
 		border-color: $color_danger_dark_15;
+	}
+	&-block--invalid &-block__error{
+		display: block;
 	}
 }
 
@@ -2017,6 +2055,189 @@ img{
 		&-lg{
 			#{$modal}__window{
 				max-width: 690px;
+			}
+		}
+	}
+}
+
+:root{
+	--vs-dropdown-max-height: 280px;
+}
+.v-select{
+	width: 100%;
+}
+.vs{
+	$root: &;
+	@keyframes vs-dropdown-menu-showing{
+		from{
+			opacity: 0;
+			transform: translateY(7px);
+		}
+		to{
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+	&__dropdown-toggle{
+		border: solid 1px #dbdbde;
+		border-radius: 1.5em;
+		padding: 0.5em 1em;
+		@include transition;
+	}
+	&__dropdown-menu{
+		border-radius: 0 0 1.3em 1.3em;
+		box-shadow: none;
+		border: solid 1px #dbdbde;
+		border-top: none;
+		padding: 0.4em 0 1em;
+		max-width: none;
+		min-width: 0;
+		transition: all 0.4s;
+		&.fade-enter-active{
+			@include animation(vs-dropdown-menu-showing 0.4s 1 forwards ease-in-out);
+		}
+		&.fade-leave-active{
+			@include animation(vs-dropdown-menu-showing 0.4s 1 reverse forwards ease-in-out);
+		}
+	}
+	&__dropdown-option{
+		padding: 0.37em 1em;
+		&--highlight{
+			background: $color_primary;
+		}
+	}
+	&__custom-open-indicator{
+		color: $color_gray_dark_30;
+		font-size: 16px;
+		@include transition;
+		@at-root #{$root}--open &{
+			@include transform(rotate(180deg));
+		}
+	}
+	&__selected{
+		margin-top: 0;
+	}
+	&__actions{
+		padding-top: 0;
+	}
+	&--single#{&}--open &__selected{
+		opacity: 1;
+		position: static;
+	}
+	&--open &__dropdown-toggle{
+		border-bottom-left-radius: 0 !important;
+		border-bottom-right-radius: 0 !important;
+	}
+	&--not-selected &__selected{
+		color: $color_violet;
+	}
+}
+.vc{
+	&-container{
+		--font-medium: 400;
+		--font-bold: 400;
+		--font-semibold: 400;
+		font-family: 'Roboto', sans-serif !important;
+	}
+}
+.tooltip{
+	$self: &;
+	position: relative;
+	display: inline-block;
+	line-height: 0;
+	&__icon{
+		cursor: default;
+		position: relative;
+		display: inline-block;
+		width: 1.3em;
+		height: 1.3em;
+		background: #fff;
+		@include box-shadow-default;
+		@include border-radius(50%);
+		&-text{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			@include transform(translate(-50%, -50%));
+		}
+	}
+	&__window{
+		line-height: initial;
+		position: absolute;
+		background: #fff;
+		font-size: 1rem;
+		min-width: 275px;
+		padding: 1.2em;
+		left: 50%;
+		top: -25px;
+		opacity: 0;
+		pointer-events: none;
+		@include transform(translate(-50%, -100%));
+		@include box-shadow(0px 5px 12px rgba(65, 89, 76, 0.15));
+		@include transition;
+		@include box-sizing;
+		&-title, &-text{
+			display: inline-block;
+		}
+		&-title{
+			color: $color_violet;
+			font-weight: 500;
+			font-size: 1.1em;
+			margin-bottom: 0.15em;
+		}
+		&-text{
+			color: #818181;
+			font-size: 0.9em;
+		}
+		&-buttons{
+			display: inline-block;
+			margin-top: 10px;
+		}
+		&-button{
+			display: inline-block;
+			font-size: 0.8rem;
+			width: 100%;
+			& + &{
+				margin-top: 10px;
+			}
+		}
+		&::after{
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 15px 15px 0 15px;
+			border-color: #fff transparent transparent transparent;
+			content: '';
+			display: block;
+			position: absolute;
+			left: 50%;
+			bottom: 3px;
+			@include transform(translate(-50%, 100%));
+		}
+		&::before{
+			left: 0;
+			bottom: -33px;
+			width: 100%;
+			height: 40px;
+			content: '';
+			display: block;
+			position: absolute;
+		}
+	}
+	&:hover &__window{
+		top: -20px;
+		opacity: 1;
+		pointer-events: auto;
+	}
+	&--right{
+		#{$self}__window{
+			right: -18px;
+			left: auto;
+			@include transform(translate(0, -100%));
+			&::after{
+				left: auto;
+				right: 15px;
+				transform: translate(0, 100%);
 			}
 		}
 	}

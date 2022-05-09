@@ -1,6 +1,27 @@
+import Inputmask from 'inputmask';
 import { CityInformation } from '@/types';
 
 export const apiBaseUrl = process.env.VUE_APP_API_BASE_URL;
+export const tokenCookieKey = 'almc_token';
+
+export const currencyMaskOptions: Inputmask.Options = {
+  alias: 'currency',
+  rightAlign: false,
+  groupSeparator: ' ',
+  inputmode: 'numeric',
+  numericInput: true,
+  suffix: 'тг.',
+  radixPoint: ',',
+  digits: 0,
+  max: 9999999,
+};
+
+export const phoneMaskOptions: Inputmask.Options = {
+  mask: '(999) 999 99 99',
+  placeholder: '_',
+  inputmode: 'numeric',
+};
+export const phoneMask = new Inputmask(phoneMaskOptions);
 
 export const citiesList: CityInformation[] = [
   {
@@ -23,4 +44,6 @@ export const citiesList: CityInformation[] = [
 export default {
   apiBaseUrl,
   citiesList,
+  currencyMaskOptions,
+  phoneMask,
 };
