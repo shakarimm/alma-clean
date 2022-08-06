@@ -44,8 +44,37 @@
               :href="`tel:${phone}`"
               class="link link--violet phones-list__item">{{ phone }}</a>
         </div>
-        <a href="#" class="btn btn--small btn--primary
+        <div v-if="profile !== null"
+             class="user-bar"
+             :class="{
+                'user-bar--loading': logoutLoading,
+             }">
+          <div class="user-bar__user-name">
+            <div class="user-bar__user-name-text">
+              {{ profile.firstName }} {{ profile.lastName.substr(0, 1) }}.
+            </div>
+            <i class="ac-icon ac-icon-arrow-down user-bar__user-name-arrow"></i>
+            <div class="user-bar__loader"><LoaderHor/></div>
+          </div>
+          <div class="user-bar__links">
+            <router-link custom to="/profile"
+                         v-slot="{ navigate }">
+              <a href="#" @click="navigate" class="link user-bar__link">Личный кабинет</a>
+            </router-link>
+            <div class="user-bar__link-delimiter"></div>
+            <a href="#"
+               @click.prevent="logout"
+               class="link user-bar__link">Выйти</a>
+          </div>
+        </div>
+        <div v-else-if="profileLoading" class="header__user-loading">
+          <Loader color="grey"/>
+        </div>
+        <router-link v-else custom to="/auth/sign-up"
+                     v-slot="{ navigate }">
+          <a href="#" @click="navigate" class="btn btn--small btn--primary
           btn--text-medium btn--circle">Личный кабинет</a>
+        </router-link>
       </div>
 
     </div>
@@ -56,20 +85,37 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { mapGetters } from 'vuex';
-import { CityInformation } from '@/types';
+import { CityInformation, ProfileData } from '@/types';
 import { citiesList } from '@/app.config';
+import LoaderHor from '@/components/LoaderHor.vue';
+import Loader from '@/components/Loader.vue';
 
 @Options({
+  components: { Loader, LoaderHor },
   computed: mapGetters({
     locationCity: 'locationCity',
+    profile: 'myProfile',
+    profileLoading: 'profileLoading',
   }),
 })
 export default class Header extends Vue {
+  readonly profile!: null|ProfileData;
+  readonly profileLoading!: boolean;
   readonly locationCity!: CityInformation;
   readonly citiesList: CityInformation[] = citiesList;
+  logoutLoading = false;
 
   changeCity(city: CityInformation): void {
     this.$store.dispatch('setLocationCity', city.slug);
+  }
+
+  async logout(): Promise<void> {
+    try {
+      this.logoutLoading = true;
+      await this.$store.dispatch('logoutProfile');
+    } finally {
+      this.logoutLoading = false;
+    }
   }
 }
 </script>

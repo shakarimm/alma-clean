@@ -9,9 +9,9 @@ import { citiesList } from '@/app.config';
 
 @Module
 export default class Location extends VuexModule {
-  city: CityInformation|null = citiesList[0];
+  city: null|CityInformation = citiesList[0];
 
-  get locationCity(): CityInformation|null {
+  get locationCity(): null|CityInformation {
     return this.city;
   }
 
@@ -21,7 +21,7 @@ export default class Location extends VuexModule {
   }
 
   @Action({ commit: 'SET_LOCATION_CITY' })
-  setLocationCity(city: City): CityInformation|null {
+  setLocationCity(city: City): null|CityInformation {
     return citiesList.find((listCity) => listCity.slug === city) ?? null;
   }
 }

@@ -3,6 +3,7 @@
 
 // AUTHORIZATION FORM
 .authorization-form{
+	width: 100%;
 	&__input-block{
 		width: 48.5%;
 	}
@@ -63,11 +64,40 @@
 	padding: 30px;
 	background: #fff;
 	border: solid 1px $color_gray_light_20;
+	position: relative;
 	@include display-flex;
 	@include flex-direction(row);
 	@include justify-content(space-between);
 	@include align-items(stretch);
 	@include border-radius-default;
+	&--loading > *:not(&__loader){
+		filter: blur(2px);
+	}
+	&__loader{
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255, 255, 255, 0.7);
+		@include transition;
+		@include border-radius-default;
+		svg{
+			font-size: 60px;
+			width: 1em;
+			height: 1em;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	&--loading &__loader{
+		opacity: 1;
+		pointer-events: auto;
+	}
 }
 
 // DATE CARD
@@ -115,10 +145,6 @@
 	& + &{
 		margin-top: 2%;
 	}
-	&__btn{
-		text-transform: none;
-		font-weight: 400;
-	}
 	&__cleanings-count{
 		color: $color_gray_dark_15;
 	}
@@ -149,6 +175,10 @@
 	font-size: 0.95em;
 	& + &{
 		margin-top: 2%;
+	}
+	&__services-link{
+		display: inline-block;
+		margin-left: 0.3em;
 	}
 	&__col{
 		@include box-sizing;
@@ -191,6 +221,21 @@
 	}
 	&__type{
 		font-weight: 500;
+	}
+	&__cleaner{
+		width: 50%;
+	}
+	&__actions{
+		width: 45%;
+		@include display-flex;
+		@include flex-direction(column);
+		@include justify-content(center);
+		@include align-items(flex-end);
+	}
+	&__action{
+		&--pay-link{
+			text-align: center;
+		}
 	}
 }
 
@@ -306,6 +351,10 @@
 	}
 }
 
+.orders-list{
+	padding: 40px 0 100px;
+}
+
 // SEPARATED BLOCK
 .separated-block{
 	padding: 4.8% 3.7%;
@@ -344,6 +393,13 @@
 		&--mt-0{
 			margin-top: 0;
 		}
+		&--user-info{
+			& + &{
+				margin-top: 2.2em;
+				padding-top: 0.5em;
+				border-top: solid 1px $color_gray_light_20;
+			}
+		}
 	}
 	&__input-block{
 		width: 30.5%;
@@ -356,8 +412,12 @@
 		}
 	}
 	&__btn-secondary{
-		width: 32.5%;
-		margin-top: 5%;
+		min-width: 17.26em;
+		margin-top: 4em;
+	}
+	&__btn-delete{
+		min-width: 17.26em;
+		margin-top: 1.3em;
 	}
 }
 

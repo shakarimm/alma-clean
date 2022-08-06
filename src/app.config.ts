@@ -3,6 +3,7 @@ import { CityInformation } from '@/types';
 
 export const apiBaseUrl = process.env.VUE_APP_API_BASE_URL;
 export const tokenCookieKey = 'almc_token';
+export const tokenCookieExpiresInDays = 365;
 
 export const currencyMaskOptions: Inputmask.Options = {
   alias: 'currency',

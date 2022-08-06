@@ -25,11 +25,12 @@ function responseResolve(response: AxiosResponse) {
 
 function responseReject(err: AxiosError) {
   if (err.response) {
-    if (err.request.responseURL.indexOf(`${apiBaseUrl}/auth/login`) !== 0
-      && !window.location.href.includes('/auth/login')
+    if (err.request.responseURL.indexOf(`${apiBaseUrl}/auth/sign-in`) !== 0
+      && !window.location.href.includes('/auth/sign-in')
+      && window.location.href.includes('/profile')
       && err.response.status === ResponseStatus.UNAUTHORIZED) {
       Cookie.remove(tokenCookieKey);
-      window.location.href = '/auth/login';
+      window.location.href = '/auth/sign-in';
     }
   }
 

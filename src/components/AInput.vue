@@ -8,6 +8,7 @@
       'input-block--mt-lg': marginTop === 'lg',
       'input-block--readonly': readonly,
     }">
+    <label v-if="label" class="input-block__label">{{ label }}</label>
     <div class="input-block__wrapper">
       <div
           v-if="$slots.prepend"
@@ -21,6 +22,7 @@
           class="input-control"
           :placeholder="placeholder"
           :readonly="readonly"
+          :disabled="disabled"
           v-model="localValue"
           cols="3"/>
       <input
@@ -28,15 +30,26 @@
           ref="input"
           :type="type"
           class="input-control"
+          :class="{
+            'input-control--short': short,
+          }"
           @focus="focused = true"
           @blur="focused = false"
           :placeholder="placeholder"
           :readonly="readonly"
+          :disabled="disabled"
           v-model="localValue"/>
     </div>
-    <div v-if="errorText !== null"
-         class="input-block__error"
-         v-text="errorText"/>
+    <div v-if="errorsTexts && errorsTexts.length > 0"
+         class="input-block__error">
+      <template v-if="errorsTexts.length === 1">
+        {{ errorsTexts[0] }}
+      </template>
+      <ul v-else>
+        <li v-for="errorText in errorsTexts"
+            :key="errorText">{{ errorText }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -49,7 +62,6 @@ declare type MarginTopTypes = 'sm' | 'md' | 'lg';
 declare type InputTypes = 'text' | 'number' | 'password';
 
 @Options({
-  inject: ['activeInGroup', 'onClickCallback'],
   emits: ['update:modelValue'],
   watch: {
     localValue() {
@@ -60,25 +72,40 @@ declare type InputTypes = 'text' | 'number' | 'password';
     },
   },
   props: {
+    modelValue: {
+      type: [String, Number],
+      required: true,
+      default: '',
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    short: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    label: {
+      type: String,
+      required: false,
+    },
     type: {
       type: String as PropType<InputTypes>,
       required: false,
       default: 'text',
       validator: (value: string) => ['text', 'number', 'password'].includes(value),
     },
-    modelValue: {
-      type: [String, Number],
-      required: true,
-      default: '',
-    },
     placeholder: {
       type: String,
       required: false,
       default: null,
     },
-    errorText: {
-      type: String,
+    errorsTexts: {
+      type: Array as PropType<string[]>,
       required: false,
+      default: null,
     },
     invalid: {
       type: Boolean,
@@ -114,23 +141,26 @@ declare type InputTypes = 'text' | 'number' | 'password';
   },
 })
 export default class AInput extends Vue {
+  readonly disabled!: boolean;
+  readonly short!: boolean;
+  readonly label!: null|string;
   readonly mask!: null|Inputmask.Instance;
   readonly type!: InputTypes;
   readonly placeholder!: null|string;
-  readonly errorText!: null|string;
+  readonly errorsTexts!: null|string[];
   readonly invalid!: boolean;
   readonly readonly!: boolean;
   readonly isTextarea!: boolean;
   readonly marginTop!: null|MarginTopTypes;
   readonly modelValue!: string;
   readonly autoUnmask!: boolean;
-  maskInput: Inputmask.Instance | null = null;
+  maskInput: Inputmask.Instance|null = null;
   focused = false;
   localValue: null|string|number = this.modelValue;
 
   $refs!: {
-    input: HTMLFormElement
-  }
+    input: HTMLFormElement,
+  };
 
   mounted(): void {
     if (this.mask != null && !this.isTextarea) {

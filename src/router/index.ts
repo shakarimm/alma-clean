@@ -6,6 +6,8 @@ import Order from '@/views/Order.vue';
 import ProfileOrders from '@/views/Profile/ProfileOrders.vue';
 import ProfileFreeOrders from '@/views/Profile/ProfileFreeOrders.vue';
 import ProfileSettings from '@/views/Profile/ProfileSettings.vue';
+import ProfileCleaners from '@/views/Profile/ProfileCleaners.vue';
+import Auth from '@/views/Auth/Auth.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -43,11 +45,26 @@ const routes: Array<RouteRecordRaw> = [
         component: ProfileFreeOrders,
       },
       {
+        path: '/profile/cleaners',
+        name: 'ProfileCleaners',
+        component: ProfileCleaners,
+      },
+      {
         path: '/profile/settings',
         name: 'ProfileSettings',
         component: ProfileSettings,
       },
     ],
+  },
+  {
+    path: '/auth',
+    redirect: '/auth/sign-up',
+  },
+  {
+    path: '/auth/sign-in',
+    alias: ['/auth/sign-up'],
+    name: 'Auth',
+    component: Auth,
   },
 ];
 

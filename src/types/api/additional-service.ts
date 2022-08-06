@@ -9,12 +9,19 @@ export interface AdditionalServicesListItem {
   icon_url: string,
 }
 
-export interface AdditionalServiceOrderModel {
+export interface AdditionalServiceOrderFormModel {
   id: number,
   type: AdditionalServiceType,
   cleaningTypesIds: number[],
   name: string,
   price: number,
   iconUrl: string,
+  quantity: number,
+}
+
+export interface AdditionalServiceOrderModel {
+  id: number,
+  name: string,
+  price: number,
   quantity: number,
 }

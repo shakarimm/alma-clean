@@ -1,6 +1,6 @@
 export interface CleaningTypesListItem {
   id: number,
-  slug: boolean,
+  slug: string,
   name: string,
   price_apartment: number,
   price_house: number,
@@ -13,7 +13,7 @@ export interface CleaningTypesListItem {
 
 export interface CleaningTypeModel {
   id: number,
-  slug: boolean,
+  slug: string,
   name: string,
   priceApartment: number,
   priceHouse: number,

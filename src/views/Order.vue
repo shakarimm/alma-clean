@@ -11,16 +11,31 @@
   <!--END SECTION PAGE FIRST SCREEN-->
 
   <!--START SECTION ORDER DETAILS-->
-  <section class="section s-order-details">
+  <div v-if="loadingPage" class="loader-container">
+    <div class="container">
+      <Loader color="primary"/>
+    </div>
+  </div>
+  <section v-else class="section s-order-details">
     <div class="container container--flex">
       <div class="content-block">
         <div class="breadcrumbs">
-          <div class="breadcrumbs__item" :class="{
-            'breadcrumbs__item--active': currentStep === 'order_detail',
-          }">Детали заказа</div>
+          <div
+              class="breadcrumbs__item"
+              :class="{
+                'breadcrumbs__item--active': currentStep === 'order_detail',
+              }"
+              @click="currentStep = 'order_detail'"
+          >Детали заказа</div>
           <div class="breadcrumbs__item" :class="{
             'breadcrumbs__item--active': currentStep === 'registration',
-          }">Регистрация</div>
+            'breadcrumbs__item--disabled': profile,
+          }">
+            Регистрация
+            <i
+                v-if="profile"
+                class="ac-icon ac-icon-check breadcrumbs__item-icon"></i>
+          </div>
           <div class="breadcrumbs__item" :class="{
             'breadcrumbs__item--active': currentStep === 'payment',
           }">Оплата</div>
@@ -252,6 +267,7 @@
                 <v-date-picker
                     color="green"
                     v-model="order.date"
+                    :min-date='new Date()'
                     locale="ru">
                   <template v-slot="{ inputValue, inputEvents }">
                     <AInput
@@ -259,8 +275,8 @@
                         :modelValue="inputValue"
                         v-on="inputEvents"
                         :readonly="true"
-                        :invalid="order.dateInvalid"
-                        error-text="Укажите дату"
+                        :invalid="order.dateErrors"
+                        :errors-texts="order.dateErrors"
                     >
                       <template #prepend>
                         <i class="ac-icon ac-icon-calendar color-primary"></i>
@@ -271,11 +287,11 @@
               </div>
               <ASelect
                   class="order-detail__time-input"
-                  :options="timeOptions"
+                  :options="timeOptionsFiltered"
                   placeholder="Время"
                   v-model="order.time"
-                  :invalid="order.timeInvalid"
-                  error-text="Укажите время"
+                  :invalid="order.timeErrors"
+                  :errors-texts="order.timeErrors"
               >
                 <template #prepend>
                   <i class="ac-icon ac-icon-time color-primary"></i>
@@ -298,18 +314,18 @@
                 <AInput
                     placeholder="Улица"
                     v-model="order.address.street"
-                    :invalid="order.address.streetInvalid"
-                    error-text="Укажите адрес"
-                    @input="order.address.streetInvalid = false"
+                    :invalid="order.address.streetErrors"
+                    :errors-texts="order.address.streetErrors"
+                    @input="order.address.streetErrors = null"
                 />
               </div>
               <div class="address-form__input-block input-block">
                 <AInput
                     placeholder="Дом"
                     v-model="order.address.streetNumber"
-                    :invalid="order.address.streetNumberInvalid"
-                    error-text="Укажите номер дома"
-                    @input="order.address.streetNumberInvalid = false"
+                    :invalid="order.address.streetNumberErrors"
+                    :errors-texts="order.address.streetNumberErrors"
+                    @input="order.address.streetNumberErrors = null"
                 />
               </div>
               <div class="address-form__input-block input-block">
@@ -321,7 +337,7 @@
               <div class="address-form__input-block input-block">
                 <AInput
                     placeholder="Квартира"
-                    v-model="order.address.apartment_number"
+                    v-model="order.address.apartmentNumber"
                 />
               </div>
               <div class="address-form__input-block address-form__input-block--full input-block">
@@ -339,13 +355,10 @@
           </div>
         </div>
 
-        <div class="shadow-block" v-if="currentStep === 'registration'">
-          <div class="block-title block-underline">Регистрация</div>
-
-          <div class="shadow-block__container order-detail__container block-underline">
-            <AuthorizationForm @authorized="authorized"/>
-          </div>
-        </div>
+        <AuthorizationForm
+            v-if="currentStep === 'registration'"
+            @signUpDone="authorized"
+            @signInDone="authorized"/>
 
         <div class="shadow-block" v-if="currentStep === 'payment'">
           <div class="block-title block-underline">Информация по оплате</div>
@@ -353,14 +366,19 @@
             <div class="order-detail__title">Выберите вид оплаты</div>
             <div class="order-detail__payment-methods">
               <label class="order-detail__payment-method radio-btn">
-                <input type="radio" name="payment_method" value="card"
-                       class="radio-btn__input" checked>
+                <input type="radio" name="payment_method" value="online"
+                       class="radio-btn__input"
+                       v-model="order.paymentType"
+                       :checked="order.paymentType === 'online'">
                 <span class="radio-btn__button">
                   <i class="ac-icon ac-icon-card radio-btn__button-icon"></i> Оплата картой
                 </span>
               </label>
               <label class="order-detail__payment-method radio-btn">
-                <input type="radio" name="payment_method" value="cash" class="radio-btn__input">
+                <input type="radio" name="payment_method"
+                       value="cash" class="radio-btn__input"
+                       v-model="order.paymentType"
+                       :checked="order.paymentType === 'cash'">
                 <span class="radio-btn__button">
                   <i class="ac-icon ac-icon-trading radio-btn__button-icon"></i> Оплата наличными
                 </span>
@@ -373,17 +391,15 @@
               class="shadow-block__container order-detail__container block-underline">
             <div class="order-detail__title">У вас есть промокод?</div>
             <div class="order-detail__promocode">
-              <div class="input-block order-detail__promocode-input-block"
-                :class="{ 'input-block--invalid': promocode.codeInvalid }">
-                <input type="text"
-                       ref="promocodeInput"
-                       name="promocode"
-                       class="input-control order-detail__promocode-input"
-                       v-model="promocode.code"
-                       @input="promocode.codeInvalid = false"
-                       :disabled="promocodeUseLoading"
-                       placeholder="Промокод">
-              </div>
+              <AInput
+                  class="order-detail__promocode-input-block"
+                  v-model="promocode.code"
+                  @input="promocode.codeInvalid = false"
+                  :invalid="promocode.codeInvalid"
+                  :disabled="promocodeUseLoading"
+                  :mask="promocodeMask"
+                  placeholder="Промокод"
+              />
               <AButton
                   :disabled="promocodeUseLoading"
                   class="order-detail__promocode-btn"
@@ -406,9 +422,21 @@
           </div>
 
           <div class="shadow-block__container order-detail__container block-underline">
-            <button type="submit" class="order-detail__submit-btn btn btn--primary">
-              Подтвердить заказ</button>
+            <AButton
+              class="order-detail__submit-btn"
+              text="Подтвердить заказ"
+              font-weight="bold"
+              @click="goToNextStep"/>
           </div>
+        </div>
+        <div v-if="currentStep !== 'order_detail'"
+             class="order-check-back-btn-container">
+          <AButtonLink
+              class="order-check-back-btn"
+              text="Вернутся к прошлому шагу"
+              color="gray"
+              @click="goToPrevStep"
+          />
         </div>
       </div>
       <div class="sidebar">
@@ -511,16 +539,18 @@ import cleaningTypes from '@/repositories/api/cleaning-types';
 import additionalServices from '@/repositories/api/additional-services';
 import promocodes from '@/repositories/api/promocodes';
 import {
-  OrderModel,
   CleaningTypeModel,
   AdditionalServiceOrderModel,
   OrderCleaningFrequency,
   PromocodeModel,
+  ProfileData,
+  OrderFormModel,
+  AdditionalServiceOrderFormModel,
 } from '@/types/api';
 import NumberController from '@/components/calculator/NumberController.vue';
 import AInput from '@/components/AInput.vue';
 import ASelect, { ASelectOption } from '@/components/ASelect.vue';
-import { CityInformation } from '@/types';
+import { City, CityInformation } from '@/types';
 import { citiesList } from '@/app.config';
 import { mapGetters } from 'vuex';
 import moment from 'moment';
@@ -528,11 +558,17 @@ import vueStickySidebar from 'vue-sticky-sidebar/src/vue-sticky-sidebar.vue';
 import AuthorizationForm from '@/components/auth/AuthorizationForm.vue';
 import Inputmask from 'inputmask';
 import AButton from '@/components/AButton.vue';
+import Loader from '@/components/Loader.vue';
+import { nextTick } from 'vue';
+import orders from '@/repositories/api/orders';
+import AButtonLink from '@/components/AButtonLink.vue';
 
 type OrderStepType = 'order_detail' | 'registration' | 'payment';
 
 @Options({
   components: {
+    AButtonLink,
+    Loader,
     AButton,
     AuthorizationForm,
     ASelect,
@@ -542,6 +578,7 @@ type OrderStepType = 'order_detail' | 'registration' | 'payment';
   },
   computed: mapGetters({
     locationCity: 'locationCity',
+    profile: 'myProfile',
   }),
   watch: {
     needDryCleaning() {
@@ -550,7 +587,7 @@ type OrderStepType = 'order_detail' | 'registration' | 'payment';
         : 0;
       this.$refs.drycleaningCardsContainer.style.height = `${height}px`;
       if (this.needDryCleaning || this.order === null) return;
-      this.order.additionalServices.forEach((service: AdditionalServiceOrderModel) => {
+      this.order.additionalServices.forEach((service: AdditionalServiceOrderFormModel) => {
         if (service.type === 'dry_cleaning') {
           service.quantity = 0;
         }
@@ -558,44 +595,58 @@ type OrderStepType = 'order_detail' | 'registration' | 'payment';
     },
     'order.date': {
       handler() {
-        this.order.dateInvalid = false;
+        this.order.dateErrors = null;
+        this.resetInvalidTime();
       },
     },
     'order.time': {
       handler() {
-        this.order.timeInvalid = false;
+        this.order.timeErrors = null;
       },
     },
     'order.cleaningType': {
       handler() {
         if (this.order === null) return;
-        this.order.additionalServices.forEach((service: AdditionalServiceOrderModel) => {
+        this.order.additionalServices.forEach((service: AdditionalServiceOrderFormModel) => {
           if (!service.cleaningTypesIds.includes(this.order.cleaningType.id)) {
             service.quantity = 0;
           }
         });
       },
     },
+    profile() {
+      if (this.profile === null && this.currentStep === 'payment') {
+        this.currentStep = 'registration';
+      }
+    },
   },
 })
 export default class Order extends Vue {
+  readonly profile!: null|ProfileData;
   readonly locationCity!: CityInformation;
   readonly citiesOptions: ASelectOption[] = citiesList.map((city) => ({
     value: city.slug,
     label: city.name,
     selectable: true,
   }));
+  orderCreateLoading = false;
   currentStep: OrderStepType = 'order_detail';
   cleaningTypes: null|CleaningTypeModel[] = null;
-  order: null|OrderModel = null;
+  order: null|OrderFormModel = null;
   needDryCleaning = false;
+  loadingPage = false;
   promocode: PromocodeModel = {
     id: null,
     code: null,
     discountPercent: null,
     discountValue: null,
     codeInvalid: false,
-  }
+  };
+  promocodeMask = new Inputmask({
+    mask: '******',
+    placeholder: '',
+    showMaskOnHover: false,
+  });
   promocodeErrorText: null|string = null;
   promocodeUseLoading = false;
   timeOptions: ASelectOption[] = [
@@ -681,6 +732,7 @@ export default class Order extends Vue {
     twice_month: 15,
     every_week: 20,
   } as { [key in OrderCleaningFrequency]: number };
+  orderTimeHoursOffset = 1;
 
   created(): void {
     this.loadCleaningTypes().then(() => {
@@ -689,13 +741,34 @@ export default class Order extends Vue {
     });
   }
 
-  maskPromocodeInput(): void {
-    if (this.$refs.promocodeInput === undefined) return;
-    (new Inputmask({
-      mask: '******',
-      placeholder: '',
-      showMaskOnHover: false,
-    })).mask(this.$refs.promocodeInput as HTMLFormElement);
+  get timeOptionsFiltered(): ASelectOption[] {
+    if (this.order === null || this.order.date === null) return this.timeOptions;
+    const nowDate = new Date();
+    const nowTime = (nowDate.getHours() + this.orderTimeHoursOffset) * 100 + nowDate.getMinutes();
+    const isToday = moment(nowDate).isSame(this.order.date, 'day');
+    return this.timeOptions.map((time) => {
+      if (!isToday) {
+        time.selectable = true;
+      } else {
+        const timeInt = parseInt((time.value as string).replace(':', ''), 0);
+        time.selectable = timeInt > nowTime;
+      }
+      return time;
+    });
+  }
+
+  resetInvalidTime(): void {
+    if (this.order === null
+      || this.order.date === null
+      || this.order.time === null) return;
+    const nowDate = new Date();
+    const isToday = moment(nowDate).isSame(this.order.date, 'day');
+    if (!isToday) return;
+    const nowTime = (nowDate.getHours() + this.orderTimeHoursOffset) * 100 + nowDate.getMinutes();
+    const selectedTime = parseInt(this.order.time.replace(':', ''), 0);
+    if (nowTime > selectedTime) {
+      this.order.time = null;
+    }
   }
 
   initEmptyOrder(): void {
@@ -710,22 +783,24 @@ export default class Order extends Vue {
       time: null,
       date: null,
       comment: null,
-      dateInvalid: false,
-      timeInvalid: false,
+      dateErrors: null,
+      timeErrors: null,
+      paymentType: 'online',
       address: {
         city: this.locationCity.slug,
         street: null,
         streetNumber: null,
         floor: null,
         apartmentNumber: null,
-        streetInvalid: false,
-        streetNumberInvalid: false,
+        streetErrors: null,
+        streetNumberErrors: null,
       },
     };
   }
 
   async loadCleaningTypes(): Promise<void> {
     try {
+      this.loadingPage = true;
       const response = await cleaningTypes.getList();
       this.cleaningTypes = response.data.data.map((item) => ({
         id: item.id,
@@ -757,6 +832,7 @@ export default class Order extends Vue {
         iconUrl: item.icon_url,
         quantity: 0,
       }));
+      this.loadingPage = false;
     } catch (e) {
       this.$store.dispatch('showAlertError', 'Произошла ошибка при загрузке данных');
     }
@@ -884,45 +960,59 @@ export default class Order extends Vue {
 
   validateForm(): boolean {
     if (this.order === null) return false;
-    let invalid = false;
+    let valid = true;
+
     if (this.order.address.street === null || this.order.address.street.trim().length < 1) {
-      this.order.address.streetInvalid = true;
-      invalid = true;
+      this.order.address.streetErrors = ['Укажите улицу'];
+      valid = false;
     }
     if (this.order.address.streetNumber === null
         || this.order.address.streetNumber.trim().length < 1) {
-      this.order.address.streetNumberInvalid = true;
-      invalid = true;
+      this.order.address.streetNumberErrors = ['Укажите номер дома'];
+      valid = false;
     }
     if (this.order.date === null) {
-      this.order.dateInvalid = true;
-      invalid = true;
+      this.order.dateErrors = ['Укажите дату'];
+      valid = false;
     }
     if (this.order.time === null) {
-      this.order.timeInvalid = true;
-      invalid = true;
+      this.order.timeErrors = ['Укажите время'];
+      valid = false;
     }
-    return invalid;
+
+    return valid;
   }
 
   authorized(): void {
+    this.$store.dispatch('initProfile');
     this.goToNextStep();
   }
 
-  goToNextStep(): void {
+  async goToNextStep(): Promise<void> {
     if (this.currentStep === 'order_detail') {
-      if (this.validateForm()) {
-        this.currentStep = 'registration';
-      }
+      if (!this.validateForm()) return;
+      this.currentStep = this.profile ? 'payment' : 'registration';
+      await nextTick();
+      setTimeout(() => {
+        this.$helpers.scrollToTop();
+      }, 100);
     } else if (this.currentStep === 'registration') {
       this.currentStep = 'payment';
+      await nextTick();
+      setTimeout(() => {
+        this.$helpers.scrollToTop();
+      }, 100);
     } else if (this.currentStep === 'payment') {
-      //
+      this.createOrder();
     }
   }
 
-  updated(): void {
-    this.maskPromocodeInput();
+  async goToPrevStep(): Promise<void> {
+    this.currentStep = 'order_detail';
+    await nextTick();
+    setTimeout(() => {
+      this.$helpers.scrollToTop();
+    }, 100);
   }
 
   async usePromocode(): Promise<void> {
@@ -959,6 +1049,45 @@ export default class Order extends Vue {
       this.$store.dispatch('showAlertError', 'При активации промокода произошла ошибка');
     } finally {
       this.promocodeUseLoading = false;
+    }
+  }
+
+  async createOrder(): Promise<void> {
+    if (this.order === null
+        || this.order.time === null
+        || this.order.date === null) return;
+    try {
+      this.orderCreateLoading = true;
+      const timePieces = this.order.time.split(':');
+      this.order.date
+        .setHours(parseInt(timePieces[0], 0), parseInt(timePieces[1], 0), 0, 0);
+      const response = await orders.create({
+        location_type: this.order.locationType,
+        rooms_count: this.order.roomsCount,
+        bathrooms_count: this.order.bathroomsCount,
+        cleaning_type_id: this.order.cleaningType.id,
+        additional_services: this.order.additionalServices
+          .filter((additionalService) => additionalService.quantity > 0)
+          .map((additionalService) => ({
+            id: additionalService.id,
+            quantity: additionalService.quantity,
+          })),
+        cleaning_frequency: this.order.cleaningFrequency,
+        datetime: this.order.date.toISOString(),
+        payment_type: this.order.paymentType,
+        comment: this.order.comment,
+        address: {
+          city: `${this.order.address.city}` as City,
+          street: `${this.order.address.street}`,
+          street_number: `${this.order.address.streetNumber}`,
+          floor: this.order.address.floor,
+          apartment_number: this.order.address.apartmentNumber,
+        },
+      });
+    } catch (e) {
+      this.$store.dispatch('showAlertError', 'При попытке создания заказа произошла ошибка');
+    } finally {
+      this.orderCreateLoading = false;
     }
   }
 }

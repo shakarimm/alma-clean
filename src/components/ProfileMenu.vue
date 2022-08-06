@@ -10,10 +10,10 @@
           <router-link to="/profile/free-orders" class="profile-menu__item"
                        active-class="profile-menu__item--active"
                        v-text="'Бесплатные уборки'"/>
-          <router-link to="/profile/settings/payment" class="profile-menu__item"
-                       active-class="profile-menu__item--active"
-                       v-text="'Оплата'"/>
-          <router-link to="/profile/favorite-cleaners" class="profile-menu__item"
+<!--          <router-link to="/profile/settings/payment" class="profile-menu__item"-->
+<!--                       active-class="profile-menu__item&#45;&#45;active"-->
+<!--                       v-text="'Оплата'"/>-->
+          <router-link to="/profile/cleaners" class="profile-menu__item"
                        active-class="profile-menu__item--active"
                        v-text="'Мои клинеры'"/>
           <router-link to="/profile/settings" class="profile-menu__item"

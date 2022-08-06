@@ -42,24 +42,46 @@
       </div>
 
       <div class="s-first-screen__form">
-        <div class="s-first-screen__form-block quick-order-form">
+        <form
+            @submit.prevent="submitFeedbackShortForm"
+            class="s-first-screen__form-block quick-order-form">
           <div class="quick-order-form__title title title--primary title--small title--center">
             Для быстрого оформления заказа заполните форму</div>
           <AInput
               class="quick-order-form__input-block"
-              placeholder="Ваше имя"/>
+              placeholder="Ваше имя"
+              @input="feedbackShortForm.nameErrors = null"
+              v-model="feedbackShortForm.name"
+              :invalid="feedbackShortForm.nameErrors"/>
           <AInput
               class="quick-order-form__input-block"
               margin-top="sm"
-              placeholder="(777) ХХХ-ХХ-ХХ">
+              :mask="phoneMask"
+              :auto-unmask="false"
+              @input="feedbackShortForm.phoneErrors = null"
+              v-model="feedbackShortForm.phone"
+              :invalid="feedbackShortForm.phoneErrors"
+              placeholder="(___) ___ __ __">
             <template #prepend>+7</template>
           </AInput>
-          <button type="button" class="btn btn--primary quick-order-form__btn">
-            Быстрый заказ</button>
-        </div>
+          <AButton
+              type="submit"
+              text="Быстрый заказ"
+              font-weight="bold"
+              :loading="feedbackShortForm.loading"
+              class="quick-order-form__btn"/>
+        </form>
         <div class="s-first-screen__form-block s-first-screen__form-block--btn">
-          <button type="button" class="btn btn--primary-outline s-first-screen__calculate-btn">
-            Рассчитать стоимость самостоятельно</button>
+          <router-link custom to="/order"
+                       v-slot="{ navigate }">
+            <AButton
+                @click="navigate"
+                class="s-first-screen__calculate-btn"
+                font-weight="bold"
+                text="Рассчитать стоимость самостоятельно"
+                :outline="true"
+            />
+          </router-link>
         </div>
       </div>
     </div>
@@ -557,21 +579,56 @@
       class="feedback-modal"
       @close="feedbackModalIsActive = false"
   >
-    <form @submit.prevent="false">
-      <AInput placeholder="Ваше имя"/>
-      <AInput margin-top="md"
-              placeholder="(777) ХХХ-ХХ-ХХ">
+    <form v-if="!feedbackModalShowResult"
+          @submit.prevent="submitFeedbackFullForm">
+      <AInput
+          v-model="feedbackFullForm.name"
+          :errors-texts="feedbackFullForm.nameErrors"
+          :invalid="feedbackFullForm.nameErrors"
+          @input="feedbackFullForm.nameErrors = null"
+          placeholder="Ваше имя"/>
+      <AInput
+          margin-top="md"
+          v-model="feedbackFullForm.phone"
+          :errors-texts="feedbackFullForm.phoneErrors"
+          :invalid="feedbackFullForm.phoneErrors"
+          @input="feedbackFullForm.phoneErrors = null"
+          :mask="phoneMask"
+          :auto-unmask="false"
+          placeholder="(___) ___ __ __">
         <template #prepend>+7</template>
       </AInput>
-      <AInput margin-top="md"
-              placeholder="E-Mail"/>
-      <AInput :is-textarea="true"
-              margin-top="md"
-              placeholder="Сообщение"/>
-      <button type="submit" class="btn btn--full-width btn--primary feedback-modal__submit-btn">
-        Быстрый заказ</button>
+      <AInput
+          margin-top="md"
+          v-model="feedbackFullForm.email"
+          placeholder="E-Mail"/>
+      <AInput
+          :is-textarea="true"
+          margin-top="md"
+          v-model="feedbackFullForm.comment"
+          placeholder="Сообщение"/>
+      <AButton
+          type="submit"
+          class="feedback-modal__submit-btn"
+          :full-width="true"
+          :loading="feedbackFullForm.loading"
+          font-weight="bold"
+          text="Быстрый заказ"/>
     </form>
+    <FeedbackSuccessBox
+        v-else
+        @btnClick="feedbackModalIsActive = false"/>
   </Modal>
+  <Modal
+      size="sm"
+      :is-active="feedbackSuccessModalIsActive"
+      title="Написать нам"
+      @close="feedbackSuccessModalIsActive = false"
+  >
+    <FeedbackSuccessBox
+        @btnClick="feedbackSuccessModalIsActive = false"/>
+  </Modal>
+  <GoTopButton/>
 </template>
 
 <script lang="ts">
@@ -588,6 +645,11 @@ import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
 import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
 import AInput from '@/components/AInput.vue';
+import AButton from '@/components/AButton.vue';
+import { phoneMask } from '@/app.config';
+import feedback from '@/repositories/api/feedback';
+import FeedbackSuccessBox from '@/components/FeedbackSuccessBox.vue';
+import GoTopButton from '@/components/GoTopButton.vue';
 
 interface ReviewProps {
   text: string,
@@ -604,11 +666,24 @@ interface EquipmentProps {
   description: string,
 }
 
+interface FeedbackForm {
+  name: string,
+  phone: string,
+  nameErrors: null|string[],
+  phoneErrors: null|string[],
+  email: null,
+  comment: null,
+  loading: boolean,
+}
+
 type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
 type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
 
 @Options({
   components: {
+    GoTopButton,
+    FeedbackSuccessBox,
+    AButton,
     Swiper,
     SwiperSlide,
     Modal,
@@ -620,11 +695,14 @@ type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
   },
 })
 export default class Home extends Vue {
+  readonly phoneMask = phoneMask;
   showedEquipmentModal: EquipmentProps|null = null;
   specialOfferTabActive: SpecialOfferTabType = 'furniture';
   cleaningTypesTabActive: CleaningTypesTabType = 'rooms';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
   feedbackModalIsActive = false;
+  feedbackSuccessModalIsActive = false;
+  feedbackModalShowResult = false;
   reviews: ReviewProps[] = [
     {
       text: 'Решил жене сделать небольшой подарок во время ее отсутствия, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!',
@@ -675,5 +753,76 @@ export default class Home extends Vue {
       description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
     },
   ];
+  feedbackShortForm: FeedbackForm = {
+    name: '',
+    phone: '',
+    nameErrors: null,
+    phoneErrors: null,
+    email: null,
+    comment: null,
+    loading: false,
+  };
+  feedbackFullForm: FeedbackForm = {
+    name: '',
+    phone: '',
+    nameErrors: null,
+    phoneErrors: null,
+    email: null,
+    comment: null,
+    loading: false,
+  };
+
+  validateFeedbackForm(form: FeedbackForm): boolean {
+    let valid = true;
+
+    if (form.name.trim().length < 1) {
+      form.nameErrors = ['Укажите имя'];
+      valid = false;
+    }
+    if (!this.$helpers.validPhone(form.phone)) {
+      form.phoneErrors = ['Укажите номер телефона'];
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  async submitFeedbackForm(form: FeedbackForm): Promise<boolean> {
+    if (!this.validateFeedbackForm(form)) return false;
+    try {
+      form.loading = true;
+      const response = await feedback.send({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        comment: form.comment,
+      });
+      if (response.data?.successful) {
+        form.name = '';
+        form.phone = '';
+        form.email = null;
+        form.comment = null;
+        return true;
+      }
+      this.$store.dispatch('showAlertError', 'При отправке произошла ошибка');
+    } catch (e) {
+      this.$store.dispatch('showAlertError', 'При отправке произошла ошибка');
+    } finally {
+      form.loading = false;
+    }
+    return false;
+  }
+
+  async submitFeedbackFullForm(): Promise<void> {
+    if (await this.submitFeedbackForm(this.feedbackFullForm)) {
+      this.feedbackModalShowResult = true;
+    }
+  }
+
+  async submitFeedbackShortForm(): Promise<void> {
+    if (await this.submitFeedbackForm(this.feedbackShortForm)) {
+      this.feedbackSuccessModalIsActive = true;
+    }
+  }
 }
 </script>

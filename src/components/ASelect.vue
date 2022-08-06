@@ -18,7 +18,10 @@
           :clearable="false"
           :selectable="option => option.selectable"
           transition="fade"
-          :class="{ 'vs--not-selected': localValue === null }">
+          :class="{
+            'vs--not-selected': localValue === null,
+            'vs--short': short,
+          }">
         <template #open-indicator>
           <i class="vs__custom-open-indicator ac-icon ac-icon-arrow-down"></i>
         </template>
@@ -31,9 +34,16 @@
         </template>
       </v-select>
     </div>
-    <div v-if="errorText !== null"
-         class="input-block__error"
-         v-text="errorText"/>
+    <div v-if="errorsTexts && errorsTexts.length > 0"
+         class="input-block__error">
+      <template v-if="errorsTexts.length === 1">
+        {{ errorsTexts[0] }}
+      </template>
+      <ul v-else>
+        <li v-for="errorText in errorsTexts"
+            :key="errorText">{{ errorText }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -48,8 +58,12 @@ export interface ASelectOption {
 }
 
 @Options({
-  inject: ['activeInGroup', 'onClickCallback'],
   props: {
+    short: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     modelValue: {
       type: [String, Number],
       required: true,
@@ -60,9 +74,10 @@ export interface ASelectOption {
       required: false,
       default: null,
     },
-    errorText: {
-      type: String,
+    errorsTexts: {
+      type: Array as PropType<string[]>,
       required: false,
+      default: null,
     },
     invalid: {
       type: Boolean,
@@ -85,9 +100,10 @@ export interface ASelectOption {
   },
 })
 export default class ASelect extends Vue {
+  readonly short!: boolean;
   readonly placeholder!: null|string;
   readonly options!: ASelectOption[];
-  readonly errorText!: null|string;
+  readonly errorsTexts!: null|string[];
   readonly invalid!: boolean;
   readonly modelValue!: string
   localValue: null|string|number = this.modelValue;

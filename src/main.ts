@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import vSelect from 'vue-select';
 import VCalendar from 'v-calendar';
 import helpers from '@/plugins/helpers.plugin';
+import VueSocialSharing from 'vue-social-sharing';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -15,6 +16,7 @@ createApp(App)
   .use(store)
   .use(router)
   .use(helpers)
-  .use(VCalendar, {})
+  .use(VCalendar)
+  .use(VueSocialSharing)
   .component('v-select', vSelect)
   .mount('#app');

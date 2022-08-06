@@ -1,12 +1,17 @@
 <template>
   <button
       :type="type"
-      class="btn btn--primary"
+      class="btn"
       :class="{
         'btn--small': small,
         'btn--circle': circle,
         'btn--loading': loading,
         'btn--text-regular': fontWeight === 'regular',
+        'btn--primary': color === 'primary' && !outline,
+        'btn--secondary': color === 'secondary',
+        'btn--danger': color === 'danger',
+        'btn--primary-outline': color === 'primary' && outline,
+        'btn--full-width': fullWidth,
       }"
       :disabled="disabled"
       @click="$emit('click')"
@@ -27,6 +32,7 @@ import { PropType } from 'vue';
 
 declare type ButtonTypes = 'button' | 'submit';
 declare type ButtonFontWeights = 'bold' | 'regular';
+declare type ButtonColors = 'primary' | 'secondary' | 'danger';
 
 @Options({
   emits: ['click'],
@@ -45,6 +51,17 @@ declare type ButtonFontWeights = 'bold' | 'regular';
       required: false,
       default: 'regular',
       validator: (value: string) => ['bold', 'regular'].includes(value),
+    },
+    color: {
+      type: String as PropType<ButtonColors>,
+      required: false,
+      default: 'primary',
+      validator: (value: string) => ['primary', 'secondary', 'danger'].includes(value),
+    },
+    outline: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
     text: {
       type: String,
@@ -70,6 +87,11 @@ declare type ButtonFontWeights = 'bold' | 'regular';
       required: false,
       default: false,
     },
+    fullWidth: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 })
 export default class AButton extends Vue {
@@ -80,5 +102,8 @@ export default class AButton extends Vue {
   readonly loading!: boolean;
   readonly fontWeight!: ButtonFontWeights;
   readonly type!: ButtonTypes;
+  readonly color!: ButtonColors;
+  readonly outline!: boolean;
+  readonly fullWidth!: boolean;
 }
 </script>

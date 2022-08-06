@@ -20,17 +20,24 @@ export interface AuthSignInResponse {
   token: string,
 }
 
-export interface RegisterForm {
+export interface SignUpForm {
   firstName: null|string,
   lastName: null|string,
   email: null|string,
   phone: null|string,
   password: null|string,
   passwordConfirmation: null|string,
-  firstNameInvalid: boolean,
-  lastNameInvalid: boolean,
-  emailInvalid: boolean,
-  phoneInvalid: boolean,
-  passwordInvalid: boolean,
-  passwordConfirmationInvalid: boolean,
+  firstNameErrors: null|string[],
+  lastNameErrors: null|string[],
+  emailErrors: null|string[],
+  phoneErrors: null|string[],
+  passwordErrors: null|string[],
+  passwordConfirmationErrors: null|string[],
+}
+
+export interface SignInForm {
+  email: null|string,
+  password: null|string,
+  emailErrors: null|string[],
+  passwordErrors: null|string[],
 }

@@ -12,6 +12,7 @@
           </div>
         </div>
       </div>
+      <ProfileSidebar/>
     </div>
   </section>
   <!--END SECTION ORDERS-->
@@ -19,7 +20,12 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import ProfileSidebar from '@/components/profile/ProfileSidebar.vue';
 
-@Options({})
+@Options({
+  components: {
+    ProfileSidebar,
+  },
+})
 export default class ProfileFreeOrders extends Vue {}
 </script>

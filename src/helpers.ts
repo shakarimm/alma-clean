@@ -16,8 +16,14 @@ function validEmail(val: string): boolean {
   return re.test(val.toLowerCase());
 }
 
-function validPhone(val: string): boolean {
-  return !/_/.test(val);
+function validPhone(val: null|string): boolean {
+  return val !== null && val.trim().length > 1 && !/_/.test(val);
+}
+
+function scrollToTop(): void {
+  document.body.scrollIntoView({
+    behavior: 'smooth',
+  });
 }
 
 export default {
@@ -25,4 +31,5 @@ export default {
   formatCurrency,
   validEmail,
   validPhone,
+  scrollToTop,
 };

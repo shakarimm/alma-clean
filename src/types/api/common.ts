@@ -25,6 +25,10 @@ export interface DataResponse<T> {
   data: T;
 }
 
+export interface SuccessfulResponse {
+  successful: boolean;
+}
+
 export interface UnprocessableContentResponse {
   message: string,
   errors: {

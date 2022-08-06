@@ -16,11 +16,31 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import ProfileMenu from '@/components/ProfileMenu.vue';
+import { mapGetters } from 'vuex';
+import { ProfileData } from '@/types';
 
 @Options({
+  computed: mapGetters({
+    profile: 'myProfile',
+  }),
   components: {
     ProfileMenu,
   },
+  watch: {
+    $route(): void {
+      this.$store.dispatch('initProfile');
+    },
+    profile(): void {
+      if (this.profile) return;
+      this.$router.push('/');
+    },
+  },
 })
-export default class ProfileLayout extends Vue {}
+export default class ProfileLayout extends Vue {
+  profile!: ProfileData;
+
+  created(): void {
+    this.$store.dispatch('initProfile');
+  }
+}
 </script>
