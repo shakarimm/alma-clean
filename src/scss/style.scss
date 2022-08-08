@@ -39,6 +39,20 @@ img{
 	outline: none !important;
 }
 
+li {
+	list-style:none;
+	background-image:none;
+	background-repeat:none;
+	background-position:0;
+}
+
+ul
+{
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+
 .tab-content-js{
 	display: none;
 	&--active {
@@ -1695,6 +1709,7 @@ img{
 			padding: 25px;
 			position: relative;
 			z-index: 2;
+			//height: 225px;
 		}
 		&-arrow{
 			width: 0;
@@ -2059,6 +2074,52 @@ img{
 	}
 }
 
+// VACUUM DESCR
+.vacuum-descr{
+	@include display-flex;
+	color: $color_violet;
+	&__img-wrapper{
+		width: 300px;
+		@include display-flex;
+		@include justify-content(center);
+		@include align-items(center);
+		flex-shrink: 0;
+		margin-left: -35px;
+	}
+	&__title{
+		font-size: 22px;
+		margin-top: 0;
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+	&__text{
+		font-size: 16px;
+		line-height: 1.4;
+		margin-bottom: 30px;
+		margin-top: 0;
+	}
+	&__mini-title{
+		font-size: 18px;
+		margin: 18px 0;
+		font-weight: 600;
+	}
+	&__descr li{
+		margin-bottom: 22px;
+		padding-left: 20px;
+		position: relative;
+		font-size: 14px;
+		&::before{
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 4px;
+			width: 8px;
+			height: 8px;
+			background-color: $color_green;
+			border-radius: 50%;
+		}
+	}
+}
 // CONTACT US
 .contact-us{
 	@include display-flex;
@@ -2237,6 +2298,11 @@ img{
 		&-lg{
 			#{$modal}__window{
 				max-width: 690px;
+			}
+		}
+		&-vd{
+			#{$modal}__window{
+				max-width: 884px;
 			}
 		}
 	}

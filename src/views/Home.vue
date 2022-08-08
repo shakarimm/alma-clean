@@ -401,68 +401,7 @@
 
   <CountersSection/>
 
-  <!--START SECTION REVIEWS-->
-  <section class="section section--pb-medium section--pt-large s-reviews">
-    <div class="container">
-      <swiper
-          loop
-          :spaceBetween="30"
-          :navigation="{
-            prevEl: '#reviews-slider-prev-button',
-            nextEl: '#reviews-slider-next-button',
-          }"
-          :pagination="{
-            el: '#reviews-slider-pagination',
-            type: 'bullets',
-            bulletClass: 'dot',
-            bulletActiveClass: 'dot--active',
-            clickable: true,
-          }"
-          :modules="swiperModules"
-      >
-        <swiper-slide
-            v-for="review in reviews" :key="review"
-        >
-          <div class="review">
-            <div class="review__text">
-              <div class="review__text-wrapper">
-                {{ review.text }}
-<!--                <div class="review__text-full-btn-block">-->
-<!--                  <button type="button" class="btn btn&#45;&#45;link review__text-full-btn">-->
-<!--                    Читать полностью</button>-->
-<!--                </div>-->
-              </div>
-              <div class="review__text-arrow"></div>
-            </div>
-            <div class="review__info">
-              <div class="review__photo-block">
-                <div class="review__photo"
-                     :style="{'background-image': `url(${review.author.avatar})`}"></div>
-              </div>
-              <div class="review__name">{{ review.author.name }}</div>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-
-      <div class="reviews__slider-control navigation">
-        <div
-            id="reviews-slider-prev-button"
-            class="reviews__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
-          <i class="ac-icon ac-icon-arrow-down"></i>
-        </div>
-        <div class="reviews__dots dots">
-          <div id="reviews-slider-pagination"></div>
-        </div>
-        <div
-            id="reviews-slider-next-button"
-            class="reviews__navigation-arrow-next navigation__arrow navigation__arrow--next">
-          <i class="ac-icon ac-icon-arrow-down"></i>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--END SECTION REVIEWS-->
+  <ReviewsSection/>
 
   <!--START SECTION SPECIAL OFFER-->
   <section class="section s-special-offer">
@@ -569,8 +508,18 @@
   <Modal
       :is-active="showedEquipmentModal != null"
       @close="showedEquipmentModal = null;"
-  >
-    <div v-html="showedEquipmentModal?.description"/>
+      size="vd"
+  ><div class="vacuum-descr">
+    <div class="vacuum-descr__img-wrapper">
+      <img :src="showedEquipmentModal?.photo"/>
+    </div>
+    <div class="vacuum-descr__content">
+      <div class="vacuum-descr__title" v-html="showedEquipmentModal?.name"/>
+      <div class="vacuum-descr__text" v-html="showedEquipmentModal?.description"/>
+      <div class="vacuum-descr__mini-title" v-html="showedEquipmentModal?.miniTitle"/>
+      <div class="vacuum-descr__descr" v-html="showedEquipmentModal?.list"/>
+    </div>
+  </div>
   </Modal>
   <Modal
       size="sm"
@@ -650,20 +599,15 @@ import { phoneMask } from '@/app.config';
 import feedback from '@/repositories/api/feedback';
 import FeedbackSuccessBox from '@/components/FeedbackSuccessBox.vue';
 import GoTopButton from '@/components/GoTopButton.vue';
-
-interface ReviewProps {
-  text: string,
-  author: {
-    name: string,
-    avatar: string,
-  },
-}
+import ReviewsSection from '../components/sections/ReviewsSection.vue';
 
 interface EquipmentProps {
   name: string,
   type: string,
   photo: string,
   description: string,
+  miniTitle: string,
+  list: string,
 }
 
 interface FeedbackForm {
@@ -692,6 +636,7 @@ type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
     CountersSection,
     WorkExamplesGallerySection,
     AInput,
+    ReviewsSection,
   },
 })
 export default class Home extends Vue {
@@ -703,54 +648,39 @@ export default class Home extends Vue {
   feedbackModalIsActive = false;
   feedbackSuccessModalIsActive = false;
   feedbackModalShowResult = false;
-  reviews: ReviewProps[] = [
-    {
-      text: 'Решил жене сделать небольшой подарок во время ее отсутствия, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было просто круто! Спасибо, Всем советую, очень удобно!',
-      author: {
-        name: 'Андрей Ли',
-        avatar: '/images/reviews/reviewer-01.jpg',
-      },
-    },
-    {
-      text: 'Решил жене сделать, она придя домой не могла понять что вообще произошло))) Все сияло, блестело и остался приятный свежий запах, это было !',
-      author: {
-        name: 'Андрей Ли2',
-        avatar: '/images/reviews/reviewer-01.jpg',
-      },
-    },
-    {
-      text: 'Все сияло, блестело и остался приятный свежий запах, это было ! Решил жене сделать, она придя домой не могла понять что вообще произошло)))',
-      author: {
-        name: 'Андрей Ли3',
-        avatar: '/images/reviews/reviewer-01.jpg',
-      },
-    },
-  ];
 
   equipments: EquipmentProps[] = [
     {
       name: 'Puzzi 10/1',
       type: 'Моющий пылесос',
       photo: '/images/equipments/puzzi-10-1.png',
-      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+      description: '<p> Это профессиональный моющий пылесос для химчистки поверхностей. Благодаря моментальному всасыванию распылённого моющего средства поверхность остаётся на 65% суше, чем при уборке техникой конкурирующих марок. И её можно сразу же использовать. При обработке ковров могут использоваться специальные средства для защиты покрытия и средство для борьбы с клещами.</p>',
+      miniTitle: '',
+      list: '',
     },
     {
       name: 'IPC Soteco Fox',
       type: 'Пылесос',
       photo: '/images/equipments/ipc-soteco-fox.png',
-      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+      description: '<p>- FOX - Это новая модель пылесоса для сухой уборки в труднодоступных местах, где применение обычного пылесоса не всегда удобно. Удобный и легкий ранцевый пылесос.</p>',
+      miniTitle: 'Преимущества',
+      list: '<ul><li>FOX работает без мешков для сбора пыли</li><li>Нет необходимости отвлекаться на очистку фильтра в случае снижения мощности всасывания.</li><li>Специальная система очистки позволяет прочистить фильтр-картридж путем нажатия на специальную кнопку, при этом вся пыль останется в баке пылесоса. 2-3 секунды и пылесос снова готов к работе.</li><li>Небольшой вес – 3 кг, и плечевой ремень делает пылесос FOX незаменимым помощником везде, где необходимо произвести уборку в стесненных или в специализированных условиях.</li></ul>',
     },
     {
       name: 'Kirby Sentria',
       type: 'Пылесос',
       photo: '/images/equipments/kirby-sentria.png',
-      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+      description: '<p>- Это сплав современных технологий, высококачественных материалов, опыта специалистов, соответствующего качества уборки, но в первую очередь большой заботы о людях.</p>',
+      miniTitle: 'Преимущества',
+      list: '<ul><li>Мощный воздушный поток в сочетании с системой фильтрации HEPA</li><li>Механический привод TechDrive©</li><li>Светодиодный фонарь</li><li>Большой ассортимент практичных насадок</li></ul>',
     },
     {
       name: 'SC 2 Premium',
       type: 'Пароочиститель',
       photo: '/images/equipments/sc-2-premium.png',
-      description: '<p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются различным загрязнениям. В результате мебель приобретает непривлекательный внешний вид, а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки сидений очистить самостоятельно очень трудно.</p><p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как в виде отдельной услуги, так и в составе мероприятий по комплексной уборке ваших помещений.</p>',
+      description: '<p>- Очень эргономичен и прост в использовании. Насадка для пола Comfort с гибким соединением обеспечивает удобство и великолепные результаты очистки твердых покрытий. В модели предусмотрены два режима интенсивности подачи пара. Прибор поставляется с удлинительным комплектом, который значительно упрощает уборку в труднодоступных местах. Горячий пар позволяет уничтожить 99,99% бактерий на твердых поверхностях без применения бытовой химии.</p>',
+      miniTitle: 'Преимущества',
+      list: '<ul><li>Очистка твердых напольных покрытий</li><li>Очистка швов и смесителей</li><li>Уборка на кухне\n</li><li>Удобная утюжка</li></ul>',
     },
   ];
   feedbackShortForm: FeedbackForm = {

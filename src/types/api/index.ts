@@ -6,3 +6,4 @@ export * from './additional-service';
 export * from './promocode';
 export * from './profile';
 export * from './cleaner';
+export * from './review';

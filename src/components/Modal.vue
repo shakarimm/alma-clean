@@ -7,6 +7,7 @@
         'modal--active': localIsActive,
         'modal--sized-sm': size === 'sm',
         'modal--sized-lg': size === 'lg',
+        'modal--sized-vd': size === 'vd',
       }"
       @keydown.esc="close"
       @click.self="close">
@@ -25,7 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
-declare type ModalSizeTypes = 'sm' | 'lg';
+declare type ModalSizeTypes = 'sm' | 'lg' | 'vd';
 
 @Options({
   props: {
@@ -46,7 +47,7 @@ declare type ModalSizeTypes = 'sm' | 'lg';
       type: String,
       default: 'lg',
       required: false,
-      validator: (value: string) => ['sm', 'lg'].includes(value),
+      validator: (value: string) => ['sm', 'lg', 'vd'].includes(value),
     },
   },
   emits: ['close'],
