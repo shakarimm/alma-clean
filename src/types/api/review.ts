@@ -6,6 +6,7 @@ export interface ReviewsListItemAuthor {
 }
 
 export interface ReviewsListItem {
+  id: string,
   text: string,
   city: City,
   author: ReviewsListItemAuthor,

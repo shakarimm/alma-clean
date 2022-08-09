@@ -60,6 +60,60 @@ declare type ButtonColors = 'primary' | 'secondary' | 'danger';
     },
     outline: {
       type: Boolean,
+      props: {
+        type: {
+          type: String as PropType<ButtonTypes>,
+          required: false,
+          default: 'button',
+          validator: (value: string) => ['button', 'submit'].includes(value),
+        },
+        fontWeight: {
+          type: String as PropType<ButtonFontWeights>,
+          required: false,
+          default: 'regular',
+          validator: (value: string) => ['bold', 'regular'].includes(value),
+        },
+        color: {
+          type: String as PropType<ButtonColors>,
+          required: false,
+          default: 'primary',
+          validator: (value: string) => ['primary', 'secondary', 'danger'].includes(value),
+        },
+        outline: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        small: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+        disabled: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+        circle: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+        loading: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+        fullWidth: {
+          type: Boolean,
+          required: false,
+          default: false,
+        },
+      },
       required: false,
       default: false,
     },

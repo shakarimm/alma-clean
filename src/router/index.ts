@@ -8,6 +8,7 @@ import ProfileFreeOrders from '@/views/Profile/ProfileFreeOrders.vue';
 import ProfileSettings from '@/views/Profile/ProfileSettings.vue';
 import ProfileCleaners from '@/views/Profile/ProfileCleaners.vue';
 import Auth from '@/views/Auth/Auth.vue';
+import StandardCleaningPopUp from '@/views/CleaningTypes/StandardCleaningPopUp.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -65,6 +66,11 @@ const routes: Array<RouteRecordRaw> = [
     alias: ['/auth/sign-up'],
     name: 'Auth',
     component: Auth,
+  },
+  {
+    path: '/cleaning-types',
+    name: 'StandardCleaningPopUp',
+    component: StandardCleaningPopUp,
   },
 ];
 
