@@ -16,7 +16,7 @@ function validEmail(val: string): boolean {
   return re.test(val.toLowerCase());
 }
 
-function validPhone(val: null|string): boolean {
+function validPhone(val: null | string): boolean {
   return val !== null && val.trim().length > 1 && !/_/.test(val);
 }
 

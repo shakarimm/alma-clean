@@ -9,24 +9,27 @@
           <div class="footer__line"></div>
           <ul class="footer__list">
             <li>
-              <router-link to="/cleaning-types"
-                           v-slot="{ navigate }">
+              <router-link to="/cleaning-types/standard"
+                           v-slot="{ navigate }"
+                           @click="$helpers.scrollToTop">
                 <a href="#"
                    @click="navigate"
                    class="link link--white">Стандартная уборка</a>
               </router-link>
             </li>
             <li>
-              <router-link to="/cleaning-types"
-                           v-slot="{ navigate }">
+              <router-link to="/cleaning-types/general"
+                           v-slot="{ navigate }"
+                           @click="$helpers.scrollToTop">
                 <a href="#"
                    @click="navigate"
                    class="link link--white">Генеральная уборка</a>
               </router-link>
             </li>
             <li>
-              <router-link to="/cleaning-types"
-                           v-slot="{ navigate }">
+              <router-link to="/cleaning-types/repair"
+                           v-slot="{ navigate }"
+                           @click="$helpers.scrollToTop">
                 <a href="#"
                    @click="navigate"
                    class="link link--white">Уборка после ремонта</a>

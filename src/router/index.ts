@@ -9,6 +9,8 @@ import ProfileSettings from '@/views/Profile/ProfileSettings.vue';
 import ProfileCleaners from '@/views/Profile/ProfileCleaners.vue';
 import Auth from '@/views/Auth/Auth.vue';
 import StandardCleaningPopUp from '@/views/CleaningTypes/StandardCleaningPopUp.vue';
+import GeneralCleaningPopUp from '@/views/CleaningTypes/GeneralCleaningPopUp.vue';
+import RepairCleaningPopUp from '@/views/CleaningTypes/RepairCleaningPopUp.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +27,21 @@ const routes: Array<RouteRecordRaw> = [
     path: '/order',
     name: 'Order',
     component: Order,
+  },
+  {
+    path: '/cleaning-types/standard',
+    name: 'StandardCleaningPopUp',
+    component: StandardCleaningPopUp,
+  },
+  {
+    path: '/cleaning-types/general',
+    name: 'GeneralCleaningPopUp',
+    component: GeneralCleaningPopUp,
+  },
+  {
+    path: '/cleaning-types/repair',
+    name: 'RepairCleaningPopUp',
+    component: RepairCleaningPopUp,
   },
   {
     path: '/profile',
@@ -66,11 +83,6 @@ const routes: Array<RouteRecordRaw> = [
     alias: ['/auth/sign-up'],
     name: 'Auth',
     component: Auth,
-  },
-  {
-    path: '/cleaning-types',
-    name: 'StandardCleaningPopUp',
-    component: StandardCleaningPopUp,
   },
 ];
 
