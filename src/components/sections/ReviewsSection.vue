@@ -1,10 +1,52 @@
 <template>
   <!--START SECTION REVIEWS-->
-  <section class="section section--pb-medium section--pt-large s-reviews">
+  <section class="section section--pb-medium section--pt-large s-reviews" id="reviews">
     <div class="container">
-      <review-card
-      :reviewList="reviewsList"
-      />
+      <template v-if="reviewsList">
+        <swiper
+          loop
+          slidesPerView="3"
+          :spaceBetween="30"
+          autoHeight
+          :navigation="{
+              prevEl: '#reviews-slider-prev-button',
+              nextEl: '#reviews-slider-next-button',
+            }"
+          :pagination="{
+              el: '#reviews-slider-pagination',
+              type: 'bullets',
+              bulletClass: 'dot',
+              bulletActiveClass: 'dot--active',
+              clickable: true,
+            }"
+          :modules="swiperModules"
+        >
+          <swiper-slide
+            v-for="review in reviewsList" :key="review"
+          >
+            <ReviewCard :review="review"/>
+          </swiper-slide>
+        </swiper>
+
+        <div class="reviews__slider-control navigation">
+          <div
+            id="reviews-slider-prev-button"
+            class="reviews__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
+            <i class="ac-icon ac-icon-arrow-down"></i>
+          </div>
+          <div class="reviews__dots dots">
+            <div id="reviews-slider-pagination"></div>
+          </div>
+          <div
+            id="reviews-slider-next-button"
+            class="reviews__navigation-arrow-next navigation__arrow navigation__arrow--next">
+            <i class="ac-icon ac-icon-arrow-down"></i>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <Loader color="grey"/>
+      </template>
     </div>
   </section>
   <!--END SECTION REVIEWS-->
@@ -18,18 +60,8 @@ import { SwiperModule } from 'swiper/types/shared';
 import repositoryReviews from '@/repositories/api/reviews';
 import axios from 'axios';
 import { City } from '@/types';
-import ReviewCard from '@/components/ReviewCard.vue';
+import ReviewCard, { ReviewProps } from '@/components/ReviewCard.vue';
 import Loader from '../Loader.vue';
-
-interface ReviewProps {
-  id: string,
-  text: string,
-  city: City,
-  author: {
-    name: string,
-    avatar: string,
-  },
-}
 
 @Options({
   components: {

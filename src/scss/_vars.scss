@@ -1,3 +1,4 @@
+//colors
 $color_primary: #2bc06e;
 $color_primary_dark: darken($color_primary, 5%);
 $color_gray_light: #a5a7ae;
@@ -17,3 +18,10 @@ $color_yellow: #ffd53c;
 $color_danger: #e55353;
 $color_danger_dark_15: darken($color_danger, 15%);
 $color_danger_dark_22: darken($color_danger, 22%);
+
+//media
+$ss_laptop:     1339px;
+$ss_tablet:     1019px;
+$ss_sm_tablet:  699px;
+$ss_phone:      529px;
+

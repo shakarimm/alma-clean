@@ -47,15 +47,15 @@
           <div class="footer__line"></div>
           <ul class="footer__list">
             <li><a href="#" class="link link--white">Контакты</a></li>
-            <li><a href="#" class="link link--white">Вопросы</a></li>
-            <li><a href="#" class="link link--white">Отзывы</a></li>
+            <li><a href="#faq" class="link link--white">Вопросы</a></li>
+            <li><a href="#reviews" class="link link--white">Отзывы</a></li>
           </ul>
         </div>
         <div class="footer__col footer__col--3">
           <div class="footer__title">Работа</div>
           <div class="footer__line"></div>
           <ul class="footer__list">
-            <li><a href="#" class="link link--white">Хочу стать клинером</a></li>
+            <li><a href="#offer" class="link link--white">Хочу стать клинером</a></li>
             <li><a href="#" class="link link--white">Вакансии</a></li>
           </ul>
         </div>

@@ -11,6 +11,7 @@ import 'v-calendar/dist/style.css';
 import '@/scss/style.scss';
 import '@/scss/pages.scss';
 import '@/scss/profile.scss';
+import '@/scss/media.scss';
 
 createApp(App)
   .use(store)

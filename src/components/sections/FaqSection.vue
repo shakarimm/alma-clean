@@ -1,6 +1,6 @@
 <template>
   <!--START SECTION FAQ-->
-  <section class="section s-faq">
+  <section class="section s-faq" id="faq">
     <div class="container container--flex">
       <div class="title">Часто задаваемые вопросы</div>
       <CollapseGroup>

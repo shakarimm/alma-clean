@@ -34,7 +34,7 @@
           <a href="#"
              @click="navigate" class="link link--gray menu__item">Компания</a>
         </router-link>
-        <a href="#" class="link link--gray menu__item">Частые вопросы</a>
+        <a href="#faq" class="link link--gray menu__item">Частые вопросы</a>
         <a href="#" class="link link--gray menu__item">Приложение</a>
       </div>
       <div class="header__block header__block--right">

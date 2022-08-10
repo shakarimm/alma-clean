@@ -143,7 +143,7 @@
   <!--END SECTION FIXED PRICE-->
 
   <!--START SECTION OFFER WORK-->
-  <section class="section section--pb-large s-offer-work">
+  <section class="section section--pb-large s-offer-work" id="offer">
     <div class="container">
       <h2 class="title title--primary title--center">Хотите у нас работать?</h2>
       <div class="text text-center s-offer-work__subtitle-text">Значимость этих

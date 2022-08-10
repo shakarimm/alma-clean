@@ -1,0 +1,27 @@
+@import "mixins";
+@import "vars";
+
+
+// BREAKPOINT LAPTOP
+@media (max-width: $ss_laptop) {
+  .container{
+    max-width: 880px;
+  }
+}
+
+// BREAKPOINT TABLET
+@media (max-width: $ss_tablet) {
+  .container{
+    max-width: 550px;
+  }
+}
+
+// BREAKPOINT SM TABLET
+@media (max-width: $ss_sm_tablet) {
+  padding: 0 15px;
+}
+
+// BREAKPOINT PHONE
+@media (max-width: $ss_phone) {
+
+}
