@@ -9,6 +9,7 @@ import store from './store';
 import 'vue-select/dist/vue-select.css';
 import 'v-calendar/dist/style.css';
 import '@/scss/style.scss';
+import '@/scss/nav.scss';
 import '@/scss/pages.scss';
 import '@/scss/profile.scss';
 import '@/scss/media.scss';

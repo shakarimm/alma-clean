@@ -1,27 +1,159 @@
 @import "mixins";
 @import "vars";
+@import "nav";
 
 
 // BREAKPOINT LAPTOP
 @media (max-width: $ss_laptop) {
   .container{
-    max-width: 880px;
+    max-width: 970px;
+  }
+  .header{
+    &__phones{
+      font-size: 1rem;
+    }
+    &__logo{
+      min-width: 150px;
+      margin-right: 2.2rem;
+    }
+  }
+  .s-first-screen{
+    padding: 120px 0 60px;
+    .usp{
+      max-width: 55%;
+    }
+  }
+  .card-advantage{
+    padding: 0.8em 2.4em 0.8em 3.8em;
+    &__icon-block{
+      font-size: 2em;
+    }
+    &__title{
+      font-size: 1.04rem;
+    }
+    &__text{
+      font-size: 0.8rem;
+    }
+  }
+  .usp {
+    &__advantages{
+      margin-top: 65px;
+    }
+    &__bg {
+      height: 250px;
+      width: 35px;
+      bottom: -95px;
+
+      &::after {
+        height: 40px;
+      }
+    }
   }
 }
 
 // BREAKPOINT TABLET
 @media (max-width: $ss_tablet) {
+  @include nav-module($color_primary, #000);
   .container{
-    max-width: 550px;
+    max-width: 650px;
+  }
+  .header{
+    &__block{
+      &--right{
+        display: none;
+      }
+    }
+  }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    &__item {
+      color: #fff;
+      &--last-child{
+        display: block;
+      }
+    }
+  }
+  .card-advantages{
+    display: none;
+  }
+  .card-advantage{
+    padding: 0.8em 1em 0.8em 2.4em;
+    &__icon-block{
+      font-size: 1.6em;
+      left: 0.25em;
+    }
+    &__title{
+      font-size: 0.94rem;
+    }
+  }
+  .s-first-screen{
+    padding: 90px 0 50px;
+    &__form{
+      width: 50%;
+    }
+    &__calculate{
+      &-btn{
+        font-size: 1rem;
+      }
+    }
+  }
+  .usp{
+    width: 48%;
+    &__title{
+      font-size: 2.5rem;
+      padding-top: 50px;
+    }
+    &__advantages{
+      margin-top: 50px;
+    }
+    &__bg{
+      height: 200px;
+      bottom: -125px;
+    }
   }
 }
 
 // BREAKPOINT SM TABLET
 @media (max-width: $ss_sm_tablet) {
-  padding: 0 15px;
+  .container{
+    padding: 0 15px;
+  }
+  .usp{
+    &__title{
+      font-size: 2rem;
+      padding-top: 0;
+    }
+  }
+  .s-first-screen{
+    &__form{
+      width: 100%;
+      &:first-of-type{
+        margin-top: 0;
+      }
+    }
+  }
+
 }
 
 // BREAKPOINT PHONE
 @media (max-width: $ss_phone) {
-
+  .header{
+    &__logo{
+      &::after{
+        display: none;
+      }
+    }
+    &__block{
+      &--left{
+        width: 85%;
+      }
+    }
+    &__city-selector{
+      padding: 4px 14px 4px 12px;
+      border: 1px solid #DEE0E5;
+      border-radius: 19.5px;
+      width: 40%;
+    }
+  }
 }

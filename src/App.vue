@@ -1,9 +1,11 @@
 <template>
-  <Header/>
-  <router-view/>
-  <Footer/>
-  <AAlert/>
-  <AppLoader/>
+  <div class="wrapper">
+    <Header/>
+    <router-view/>
+      <Footer/>
+    <AAlert/>
+    <AppLoader/>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,6 +1,8 @@
 @import "mixins";
 @import "vars";
+@import "nav";
 
+@include nav-module-btn($color_primary);
 // COMMON
 *::-moz-selection { background: $color_primary !important; color: #fff !important;}
 *::selection { background: $color_primary !important; color: #fff !important;}
@@ -53,6 +55,10 @@ ul
 	margin:0px;
 }
 
+.wrapper{
+	overflow: hidden;
+}
+
 .tab-content-js{
 	display: none;
 	&--active {
@@ -71,6 +77,7 @@ ul
 	max-width: 1170px;
 	position: relative;
 	margin: 0 auto;
+	box-sizing: border-box;
 	&--flex{
 		@include display-flex;
 		@include flex-direction(row);
@@ -478,6 +485,14 @@ ul
 		}
 		&#{$btn}--link, &#{$btn}--link-secondary{
 			color: $color_gray_light_10;
+		}
+	}
+}
+
+.nav{
+	&__item{
+		&--last-child{
+			display: none;
 		}
 	}
 }

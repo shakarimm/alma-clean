@@ -1,13 +1,18 @@
 <template>
-  <div class="review">
+  <div
+    class="review"
+  >
     <div class="review__text">
       <div class="review__text-wrapper">
         {{ review.text }}
         <div class="review__text-full-btn-block">
           <button
             type="button"
-            class="btn btn&#45;&#45;link review__text-full-btn">
-            Читать полностью</button>
+            class="btn btn&#45;&#45;link review__text-full-btn"
+            @click="openText"
+          >
+            Читать полностью
+          </button>
         </div>
       </div>
       <div class="review__text-arrow"></div>
@@ -57,8 +62,12 @@ export default class ReviewCard extends Vue {
   created() {
     this.textParts[0] = this.review.text.slice(0, 40);
     this.textParts[1] = this.review.text.slice(40);
-    console.log(this.textParts[0]);
-    this.textParts.push();
+    console.log(this.textParts);
   }
+  // openText(): void {
+  //   this.textParts.push('gogo');
+  //   this.textParts[0] = this.review.text.slice(40);
+  //   console.log(this.textParts[0]);
+  // }
 }
 </script>
