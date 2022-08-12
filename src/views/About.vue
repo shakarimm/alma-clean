@@ -7,7 +7,8 @@
     <div class="container s-page-first-screen__content">
       <h1 class="s-page-first-screen__title">О компании</h1>
       <div class="s-page-first-screen__subtitle">
-        Занимайтесь тем, что вас радует, а чистоту в доме доверьте профессионалам</div>
+        Занимайтесь тем, что вас радует, а чистоту в доме доверьте профессионалам
+      </div>
     </div>
   </section>
   <!--END SECTION PAGE FIRST SCREEN-->
@@ -72,31 +73,39 @@
         <h3>Оплата наличными или картой</h3>
         <table class="table s-about-info__table">
           <thead>
-            <tr>
-              <th>Услуга</th>
-              <th class="text-center">Опции</th>
-              <th class="text-center">Описание</th>
-            </tr>
+          <tr>
+            <th>Услуга</th>
+            <th class="text-center">Опции</th>
+            <th class="text-center">Описание</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><b>Оплата</b></td>
-              <td>
-                - Разовая
-                <br>
-                - Абонемент
-              </td>
-              <td>широким активом играет важную роль</td>
-            </tr>
-            <tr>
-              <td><b>Уборщица</b></td>
-              <td>
-                - Эротичная
-                <br>
-                - Обычная (40+)
-              </td>
-              <td>образом рамки и место обучения кадров обеспечивает широкому кругу </td>
-            </tr>
+          <tr class="tr">
+            <td><b>Оплата</b></td>
+            <td>
+              - Разовая
+              <br>
+              - Абонемент
+            </td>
+            <td>широким активом играет важную роль</td>
+          </tr>
+          <tr class="tr-hide">
+            <td class="td td--full" colspan="1">широким активом играет важную роль</td>
+          </tr>
+          <tr class="tr">
+            <td><b>Уборщица</b></td>
+            <td>
+              - Эротичная
+              <br>
+              - Обычная (40+)
+            </td>
+            <td>образом рамки и место обучения кадров обеспечивает широкому кругу</td>
+          </tr>
+          <tr>
+            <td class="td td--full" colspan="1">образом рамки и место обучения кадров обеспечивает
+              широкому кругу
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -105,7 +114,7 @@
   <!--END SECTION ABOUT INFO-->
 
   <!--START SECTION FIXED PRICE-->
-  <section class="section section--p-small s-fixed-price">
+  <section class="section section--pb-small s-fixed-price">
     <div class="container">
       <h3 class="title title--primary title--medium">Фиксированная цена на уборку</h3>
       <div class="check-block">
@@ -150,7 +159,8 @@
         проблем настолько очевидна, что консультация с широким активом играет важную
         роль в формировании направлений прогрессивного развития. Товарищи!
         сложившаяся структура организации представляет собой интересный
-        эксперимент проверки направлений прогрессивного развития.</div>
+        эксперимент проверки направлений прогрессивного развития.
+      </div>
       <div class="resume-form">
         <div class="resume-form__row">
           <div class="resume-form__input-block input-block">
@@ -171,7 +181,8 @@
         </div>
         <div class="resume-form__btns">
           <button type="button" class="resume-form__btn btn btn--primary-outline">
-            Прикрепить резюме</button>
+            Прикрепить резюме
+          </button>
           <button type="button" class="resume-form__btn btn btn--primary">Отправить заявку</button>
         </div>
       </div>
@@ -199,5 +210,6 @@ import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGaller
     WorkExamplesGallerySection,
   },
 })
-export default class About extends Vue {}
+export default class About extends Vue {
+}
 </script>

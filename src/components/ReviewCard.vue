@@ -4,16 +4,19 @@
   >
     <div class="review__text">
       <div class="review__text-wrapper">
-        {{ review.text }}
-        <div class="review__text-full-btn-block">
-          <button
-            type="button"
-            class="btn btn&#45;&#45;link review__text-full-btn"
-            @click="openText"
-          >
-            Читать полностью
-          </button>
-        </div>
+        {{ textParts[0] }}
+        <template v-if="isOpened">{{ textParts[1] }}</template>
+        <template v-if="textParts[1]">
+          <div class="review__text-full-btn-block">
+            <button
+              type="button"
+              class="btn btn&#45;&#45;link review__text-full-btn"
+              @click="isOpened = !isOpened"
+            >
+              {{ isOpened ? 'Скрыть' : 'Читать полностью' }}
+            </button>
+          </div>
+        </template>
       </div>
       <div class="review__text-arrow"></div>
     </div>
@@ -43,6 +46,7 @@ export interface ReviewProps {
     avatar: string,
   },
 }
+
 @Options({
   components: {
     Swiper,
@@ -59,15 +63,11 @@ export interface ReviewProps {
 export default class ReviewCard extends Vue {
   readonly review!: ReviewProps;
   textParts: string[] = [];
+  maxLen = 150;
+  isOpened = false;
   created() {
-    this.textParts[0] = this.review.text.slice(0, 40);
-    this.textParts[1] = this.review.text.slice(40);
-    console.log(this.textParts);
+    this.textParts.push(this.review.text.slice(0, this.maxLen));
+    this.textParts.push(this.review.text.slice(this.maxLen));
   }
-  // openText(): void {
-  //   this.textParts.push('gogo');
-  //   this.textParts[0] = this.review.text.slice(40);
-  //   console.log(this.textParts[0]);
-  // }
 }
 </script>

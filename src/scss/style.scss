@@ -1013,6 +1013,9 @@ ul
 .quick-order-form{
 	&__title{
 		margin-top: -5px;
+		&--mini{
+			display: none;
+		}
 	}
 	&__btn{
 		margin-top: 35px;
@@ -1218,6 +1221,9 @@ ul
 
 // ABOUT COMPANY
 .about-company{
+	&__title{
+		display: none;
+	}
 	&__text-block{
 		width: 40%;
 	}

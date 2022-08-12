@@ -5,40 +5,46 @@
 
 // BREAKPOINT LAPTOP
 @media (max-width: $ss_laptop) {
-  .container{
+  .container {
     max-width: 970px;
   }
-  .header{
-    &__phones{
+  .header {
+    &__phones {
       font-size: 1rem;
     }
-    &__logo{
+
+    &__logo {
       min-width: 150px;
       margin-right: 2.2rem;
     }
   }
-  .s-first-screen{
+  .s-first-screen {
     padding: 120px 0 60px;
-    .usp{
+
+    .usp {
       max-width: 55%;
     }
   }
-  .card-advantage{
+  .card-advantage {
     padding: 0.8em 2.4em 0.8em 3.8em;
-    &__icon-block{
+
+    &__icon-block {
       font-size: 2em;
     }
-    &__title{
+
+    &__title {
       font-size: 1.04rem;
     }
-    &__text{
+
+    &__text {
       font-size: 0.8rem;
     }
   }
   .usp {
-    &__advantages{
+    &__advantages {
       margin-top: 65px;
     }
+
     &__bg {
       height: 250px;
       width: 35px;
@@ -49,17 +55,39 @@
       }
     }
   }
+  .equipment{
+    @include box-shadow-default;
+    &__btn-about{
+      opacity: 1;
+    }
+  }
+  .footer{
+    &__info-item{
+      &:nth-child(1){
+        width: 23%;
+      }
+      &:nth-child(2){
+        width: 59%;
+      }
+    }
+  }
+  .s-page-first-screen{
+    height: 240px;
+    &__bg{
+      height: auto;
+    }
+  }
 }
 
 // BREAKPOINT TABLET
 @media (max-width: $ss_tablet) {
   @include nav-module($color_primary, #000);
-  .container{
+  .container {
     max-width: 650px;
   }
-  .header{
-    &__block{
-      &--right{
+  .header {
+    &__block {
+      &--right {
         display: none;
       }
     }
@@ -67,93 +95,661 @@
   .nav {
     display: flex;
     flex-direction: column;
+
     &__item {
       color: #fff;
-      &--last-child{
+
+      &--last-child {
         display: block;
       }
     }
   }
-  .card-advantages{
+  .card-advantages {
     display: none;
   }
-  .card-advantage{
+  .card-advantage {
     padding: 0.8em 1em 0.8em 2.4em;
-    &__icon-block{
+
+    &__icon-block {
       font-size: 1.6em;
       left: 0.25em;
     }
-    &__title{
+
+    &__title {
       font-size: 0.94rem;
     }
   }
-  .s-first-screen{
+  .s-first-screen {
     padding: 90px 0 50px;
-    &__form{
+
+    &__form {
       width: 50%;
     }
-    &__calculate{
-      &-btn{
+
+    &__calculate {
+      &-btn {
         font-size: 1rem;
       }
     }
   }
-  .usp{
+  .usp {
     width: 48%;
-    &__title{
+
+    &__title {
       font-size: 2.5rem;
       padding-top: 50px;
     }
-    &__advantages{
+
+    &__advantages {
       margin-top: 50px;
     }
-    &__bg{
+
+    &__bg {
       height: 200px;
       bottom: -125px;
     }
+  }
+  .s-about-company {
+    background: none;
+    padding-top: 88px;
+  }
+  .about-company {
+    &__text {
+      margin-bottom: 17px;
+    }
+
+    &__text-block {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+  .advantages {
+    @include flex-wrap(wrap);
+    margin-bottom: -20px;
+  }
+  .advantage {
+    width: 46%;
+    margin-bottom: 35px;
+
+    &__icon-block {
+      margin-bottom: 20px;
+    }
+  }
+  .tabs {
+    @include flex-wrap(wrap);
+  }
+  .about-cleaning {
+    &__text {
+      margin-bottom: 50px;
+    }
+
+    &__tabs {
+      margin-bottom: 45px;
+
+      .tab {
+        width: 48%;
+        margin-bottom: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+  .cleaning-interactive {
+    &__point-text {
+      display: none;
+    }
+  }
+  .counter {
+    &:nth-child(4) {
+      display: none;
+    }
+  }
+  .reviews__slider {
+    &-control {
+      margin-top: 40px;
+    }
+  }
+  .s-special-offer {
+    &__bg {
+      display: none;
+    }
+  }
+  .collapse{
+    &__label{
+      font-size: 1.2rem;
+    }
+  }
+  .footer{
+    &__col{
+      width: 100%;
+      margin-bottom: 30px;
+      &--services-links{
+        .footer__list{
+          width: 100%;
+        }
+      }
+    }
+    &__row{
+      &--links{
+        margin-bottom: 20px;
+      }
+    }
+    &__info-item{
+      &:nth-child(1){
+        width: 100%;
+      }
+      &:nth-child(2){
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+  .social-link{
+    width: 50%;
+  }
+  .s-page-first-screen{
+    height: 142px;
+    &__bg{
+      height: 100%;
+      img{
+        animation: none;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+    }
+    &__title{
+      font-size: 2em;
+    }
+    &__subtitle{
+      font-size: 1.2em;
+    }
+  }
+  .s-fixed-price{
+    padding-top: 0;
   }
 }
 
 // BREAKPOINT SM TABLET
 @media (max-width: $ss_sm_tablet) {
-  .container{
+  .container {
     padding: 0 15px;
   }
-  .usp{
-    &__title{
+  .usp {
+    &__title {
       font-size: 2rem;
       padding-top: 0;
     }
+
+    &__bg {
+      display: none;
+    }
+
+    &::before {
+      display: none;
+    }
   }
-  .s-first-screen{
-    &__form{
+  .s-first-screen {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
       width: 100%;
-      &:first-of-type{
-        margin-top: 0;
+      height: 100%;
+      background: #fff;
+      opacity: 0.8;
+      left: 0;
+      top: 0;
+    }
+
+    .container {
+      z-index: 2;
+    }
+
+    .usp {
+      max-width: none;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__form {
+      width: 100%;
+      margin: 0 auto;
+
+      &-block {
+        &:first-child {
+          margin-top: 25px;
+        }
       }
     }
   }
+  .s-about-company {
+    padding-top: 60px;
+  }
+  .about-company {
+    &__title {
+      display: block;
+      margin-bottom: 0.5em;
+      font-size: 2rem;
+    }
+  }
+  .s-advantages {
+    .container {
+      z-index: 2;
+    }
+  }
+  .s-about-cleaning {
+    &::after {
+      background: #EBF8F1;
+    }
 
+    &::before {
+      width: 100%;
+      padding-bottom: 77%;
+    }
+  }
+  .title {
+    margin-bottom: 0.5em;
+    font-size: 2rem;
+
+    &--primary {
+      color: $color_primary;
+    }
+
+    &--small {
+      font-size: 1.25rem;
+    }
+
+    &--medium {
+      font-size: 1.5em;
+    }
+
+    &--center {
+      text-align: center;
+    }
+  }
+  .about-cleaning {
+    &__text {
+      margin-bottom: 40px;
+    }
+  }
+  .our-specialist {
+    &__about {
+      margin-bottom: 30px;
+    }
+
+    &__icon-block {
+      display: none;
+    }
+
+    &__content {
+      max-width: none;
+      margin-left: 0;
+      padding-top: 60px;
+    }
+
+    &__items {
+      @include flex-wrap(wrap);
+    }
+  }
+  .profile-card {
+    max-width: none;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &__photo {
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding-bottom: 0;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+    }
+  }
+  .counters {
+    @include flex-wrap(wrap);
+    margin-bottom: -20px;
+  }
+  .counter {
+    width: 48%;
+    margin-bottom: 20px;
+
+    &__value {
+      font-size: 2.2rem;
+    }
+  }
+  .vacuum-descr{
+    @include flex-wrap(wrap);
+    @include justify-content(center);
+    &__img-wrapper{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    &__content{
+    }
+  }
+  .s-faq{
+    &__block{
+      width: 100%;
+    }
+    &__feedback-link{
+      margin-top: 40px;
+    }
+  }
+  .contact-us{
+    &__phone{
+      font-size: 2.1rem;
+    }
+    &__text{
+      text-align: center;
+    }
+  }
+  .article{
+    h2{
+      margin: 1.2em 0 0.5em;
+    }
+  }
+  .check-block{
+    @include flex-wrap(wrap);
+    &__left{
+      padding-right: 0;
+      border: none;
+      margin-bottom: 24px;
+    }
+    &__right{
+      padding-left: 0;
+      margin: 0 auto;
+    }
+  }
+  .s-offer-work{
+    margin-top: 0;
+    padding-bottom: 90px;
+    padding-top: 50px;
+    &::before{
+      display: none;
+    }
+  }
+  .resume-form{
+    &__row{
+      @include flex-wrap(wrap);
+    }
+    &__input-block{
+      width: 100%;
+    }
+  }
+  .input-control{
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  .resume-form{
+    &__row{
+      &+&{
+        margin-top: 0;
+      }
+    }
+    &__input-block--full{
+      input{
+        padding: 0.6em 1.3em 5em;
+      }
+    }
+    &__btns{
+      @include flex-wrap(wrap);
+      margin-top: 3.5%;
+    }
+    &__btn{
+      width: 100%;
+      &+&{
+        margin-top: 20px;
+        margin-left: 0;
+      }
+    }
+  }
+  .cleaning-type{
+    &__title{
+      font-size: 26px;
+      line-height: 32px;
+      margin-bottom: 14px;
+    }
+    &__text{
+      font-size: 22px;
+      line-height: 28px;
+    }
+    &-room{
+      width: 100%;
+    }
+  }
 }
 
 // BREAKPOINT PHONE
 @media (max-width: $ss_phone) {
-  .header{
-    &__logo{
-      &::after{
+  body {
+    padding-top: 66px;
+  }
+  .header {
+    height: 66px;
+
+    &__logo {
+      min-width: 126px;
+      margin-right: 0.9rem;
+
+      &::after {
         display: none;
       }
     }
-    &__block{
-      &--left{
+
+    &__block {
+      &--left {
         width: 85%;
       }
     }
-    &__city-selector{
+
+    &__city-selector {
       padding: 4px 14px 4px 12px;
       border: 1px solid #DEE0E5;
       border-radius: 19.5px;
       width: 40%;
+    }
+  }
+  .city-selector {
+    font-size: 0.94rem;
+  }
+  .s-first-screen {
+    padding: 39px 0 32px;
+    min-height: 574px;
+
+    &__form-block {
+      padding: 20px 23px;
+    }
+  }
+  .usp {
+    &__title {
+      font-size: 1.5rem;
+    }
+  }
+  .quick-order-form {
+    &__title {
+      display: none;
+
+      &--mini {
+        display: block;
+        font-size: 1.95rem;
+        margin-bottom: 0.8em;
+      }
+    }
+  }
+  .s-about-company {
+    text-align: center;
+    padding-top: 30px;
+  }
+  .about-company {
+    &__title {
+      margin: 0 auto;
+      padding-bottom: 20px;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+  .advantage {
+    width: 100%;
+    text-align: center;
+
+    &__title {
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+  .section {
+    &--p-small, &--pb-small {
+      padding-bottom: 24px;
+    }
+
+    &--p-small, &--pt-small {
+      padding-top: 24px;
+    }
+
+    &--p-medium, &--pb-medium {
+      padding-bottom: 40px;
+    }
+
+    &--p-medium, &--pt-medium {
+      padding-top: 40px;
+    }
+
+    &--p-large, &--pb-large {
+      padding-bottom: 60px;
+    }
+
+    &--p-large, &--pt-large {
+      padding-top: 60px;
+    }
+  }
+  .tab {
+    padding: 0.75em 0.5em;
+  }
+  .cleaning-interactive {
+    &__point {
+      &::after {
+        width: 0.5em;
+        height: 0.5em;
+      }
+    }
+  }
+  .about-cleaning {
+    &__tabs {
+      margin-bottom: 15px;
+
+      .tab {
+        font-size: 16px;
+      }
+    }
+
+    &__text {
+      margin-bottom: 30px;
+    }
+  }
+  .dot {
+    width: 17px;
+    height: 17px;
+  }
+  .reviews {
+    &__slider-control {
+      margin-top: 30px;
+    }
+  }
+  .navigation {
+    &__arrow {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .modal{
+    &__window{
+      padding: 48px 18px 15px 18px;
+    }
+  }
+  .work-examples-gallery-slider{
+    &__prev-button{
+      left: 24.3%;
+    }
+    &__next-button{
+      right: 24.3%;
+    }
+  }
+  .s-contact-us{
+    .btn{
+      padding: 0.95em 0.8em;
+    }
+  }
+  .social-link{
+    width: 100%;
+  }
+  .footer{
+    text-align: center;
+    &__col{
+      margin-bottom: 15px;
+    }
+    &__row{
+      .footer__col{
+        justify-content: center;
+      }
+      &--contact{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .go-top-btn{
+    display: none;
+  }
+  .quote{
+    padding: 1em 1.9em;
+    &__icons{
+      left: 0.4em;
+      top: 0.4em;
+    }
+    &__icon{
+      font-size: 0.6em;
+    }
+  }
+  table{
+    thead{
+      tr{
+        th{
+          &:nth-child(2){
+            border-right: solid 1px #cdced2;
+          }
+          &:nth-child(3){
+            display: none;
+          }
+        }
+      }
+    }
+    tbody{
+      .td{
+        display: block !important;
+      }
+      .tr{
+        td{
+          padding: 0.9em 1.1em;
+          &:nth-child(2){
+            border-right: solid 1px #cdced2;
+          }
+          &:last-child{
+            display: none;
+          }
+        }
+        &:last-child{
+          td{
+            &:nth-child(2){
+              border-right: solid 1px #cdced2;
+            }
+            &:last-child{
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 }

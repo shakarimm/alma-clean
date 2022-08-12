@@ -17,6 +17,17 @@
             prevEl: '#work-examples-gallery-slider-prev-button',
             nextEl: '#work-examples-gallery-slider-next-button',
           }"
+            :breakpoints="{
+            1339: {
+              slidesPerView: 3
+            },
+            699: {
+              slidesPerView: 2
+            },
+            1: {
+              slidesPerView: 2
+            },
+          }"
             :modules="swiperModules"
         >
           <swiper-slide

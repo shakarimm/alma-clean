@@ -337,6 +337,11 @@
 		}
 	}
 	tbody{
+		.td{
+			width: 100% !important;
+			text-align: center;
+			//display: none;
+		}
 		td, th{
 			border-left: solid 1px $color_gray_light_15;
 			border-bottom: solid 1px $color_gray_light_15;

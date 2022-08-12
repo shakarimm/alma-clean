@@ -19,6 +19,17 @@
               bulletActiveClass: 'dot--active',
               clickable: true,
             }"
+          :breakpoints="{
+            1339: {
+              slidesPerView: 3
+            },
+            699: {
+              slidesPerView: 2
+            },
+            1: {
+              slidesPerView: 1
+            },
+          }"
           :modules="swiperModules"
         >
           <swiper-slide
