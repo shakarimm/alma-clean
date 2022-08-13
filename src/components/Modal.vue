@@ -4,7 +4,7 @@
       ref="modal"
       class="modal"
       :class="{
-        'modal--active': localIsActive,
+        'modal--active': computedActive,
         'modal--sized-sm': size === 'sm',
         'modal--sized-lg': size === 'lg',
         'modal--sized-vd': size === 'vd',
@@ -26,11 +26,21 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { ModalName } from '@/store/modules/Modal';
+import { PropType } from 'vue';
+import { mapGetters } from 'vuex';
 
 declare type ModalSizeTypes = 'sm' | 'lg' | 'vd' | 'ct';
 
 @Options({
+  computed: mapGetters({
+    modalName: 'modalName',
+  }),
   props: {
+    name: {
+      type: String as PropType<ModalName>,
+      required: true,
+    },
     isActive: {
       type: Boolean,
       required: false,
@@ -52,32 +62,24 @@ declare type ModalSizeTypes = 'sm' | 'lg' | 'vd' | 'ct';
     },
   },
   emits: ['close'],
-  watch: {
-    localIsActive() {
-      if (this.localIsActive) {
-        document.body.classList.add('modal-showed');
-        this.$refs.modal.focus();
-      } else {
-        document.body.classList.remove('modal-showed');
-        setTimeout(() => {
-          this.$emit('close');
-        }, this.closeEmitDelayMs);
-      }
-    },
-    isActive() {
-      this.localIsActive = this.isActive;
-    },
-  },
 })
 export default class Modal extends Vue {
-  readonly isActive!: boolean;
   readonly title!: string|null;
   readonly size!: ModalSizeTypes;
-  localIsActive = false;
+  readonly name!: ModalName;
+  readonly modalName!: ModalName|null;
+  isActive = false;
   closeEmitDelayMs = 0;
 
+  get isStoreActive(): boolean {
+    return this.modalName === this.name;
+  }
+
+  get computedActive(): boolean {
+    return this.isActive || this.isStoreActive;
+  }
+
   mounted(): void {
-    this.localIsActive = this.isActive;
     this.determineCloseEmitDelay();
   }
 
@@ -93,8 +95,12 @@ export default class Modal extends Vue {
     }
   }
 
+  open(): void {
+    this.$store.dispatch('openModal', this.name);
+  }
+
   close(): void {
-    this.localIsActive = false;
+    this.$store.dispatch('closeModal', this.name);
   }
 }
 </script>
