@@ -1,4 +1,4 @@
-<template>
+<template @contactUsClick="cleaningTypeModalIsActive = true">
   <div class="cleaning-type">
     <div class="container container--sm">
       <div class="cleaning-type__inner">

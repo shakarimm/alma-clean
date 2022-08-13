@@ -2329,6 +2329,11 @@ ul
 				max-width: 884px;
 			}
 		}
+		&-ct{
+			#{$modal}__window{
+				max-width: 770px;
+			}
+		}
 	}
 }
 
@@ -2778,9 +2783,7 @@ ul
 	padding: 50px 0;
 	&__inner{
 		background: #FFFFFF;
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
-		padding: 40px 15px 20px;
 		color: $color_violet;
 	}
 	&__text{

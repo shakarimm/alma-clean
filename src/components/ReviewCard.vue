@@ -4,19 +4,7 @@
   >
     <div class="review__text">
       <div class="review__text-wrapper">
-        {{ textParts[0] }}
-        <template v-if="isOpened">{{ textParts[1] }}</template>
-        <template v-if="textParts[1]">
-          <div class="review__text-full-btn-block">
-            <button
-              type="button"
-              class="btn btn&#45;&#45;link review__text-full-btn"
-              @click="isOpened = !isOpened"
-            >
-              {{ isOpened ? 'Скрыть' : 'Читать полностью' }}
-            </button>
-          </div>
-        </template>
+        {{ review.text }}
       </div>
       <div class="review__text-arrow"></div>
     </div>
@@ -62,12 +50,5 @@ export interface ReviewProps {
 })
 export default class ReviewCard extends Vue {
   readonly review!: ReviewProps;
-  textParts: string[] = [];
-  maxLen = 150;
-  isOpened = false;
-  created() {
-    this.textParts.push(this.review.text.slice(0, this.maxLen));
-    this.textParts.push(this.review.text.slice(this.maxLen));
-  }
 }
 </script>
