@@ -69,7 +69,7 @@
     <div class="s-faq__feedback-link feedback-link">
       Если вы не нашли свой вопрос
       <a href="#"
-         @click.prevent="$emit('contactUsClick')"
+         @click.prevent="onContactUsClick"
          class="link link--green link--bordered">напишите нам</a>
     </div>
   </section>
@@ -87,5 +87,9 @@ import { Collapse, CollapseGroup } from '@/components/collapse';
   },
   emits: ['contactUsClick'],
 })
-export default class FaqSection extends Vue {}
+export default class FaqSection extends Vue {
+  onContactUsClick(): void {
+    this.$store.dispatch('openModal', 'feedback');
+  }
+}
 </script>

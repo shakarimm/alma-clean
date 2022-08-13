@@ -6,6 +6,7 @@
     <AAlert/>
     <AppLoader/>
   </div>
+  <FeedbackModal/>
 </template>
 
 <script lang="ts">
@@ -15,9 +16,11 @@ import Footer from '@/components/Footer.vue';
 import AAlert from '@/components/AAlert.vue';
 import AppLoader from '@/components/AppLoader.vue';
 import Modal from '@/components/Modal.vue';
+import FeedbackModal from '@/components/modals/FeedbackModal.vue';
 
 @Options({
   components: {
+    FeedbackModal,
     AppLoader,
     Header,
     Footer,
