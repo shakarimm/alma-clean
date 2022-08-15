@@ -491,7 +491,10 @@ ul
 
 .nav{
 	&__item{
-		&--last-child{
+		&--user{
+			display: none;
+		}
+		&--home{
 			display: none;
 		}
 	}
@@ -1091,6 +1094,11 @@ ul
 	}
 	&__menu{
 		@include fs-small;
+	}
+	&__city-selector{
+		&--nav{
+			display: none;
+		}
 	}
 	&__phones{
 		font-weight: 500;

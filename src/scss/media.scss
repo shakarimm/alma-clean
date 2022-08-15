@@ -87,7 +87,7 @@
 
 // BREAKPOINT TABLET
 @media (max-width: $ss_tablet) {
-  @include nav-module($color_primary, #000);
+  @include nav-module(#fff, #000);
   .container {
     max-width: 650px;
   }
@@ -97,16 +97,62 @@
         display: none;
       }
     }
+    &__city-selector{
+      &--nav{
+        display: block;
+        background: #FFFFFF;
+        border: 1px solid #DEE0E5;
+        border-radius: 19.5px;
+        margin-bottom: 20px;
+        .city-selector__current{
+          padding: 4px 1.4em 4px 12px;
+        }
+        .city-selector__current-arrow{
+          right: 15px;
+        }
+      }
+    }
   }
   .nav {
     display: flex;
     flex-direction: column;
-
+    width: 40%;
     &__item {
-      color: #fff;
-
-      &--last-child {
+      color: #000;
+      text-align: center;
+      &--home{
         display: block;
+        position: relative;
+        padding-top: 20px;
+        &::after{
+          position: absolute;
+          content: '';
+          width: 100%;
+          height: 1px;
+          left: 0;
+          top: 0;
+          background: rgba(222, 224, 229, 0.5);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+      }
+      &--app{
+        position: relative;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        &::after{
+          position: absolute;
+          content: '';
+          width: 100%;
+          height: 1px;
+          left: 0;
+          bottom: 0;
+          background: rgba(222, 224, 229, 0.5);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+      }
+      &--user {
+        display: block;
+        color: #fff;
       }
     }
   }
