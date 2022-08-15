@@ -2780,7 +2780,7 @@ ul
 
 // SECTION CLEANING TYPE
 .cleaning-type{
-	padding: 50px 0;
+	padding: 50px 0 0px;
 	&__inner{
 		background: #FFFFFF;
 		border-radius: 10px;
@@ -2921,5 +2921,15 @@ ul
 				color: rgba(0, 0, 0, 0.47);
 			}
 		}
+	}
+}
+.equipment-modal{
+	.modal__window{
+		max-width: 884px;
+	}
+}
+.cleaning-type-modal{
+	.modal__window{
+		max-width: 770px;
 	}
 }

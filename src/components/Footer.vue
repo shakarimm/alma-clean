@@ -10,16 +10,16 @@
           <ul class="footer__list">
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="standardCleaningTypeModalIsActive = true"
+                 @click.prevent="onCleaningTypeClick"
               >Стандартная уборка</a>
             </li>
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="generalCleaningTypeModalIsActive = true">Генеральная уборка</a>
+                 @click.prevent="onCleaningTypeClick">Генеральная уборка</a>
             </li>
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="repairCleaningTypeModalIsActive = true">Уборка после ремонта</a>
+                 @click.prevent="onCleaningTypeClick">Уборка после ремонта</a>
             </li>
           </ul>
           <ul class="footer__list">
@@ -128,10 +128,8 @@
   </div>
 
   <Modal
-    size="ct"
-    :is-active="standardCleaningTypeModalIsActive"
-    class="feedback-modal"
-    @close="standardCleaningTypeModalIsActive = false"
+    class="cleaning-type-modal"
+    name="cleaning"
   >
     <div class="cleaning-type">
       <div class="container container--sm">
@@ -503,12 +501,9 @@
     </div>
   </Modal>
   <Modal
-    size="ct"
-    :is-active="generalCleaningTypeModalIsActive"
-    class="feedback-modal"
-    @close="generalCleaningTypeModalIsActive = false"
+    class="cleaning-type-modal"
   >
-    <div class="cleaning-type">
+    <div class="cleaning">
       <div class="container container--sm">
         <div class="cleaning-type__inner">
           <div class="cleaning-type__title cleaning-type__title--big">что входит в генеральную
@@ -878,12 +873,9 @@
     </div>
   </Modal>
   <Modal
-    size="ct"
-    :is-active="repairCleaningTypeModalIsActive"
-    class="feedback-modal"
-    @close="repairCleaningTypeModalIsActive = false"
+    class="cleaning-type-modal"
   >
-    <div class="cleaning-type">
+    <div class="cleaning">
       <div class="container container--sm">
         <div class="cleaning-type__inner">
           <div class="cleaning-type__title cleaning-type__title--big">что входит в уборку после
@@ -1264,8 +1256,8 @@ import Modal from '@/components/Modal.vue';
   },
 })
 export default class Footer extends Vue {
-  standardCleaningTypeModalIsActive = false;
-  generalCleaningTypeModalIsActive = false;
-  repairCleaningTypeModalIsActive = false;
+  onCleaningTypeClick(): void {
+    this.$store.dispatch('openModal', 'cleaning');
+  }
 }
 </script>

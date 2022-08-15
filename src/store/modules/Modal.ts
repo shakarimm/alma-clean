@@ -5,7 +5,7 @@ import {
   VuexModule,
 } from 'vuex-module-decorators';
 
-export type ModalName = 'feedback';
+export type ModalName = 'feedback' | 'equipment';
 
 @Module
 export default class Modal extends VuexModule {

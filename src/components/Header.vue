@@ -37,39 +37,6 @@
           </router-link>
           <a href="#faq" class="link link--gray menu__item nav__item">Частые вопросы</a>
           <a href="#" class="link link--gray menu__item nav__item">Приложение</a>
-          <div v-if="profile !== null"
-               class="user-bar"
-               :class="{
-                'user-bar--loading': logoutLoading,
-             }">
-            <div class="user-bar__user-name">
-              <div class="user-bar__user-name-text">
-                {{ profile.firstName }} {{ profile.lastName.substr(0, 1) }}.
-              </div>
-              <i class="ac-icon ac-icon-arrow-down user-bar__user-name-arrow"></i>
-              <div class="user-bar__loader">
-                <LoaderHor/>
-              </div>
-            </div>
-            <div class="user-bar__links">
-              <router-link custom to="/profile"
-                           v-slot="{ navigate }">
-                <a href="#" @click="navigate" class="link user-bar__link">Личный кабинет</a>
-              </router-link>
-              <div class="user-bar__link-delimiter"></div>
-              <a href="#"
-                 @click.prevent="logout"
-                 class="link user-bar__link">Выйти</a>
-            </div>
-          </div>
-          <div v-else-if="profileLoading" class="header__user-loading">
-            <Loader color="grey"/>
-          </div>
-          <router-link v-else custom to="/auth/sign-up"
-                       v-slot="{ navigate }">
-            <a href="#" @click="navigate" class="btn btn--small btn--primary
-          btn--text-medium btn--circle nav__item nav__item--last-child">Личный кабинет</a>
-          </router-link>
         </div>
         <div class="nav-btn">
           <div class="nav-btn__line"></div>

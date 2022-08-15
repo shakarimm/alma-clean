@@ -7,8 +7,6 @@
         'modal--active': computedActive,
         'modal--sized-sm': size === 'sm',
         'modal--sized-lg': size === 'lg',
-        'modal--sized-vd': size === 'vd',
-        'modal--sized-ct': size === 'ct',
       }"
       @keydown.esc="close"
       @click.self="close">
@@ -30,7 +28,7 @@ import { ModalName } from '@/store/modules/Modal';
 import { PropType } from 'vue';
 import { mapGetters } from 'vuex';
 
-declare type ModalSizeTypes = 'sm' | 'lg' | 'vd' | 'ct';
+declare type ModalSizeTypes = 'sm' | 'lg' | null;
 
 @Options({
   computed: mapGetters({
@@ -52,13 +50,12 @@ declare type ModalSizeTypes = 'sm' | 'lg' | 'vd' | 'ct';
       default: null,
     },
     /**
-     * @values 'sm', 'lg', 'vd', 'ct,
+     * @values 'sm', 'lg',
      */
     size: {
       type: String,
-      default: 'lg',
       required: false,
-      validator: (value: string) => ['sm', 'lg', 'vd', 'ct'].includes(value),
+      validator: (value: string) => ['sm', 'lg', null].includes(value),
     },
   },
   emits: ['close'],

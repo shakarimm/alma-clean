@@ -480,7 +480,7 @@
           <div class="equipment__name">{{ equipment.name }}</div>
           <div class="equipment__type">{{ equipment.type }}</div>
           <button type="button" class="btn btn--primary equipment__btn-about"
-                  @click="showedEquipmentModal = equipment">Описание
+                  @click="showEquipmentModal(equipment)">Описание
           </button>
         </div>
       </div>
@@ -491,9 +491,8 @@
   <WorkExamplesGallerySection/>
   <ContactUsSection/>
   <Modal
-    :is-active="showedEquipmentModal != null"
-    @close="showedEquipmentModal = null;"
-    size="vd"
+    name="equipment"
+    class="equipment-modal"
   >
     <div class="vacuum-descr">
       <div class="vacuum-descr__img-wrapper">
@@ -501,20 +500,19 @@
       </div>
       <div class="vacuum-descr__content">
         <div class="vacuum-descr__title" v-html="showedEquipmentModal?.name"/>
-        <div class="vacuum-descr__text" v-html="showedEquipmentModal?.description"/>
-        <div class="vacuum-descr__mini-title" v-html="showedEquipmentModal?.miniTitle"/>
-        <div class="vacuum-descr__descr" v-html="showedEquipmentModal?.list"/>
+        <div class="vacuum-descr__text">
+          <p>{{ showedEquipmentModal?.description }}</p>
+        </div>
+        <div class="vacuum-descr__mini-title" v-html="showedEquipmentModal?.subtitle"/>
+        <div class="vacuum-descr__descr">
+          <ul>
+            <li v-for="item in showedEquipmentModal.items" :key="item">
+              {{ item }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </Modal>
-  <Modal
-    size="sm"
-    :is-active="feedbackSuccessModalIsActive"
-    title="Написать нам"
-    @close="feedbackSuccessModalIsActive = false"
-  >
-    <FeedbackSuccessBox
-      @btnClick="feedbackSuccessModalIsActive = false"/>
   </Modal>
   <GoTopButton/>
 </template>
@@ -538,7 +536,8 @@ import { phoneMask } from '@/app.config';
 import feedback from '@/repositories/api/feedback';
 import GoTopButton from '@/components/GoTopButton.vue';
 import { mapGetters } from 'vuex';
-import { ProfileData } from '@/types';
+import { CityInformation, ProfileData } from '@/types';
+import { PropType } from 'vue';
 import ReviewsSection from '../components/sections/ReviewsSection.vue';
 
 interface EquipmentProps {
@@ -546,8 +545,8 @@ interface EquipmentProps {
   type: string,
   photo: string,
   description: string,
-  miniTitle: string,
-  list: string,
+  subtitle: string,
+  items: string[];
 }
 
 type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
@@ -590,34 +589,39 @@ export default class Home extends Vue {
       name: 'Puzzi 10/1',
       type: 'Моющий пылесос',
       photo: '/images/equipments/puzzi-10-1.png',
-      description: '<p> Это профессиональный моющий пылесос для химчистки поверхностей. Благодаря моментальному всасыванию распылённого моющего средства поверхность остаётся на 65% суше, чем при уборке техникой конкурирующих марок. И её можно сразу же использовать. При обработке ковров могут использоваться специальные средства для защиты покрытия и средство для борьбы с клещами.</p>',
-      miniTitle: '',
-      list: '',
+      description: 'Это профессиональный моющий пылесос для химчистки поверхностей. Благодаря моментальному всасыванию распылённого моющего средства поверхность остаётся на 65% суше, чем при уборке техникой конкурирующих марок. И её можно сразу же использовать. При обработке ковров могут использоваться специальные средства для защиты покрытия и средство для борьбы с клещами.',
+      subtitle: '',
+      items: [],
     },
     {
       name: 'IPC Soteco Fox',
       type: 'Пылесос',
       photo: '/images/equipments/ipc-soteco-fox.png',
-      description: '<p>- FOX - Это новая модель пылесоса для сухой уборки в труднодоступных местах, где применение обычного пылесоса не всегда удобно. Удобный и легкий ранцевый пылесос.</p>',
-      miniTitle: 'Преимущества',
-      list: '<ul><li>FOX работает без мешков для сбора пыли</li><li>Нет необходимости отвлекаться на очистку фильтра в случае снижения мощности всасывания.</li><li>Специальная система очистки позволяет прочистить фильтр-картридж путем нажатия на специальную кнопку, при этом вся пыль останется в баке пылесоса. 2-3 секунды и пылесос снова готов к работе.</li><li>Небольшой вес – 3 кг, и плечевой ремень делает пылесос FOX незаменимым помощником везде, где необходимо произвести уборку в стесненных или в специализированных условиях.</li></ul>',
+      description: '- FOX - Это новая модель пылесоса для сухой уборки в труднодоступных местах, где применение обычного пылесоса не всегда удобно. Удобный и легкий ранцевый пылесос.',
+      subtitle: 'Преимущества',
+      items: ['FOX работает без мешков для сбора пыли', 'Нет необходимости отвлекаться на очистку фильтра в случае снижения мощности всасывания.', 'Специальная система очистки позволяет прочистить фильтр-картридж путем нажатия на специальную кнопку, при этом вся пыль останется в баке пылесоса. 2-3 секунды и пылесос снова готов к работе.', 'Небольшой вес – 3 кг, и плечевой ремень делает пылесос FOX незаменимым помощником везде, где необходимо произвести уборку в стесненных или в специализированных условиях.'],
     },
     {
       name: 'Kirby Sentria',
       type: 'Пылесос',
       photo: '/images/equipments/kirby-sentria.png',
-      description: '<p>- Это сплав современных технологий, высококачественных материалов, опыта специалистов, соответствующего качества уборки, но в первую очередь большой заботы о людях.</p>',
-      miniTitle: 'Преимущества',
-      list: '<ul><li>Мощный воздушный поток в сочетании с системой фильтрации HEPA</li><li>Механический привод TechDrive©</li><li>Светодиодный фонарь</li><li>Большой ассортимент практичных насадок</li></ul>',
+      description: '- Это сплав современных технологий, высококачественных материалов, опыта специалистов, соответствующего качества уборки, но в первую очередь большой заботы о людях.',
+      subtitle: 'Преимущества',
+      items: ['Мощный воздушный поток в сочетании с системой фильтрации HEPA', 'Механический привод TechDrive©', 'Светодиодный фонарь', 'Большой ассортимент практичных насадок'],
     },
     {
       name: 'SC 2 Premium',
       type: 'Пароочиститель',
       photo: '/images/equipments/sc-2-premium.png',
-      description: '<p>- Очень эргономичен и прост в использовании. Насадка для пола Comfort с гибким соединением обеспечивает удобство и великолепные результаты очистки твердых покрытий. В модели предусмотрены два режима интенсивности подачи пара. Прибор поставляется с удлинительным комплектом, который значительно упрощает уборку в труднодоступных местах. Горячий пар позволяет уничтожить 99,99% бактерий на твердых поверхностях без применения бытовой химии.</p>',
-      miniTitle: 'Преимущества',
-      list: '<ul><li>Очистка твердых напольных покрытий</li><li>Очистка швов и смесителей</li><li>Уборка на кухне\n</li><li>Удобная утюжка</li></ul>',
+      description: '- Очень эргономичен и прост в использовании. Насадка для пола Comfort с гибким соединением обеспечивает удобство и великолепные результаты очистки твердых покрытий. В модели предусмотрены два режима интенсивности подачи пара. Прибор поставляется с удлинительным комплектом, который значительно упрощает уборку в труднодоступных местах. Горячий пар позволяет уничтожить 99,99% бактерий на твердых поверхностях без применения бытовой химии.',
+      subtitle: 'Преимущества',
+      items: ['Очистка твердых напольных покрытий', 'Очистка швов и смесителей', 'Уборка на кухне', 'Удобная утюжка'],
     },
   ];
+
+  showEquipmentModal(equipment: EquipmentProps) {
+    this.showedEquipmentModal = equipment;
+    this.$store.dispatch('openModal', 'equipment');
+  }
 }
 </script>
