@@ -920,6 +920,9 @@
 		td:nth-child(3), th:nth-child(3){
 			width: 40%;
 		}
+		&--mobile{
+			display: none;
+		}
 	}
 }
 

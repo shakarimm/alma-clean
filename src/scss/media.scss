@@ -917,43 +917,11 @@
       font-size: 0.6em;
     }
   }
-  table{
-    thead{
-      tr{
-        th{
-          &:nth-child(2){
-            border-right: solid 1px #cdced2;
-          }
-          &:nth-child(3){
-            display: none;
-          }
-        }
-      }
-    }
-    tbody{
-      .td{
-        display: block !important;
-      }
-      .tr{
-        td{
-          padding: 0.9em 1.1em;
-          &:nth-child(2){
-            border-right: solid 1px #cdced2;
-          }
-          &:last-child{
-            display: none;
-          }
-        }
-        &:last-child{
-          td{
-            &:nth-child(2){
-              border-right: solid 1px #cdced2;
-            }
-            &:last-child{
-              display: none;
-            }
-          }
-        }
+  .s-about-info{
+    &__table{
+      display: none;
+      &--mobile{
+        display: block;
       }
     }
   }

@@ -506,7 +506,7 @@
         <div class="vacuum-descr__mini-title" v-html="showedEquipmentModal?.subtitle"/>
         <div class="vacuum-descr__descr">
           <ul>
-            <li v-for="item in showedEquipmentModal.items" :key="item">
+            <li v-for="item in showedEquipmentModal?.items" :key="item">
               {{ item }}
             </li>
           </ul>
@@ -577,7 +577,6 @@ export default class Home extends Vue {
   specialOfferTabActive: SpecialOfferTabType = 'furniture';
   cleaningTypesTabActive: CleaningTypesTabType = 'rooms';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
-
   // async submitFeedbackShortForm(): Promise<void> {
   //   if (await this.submitFeedbackForm(this.feedbackShortForm)) {
   //     this.feedbackSuccessModalIsActive = true;

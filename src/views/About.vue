@@ -89,9 +89,6 @@
             </td>
             <td>широким активом играет важную роль</td>
           </tr>
-          <tr class="tr-hide">
-            <td class="td td--full" colspan="1">широким активом играет важную роль</td>
-          </tr>
           <tr class="tr">
             <td><b>Уборщица</b></td>
             <td>
@@ -101,8 +98,37 @@
             </td>
             <td>образом рамки и место обучения кадров обеспечивает широкому кругу</td>
           </tr>
+          </tbody>
+        </table>
+        <table class="table s-about-info__table s-about-info__table--mobile">
+          <thead>
           <tr>
-            <td class="td td--full" colspan="1">образом рамки и место обучения кадров обеспечивает
+            <th>Услуга</th>
+            <th class="text-center">Опции</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="tr">
+            <td><b>Оплата</b></td>
+            <td>
+              - Разовая
+              <br>
+              - Абонемент
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">широким активом играет важную роль</td>
+          </tr>
+          <tr class="tr">
+            <td><b>Уборщица</b></td>
+            <td>
+              - Эротичная
+              <br>
+              - Обычная (40+)
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">образом рамки и место обучения кадров обеспечивает
               широкому кругу
             </td>
           </tr>
