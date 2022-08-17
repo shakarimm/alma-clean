@@ -7,3 +7,4 @@ export * from './promocode';
 export * from './profile';
 export * from './cleaner';
 export * from './review';
+export * from './stat-counts';

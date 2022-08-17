@@ -3,26 +3,10 @@
   <section class="section section--p-small s-counters">
     <div class="container">
       <div class="counters">
-        <div class="counter">
-          <div class="counter__value">2 345</div>
-          <div class="counter__title">убранных квартир</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">873</div>
-          <div class="counter__title">чистых офисов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">473</div>
-          <div class="counter__title">клиентов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">122</div>
-          <div class="counter__title">отзыва клиентов</div>
-        </div>
-        <div class="counter">
-          <div class="counter__value">14</div>
-          <div class="counter__title">заказов в день</div>
-        </div>
+        <counter-card
+          :counter="counter"
+          v-for="counter in counterList" :key="counter"
+        />
       </div>
     </div>
   </section>
@@ -31,7 +15,30 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import CounterCard, { CounterProps } from '@/components/CounterCard.vue';
+import repositoryCounters from '@/repositories/api/stat-counts';
 
-@Options({})
-export default class CountersSection extends Vue {}
+@Options({
+  components: {
+    CounterCard,
+  },
+})
+export default class CountersSection extends Vue {
+  counterList: CounterProps[]|null = null;
+  created() {
+    this.loadReviews();
+  }
+  async loadReviews(): Promise<void> {
+    try {
+      const response = await repositoryCounters.getList();
+      this.counterList = response.data.data.map((item) => ({
+        id: item.id,
+        label: item.label,
+        value: item.value,
+      }));
+    } catch (e) {
+      this.$store.dispatch('showAlertError', 'Произошла ошибка при загрузке данных');
+    }
+  }
+}
 </script>
