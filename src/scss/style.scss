@@ -1344,6 +1344,7 @@ ul
 .profile-card{
 	max-width: 200px;
 	text-align: center;
+	margin: 0 auto;
 	&__photo{
 		padding-bottom: 100%;
 		background-position: center center;
@@ -1879,6 +1880,13 @@ ul
 	&__items{
 		@include justify-content(space-between);
 	}
+	&__slider-control{
+		position: absolute;
+		bottom: 50%;
+		width: 100%;
+		z-index: 2;
+		display: none;
+	}
 }
 
 // SPECIAL OFFER
@@ -1982,7 +1990,6 @@ ul
 .equipment{
 	$self: &;
 	padding: 20px;
-	width: 19%;
 	text-align: center;
 	@include border-radius-default;
 	&, &__btn-about{
@@ -2021,6 +2028,13 @@ ul
 		#{$self}__btn-about{
 			opacity: 1;
 		}
+	}
+	&__slider-control{
+		position: absolute;
+		bottom: 50%;
+		width: 100%;
+		z-index: 2;
+		display: none;
 	}
 }
 

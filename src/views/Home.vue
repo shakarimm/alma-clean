@@ -329,55 +329,93 @@
         </div>
       </div>
       <div class="our-specialist__items">
+        <swiper
+          loop
+          slidesPerView="3"
+          :spaceBetween="30"
+          autoHeight
+          :navigation="{
+              prevEl: '#our-specialist-slider-prev-button',
+              nextEl: '#our-specialist-slider-next-button',
+            }"
+          :modules="swiperModules"
+          :breakpoints="{
+            1339: {
+              slidesPerView: 3
+            },
+            1029: {
+              slidesPerView: 2
+            },
+            699: {
+              slidesPerView: 1
+            },
+            1: {
+              slidesPerView: 1
+            },
+          }"
+        >
+          <swiper-slide>
+            <div class="our-specialist__item profile-card"
+                 v-for="item in [1]" :key="item">
+              <div class="profile-card__photo-block">
+                <div class="profile-card__photo"
+                     style="background-image: url(/images/cleaners/cleaner-01.jpg)"></div>
+              </div>
+              <div class="profile-card__name">Татьяна</div>
+              <div class="profile-card__rating rating">
+                <div class="rating__star-block">
+                  <i class="ac-icon ac-icon-star rating__star"></i>
+                  <div class="rating__star-fill" style="width: 100%;">
+                    <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
+                  </div>
+                </div>
+                <div class="rating__star-block">
+                  <i class="ac-icon ac-icon-star rating__star"></i>
+                  <div class="rating__star-fill" style="width: 100%;">
+                    <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
+                  </div>
+                </div>
+                <div class="rating__star-block">
+                  <i class="ac-icon ac-icon-star rating__star"></i>
+                  <div class="rating__star-fill" style="width: 100%;">
+                    <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
+                  </div>
+                </div>
+                <div class="rating__star-block">
+                  <i class="ac-icon ac-icon-star rating__star"></i>
+                  <div class="rating__star-fill" style="width: 100%;">
+                    <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
+                  </div>
+                </div>
+                <div class="rating__star-block">
+                  <i class="ac-icon ac-icon-star rating__star"></i>
+                  <div class="rating__star-fill" style="width: 50%;">
+                    <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
+                  </div>
+                </div>
 
-        <div class="our-specialist__item profile-card"
-             v-for="item in [1, 2, 3,]" :key="item">
-          <div class="profile-card__photo-block">
-            <div class="profile-card__photo"
-                 style="background-image: url(/images/cleaners/cleaner-01.jpg)"></div>
+              </div>
+              <div class="profile-card__rating-info">
+                <div class="profile-card__rating-value">Рейтинг: 5.0</div>
+                <div class="profile-card__rating-value">Оценок: 354</div>
+              </div>
+            </div>
+          </swiper-slide>
+          <div class="our-specialist__slider-control navigation">
+            <div
+              id="our-specialist-slider-prev-button"
+              class="our-specialist__navigation-arrow-prev
+              navigation__arrow navigation__arrow--prev">
+              <i class="ac-icon ac-icon-arrow-down"></i>
+            </div>
+            <div
+              id="our-specialist-slider-next-button"
+              class="our-specialist__navigation-arrow-next
+              navigation__arrow navigation__arrow--next">
+              <i class="ac-icon ac-icon-arrow-down"></i>
+            </div>
           </div>
-          <div class="profile-card__name">Татьяна</div>
-          <div class="profile-card__rating rating">
-
-            <div class="rating__star-block">
-              <i class="ac-icon ac-icon-star rating__star"></i>
-              <div class="rating__star-fill" style="width: 100%;">
-                <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
-              </div>
-            </div>
-            <div class="rating__star-block">
-              <i class="ac-icon ac-icon-star rating__star"></i>
-              <div class="rating__star-fill" style="width: 100%;">
-                <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
-              </div>
-            </div>
-            <div class="rating__star-block">
-              <i class="ac-icon ac-icon-star rating__star"></i>
-              <div class="rating__star-fill" style="width: 100%;">
-                <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
-              </div>
-            </div>
-            <div class="rating__star-block">
-              <i class="ac-icon ac-icon-star rating__star"></i>
-              <div class="rating__star-fill" style="width: 100%;">
-                <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
-              </div>
-            </div>
-            <div class="rating__star-block">
-              <i class="ac-icon ac-icon-star rating__star"></i>
-              <div class="rating__star-fill" style="width: 50%;">
-                <i class="ac-icon ac-icon-star rating__star rating__star--active"></i>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="profile-card__rating-info">
-            <div class="profile-card__rating-value">Рейтинг: 5.0</div>
-            <div class="profile-card__rating-value">Оценок: 354</div>
-          </div>
-        </div>
-
+        </swiper>
       </div>
     </div>
   </section>
@@ -390,79 +428,7 @@
   <!--START SECTION SPECIAL OFFER-->
   <section class="section s-special-offer">
     <div class="container">
-      <div class="special-offer">
-        <div class="special-offer__block special-offer__block--left">
-          <div class="special-offer__title title">Специальные</div>
-          <div class="special-offer__subtitle">услуги и предложения</div>
-
-          <div class="special-offer__tabs vertical-tabs">
-            <div class="vertical-tab"
-                 :class="{ 'vertical-tab--active': specialOfferTabActive === 'furniture' }"
-                 @click="specialOfferTabActive = 'furniture'">
-              Химчистка мягкой мебели <br>и ковровых покрытий
-              <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
-            </div>
-            <div class="vertical-tab"
-                 :class="{ 'vertical-tab--active': specialOfferTabActive === 'cabinet' }"
-                 @click="specialOfferTabActive = 'cabinet'">
-              Личный кабинет для <br>клиентов
-              <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
-            </div>
-            <div class="vertical-tab"
-                 :class="{ 'vertical-tab--active': specialOfferTabActive === 'repair' }"
-                 @click="specialOfferTabActive = 'repair'">
-              Уборка после ремонта
-              <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
-            </div>
-            <div class="vertical-tab"
-                 :class="{ 'vertical-tab--active': specialOfferTabActive === 'mobile_app' }"
-                 @click="specialOfferTabActive = 'mobile_app'">
-              Удобное мобильное <br>приложение
-              <i class="ac-icon ac-icon-arrow-down vertical-tab__arrow"></i>
-            </div>
-          </div>
-        </div>
-        <div class="special-offer__block special-offer__block--right">
-          <div class="special-offer__text">
-            <template v-if="specialOfferTabActive === 'furniture'">
-              <p>В процессе эксплуатации мебель: диваны, кресла, стулья - изнашиваются, подвергаются
-                различным загрязнениям. В результате мебель приобретает непривлекательный внешний
-                вид,
-                а это может испортить интерьер вашего помещения. Химчистка загрязнённой мебели
-                является довольно серьёзной проблемой. Засаленные подлокотники, закапанные подушки
-                сидений очистить самостоятельно очень трудно.</p>
-              <p>Наша компания AlmaClean готова выполнить работы по химчистке мягкой мебели как
-                в виде отдельной услуги, так и в составе мероприятий по комплексной уборке
-                ваших помещений.</p>
-            </template>
-            <template v-if="specialOfferTabActive === 'cabinet'">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
-                doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
-                quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cupiditate
-                necessitatibus nemo quibusdam ratione. Accusamus consequatur error facere iure magni
-                nihil optio repudiandae, veritatis? Animi beatae est facere illo numquam!</p>
-            </template>
-            <template v-if="specialOfferTabActive === 'repair'">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
-                doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
-                quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
-            </template>
-            <template v-if="specialOfferTabActive === 'mobile_app'">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cupiditate
-                necessitatibus nemo quibusdam ratione.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum delectus
-                doloremque eos, eveniet excepturi iure maxime neque nesciunt obcaecati, officiis
-                quaerat quasi sed sint, sit sunt veniam. Doloribus, temporibus!</p>
-            </template>
-            <div class="special-offer__text-btn-block">
-              <button type="button"
-                      class="btn btn--white special-offer__text-btn">Заказать услугу
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <special-offer/>
     </div>
     <img src="/images/backgrounds/special-offer-bg.png" alt="гостинная" class="s-special-offer__bg">
   </section>
@@ -473,17 +439,53 @@
     <div class="container">
       <div class="title">Наше оборудование</div>
       <div class="equipments">
-        <div
-          v-for="equipment in equipments" :key="equipment"
-          class="equipment">
-          <div class="equipment__photo-block">
-            <img :src="equipment.photo" :alt="equipment.name" class="equipment__photo">
+        <swiper
+          slidesPerView="4"
+          :spaceBetween="40"
+          autoHeight
+          :navigation="{
+              prevEl: '#equipment-slider-prev-button',
+              nextEl: '#equipment-slider-next-button',
+            }"
+          :breakpoints="{
+            1339: {
+              slidesPerView: 4
+            },
+            699: {
+              slidesPerView: 2
+            },
+            1: {
+              slidesPerView: 1
+            },
+          }"
+          :modules="swiperModules"
+        >
+          <swiper-slide
+            v-for="equipment in equipments" :key="equipment">
+            <div
+              class="equipment">
+              <div class="equipment__photo-block">
+                <img :src="equipment.photo" :alt="equipment.name" class="equipment__photo">
+              </div>
+              <div class="equipment__name">{{ equipment.name }}</div>
+              <div class="equipment__type">{{ equipment.type }}</div>
+              <button type="button" class="btn btn--primary equipment__btn-about"
+                      @click="showEquipmentModal(equipment)">Описание
+              </button>
+            </div>
+          </swiper-slide>
+        </swiper>
+        <div class="equipment__slider-control navigation">
+          <div
+            id="equipment-slider-prev-button"
+            class="equipment__navigation-arrow-prev navigation__arrow navigation__arrow--prev">
+            <i class="ac-icon ac-icon-arrow-down"></i>
           </div>
-          <div class="equipment__name">{{ equipment.name }}</div>
-          <div class="equipment__type">{{ equipment.type }}</div>
-          <button type="button" class="btn btn--primary equipment__btn-about"
-                  @click="showEquipmentModal(equipment)">Описание
-          </button>
+          <div
+            id="equipment-slider-next-button"
+            class="equipment__navigation-arrow-next navigation__arrow navigation__arrow--next">
+            <i class="ac-icon ac-icon-arrow-down"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -540,6 +542,7 @@ import GoTopButton from '@/components/GoTopButton.vue';
 import { mapGetters } from 'vuex';
 import { CityInformation, ProfileData } from '@/types';
 import { PropType } from 'vue';
+import SpecialOffer from '@/components/SpecialOffer.vue';
 import ReviewsSection from '../components/sections/ReviewsSection.vue';
 
 interface EquipmentProps {
@@ -551,11 +554,11 @@ interface EquipmentProps {
   items: string[];
 }
 
-type SpecialOfferTabType = 'furniture' | 'repair' | 'cabinet' | 'mobile_app';
 type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
 
 @Options({
   components: {
+    SpecialOffer,
     GoTopButton,
     AButton,
     Swiper,
@@ -576,7 +579,6 @@ export default class Home extends Vue {
   readonly profile!: ProfileData;
   readonly phoneMask = phoneMask;
   showedEquipmentModal: EquipmentProps | null = null;
-  specialOfferTabActive: SpecialOfferTabType = 'furniture';
   cleaningTypesTabActive: CleaningTypesTabType = 'rooms';
   swiperModules: SwiperModule[] = [Pagination, Navigation];
   // async submitFeedbackShortForm(): Promise<void> {

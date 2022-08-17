@@ -60,6 +60,9 @@
     &__btn-about{
       opacity: 1;
     }
+    &__photo-block{
+      padding-bottom: 70%;
+    }
   }
   .footer{
     &__info-item{
@@ -82,6 +85,11 @@
   }
   .s-auth-form{
     margin-top: -20px;
+  }
+  .our-specialist, .equipment{
+    &__slider-control{
+      display: flex;
+    }
   }
 }
 
@@ -383,6 +391,20 @@
   }
   .s-profile-menu{
     margin-top: 20px;
+  }
+  .s-special-offer{
+    background: linear-gradient(to right, $color_yellow 20%, $color_yellow 20%, $color_primary 20%, $color_primary 20%);
+  }
+  .special-offer{
+    @include flex-wrap(wrap);
+    &__block{
+      &--left{
+        width: 100%;
+      }
+      &--rigth{
+        width: 100%;
+      }
+    }
   }
 }
 
