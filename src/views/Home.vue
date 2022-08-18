@@ -425,14 +425,7 @@
 
   <ReviewsSection/>
 
-  <!--START SECTION SPECIAL OFFER-->
-  <section class="section s-special-offer">
-    <div class="container">
-      <special-offer/>
-    </div>
-    <img src="/images/backgrounds/special-offer-bg.png" alt="гостинная" class="s-special-offer__bg">
-  </section>
-  <!--END SECTION SPECIAL OFFER-->
+  <SpecialOfferSection/>
 
   <!--START SECTION EQUIPMENT-->
   <section class="section section--p-medium s-equipment">
@@ -492,8 +485,11 @@
   </section>
   <!--END SECTION EQUIPMENT-->
   <FaqSection class="section--pb-medium"/>
+
   <WorkExamplesGallerySection/>
+
   <ContactUsSection/>
+
   <Modal
     name="equipment"
     class="equipment-modal"
@@ -518,6 +514,7 @@
       </div>
     </div>
   </Modal>
+
   <GoTopButton/>
 </template>
 
@@ -542,7 +539,7 @@ import GoTopButton from '@/components/GoTopButton.vue';
 import { mapGetters } from 'vuex';
 import { CityInformation, ProfileData } from '@/types';
 import { PropType } from 'vue';
-import SpecialOffer from '@/components/SpecialOffer.vue';
+import SpecialOfferSection from '@/components/sections/SpecialOfferSection.vue';
 import ReviewsSection from '../components/sections/ReviewsSection.vue';
 
 interface EquipmentProps {
@@ -558,7 +555,7 @@ type CleaningTypesTabType = 'rooms' | 'kitchen' | 'bathroom' | 'corridor';
 
 @Options({
   components: {
-    SpecialOffer,
+    SpecialOfferSection,
     GoTopButton,
     AButton,
     Swiper,

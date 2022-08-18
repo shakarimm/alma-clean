@@ -176,45 +176,7 @@
     </div>
   </section>
   <!--END SECTION FIXED PRICE-->
-
-  <!--START SECTION OFFER WORK-->
-  <section class="section section--pb-large s-offer-work" id="offer">
-    <div class="container">
-      <h2 class="title title--primary title--center">Хотите у нас работать?</h2>
-      <div class="text text-center s-offer-work__subtitle-text">Значимость этих
-        проблем настолько очевидна, что консультация с широким активом играет важную
-        роль в формировании направлений прогрессивного развития. Товарищи!
-        сложившаяся структура организации представляет собой интересный
-        эксперимент проверки направлений прогрессивного развития.
-      </div>
-      <div class="resume-form">
-        <div class="resume-form__row">
-          <div class="resume-form__input-block input-block">
-            <input type="text" class="input-control input-control--short" placeholder="ФИО">
-          </div>
-          <div class="resume-form__input-block input-block">
-            <input type="text" class="input-control input-control--short" placeholder="Email">
-          </div>
-          <div class="resume-form__input-block input-block">
-            <input type="text" class="input-control input-control--short" placeholder="Телефон">
-          </div>
-        </div>
-        <div class="resume-form__row">
-          <div class="resume-form__input-block resume-form__input-block--full input-block">
-            <input type="text" class="input-control input-control--short"
-                   placeholder="Расскажите о себе">
-          </div>
-        </div>
-        <div class="resume-form__btns">
-          <button type="button" class="resume-form__btn btn btn--primary-outline">
-            Прикрепить резюме
-          </button>
-          <button type="button" class="resume-form__btn btn btn--primary">Отправить заявку</button>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--END SECTION OFFER WORK-->
+  <OfferWorkSection/>
   <CountersSection/>
   <FaqSection class="section--pt-medium section--pb-medium"/>
   <WorkExamplesGallerySection/>
@@ -227,9 +189,11 @@ import FaqSection from '@/components/sections/FaqSection.vue';
 import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
 import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
+import OfferWorkSection from '@/components/sections/OfferWorkSection.vue';
 
 @Options({
   components: {
+    OfferWorkSection,
     CountersSection,
     ContactUsSection,
     FaqSection,

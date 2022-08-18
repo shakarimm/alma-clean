@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Header/>
     <router-view/>
-      <Footer/>
+    <Footer/>
     <AAlert/>
     <AppLoader/>
   </div>

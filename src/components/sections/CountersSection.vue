@@ -26,9 +26,9 @@ import repositoryCounters from '@/repositories/api/stat-counts';
 export default class CountersSection extends Vue {
   counterList: CounterProps[]|null = null;
   created() {
-    this.loadReviews();
+    this.loadStats();
   }
-  async loadReviews(): Promise<void> {
+  async loadStats(): Promise<void> {
     try {
       const response = await repositoryCounters.getList();
       this.counterList = response.data.data.map((item) => ({

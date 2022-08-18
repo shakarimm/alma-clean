@@ -816,10 +816,29 @@
 		}
 	}
 	&__input-block{
-		width: 31.5%;
+		width: 30%;
 		margin: 0 !important;
 		&--full{
 			width: 100%;
+		}
+		input{
+			box-sizing: border-box;
+		}
+	}
+	&__label{
+		text-align: center;
+		box-sizing: border-box;
+		input{
+			display: none;
+			box-sizing: border-box;
+		}
+		&-error{
+			text-transform: capitalize;
+			position: absolute;
+			bottom: -30px;
+			color: #cd1f1f;
+			font-size: 15px;
+			font-weight: 400;
 		}
 	}
 	&__btns{
@@ -830,6 +849,7 @@
 	}
 	&__btn{
 		width: 40.5%;
+		font-weight: bold;
 		& + &{
 			margin-left: 3.2%;
 		}
