@@ -795,6 +795,7 @@ ul
 	display: inline-block;
 	@include fs-medium;
 	&__items{
+		z-index: 2;
 		opacity: 0;
 		pointer-events: none;
 		position: absolute;
@@ -1986,6 +1987,9 @@ ul
 	@include display-flex;
 	@include flex-direction(row);
 	@include justify-content(space-between);
+	.swiper{
+		padding: 10px;
+	}
 }
 .equipment{
 	$self: &;

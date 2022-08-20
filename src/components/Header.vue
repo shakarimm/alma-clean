@@ -48,7 +48,7 @@
               </a>
             </div>
           </div>
-          <router-link custom to="/home"
+          <router-link custom to="/"
                        v-slot="{ navigate }">
             <a href="#"
                @click="navigate"
@@ -59,7 +59,11 @@
             <a href="#"
                @click="navigate" class="link link--gray menu__item nav__item">Компания</a>
           </router-link>
-          <a href="#faq" class="link link--gray menu__item nav__item">Частые вопросы</a>
+          <router-link to="#faq"
+             class="link link--gray menu__item nav__item"
+          >
+            Частые вопросы
+          </router-link>
           <a href="#" class="link link--gray menu__item nav__item nav__item--app">Приложение</a>
           <div v-if="profile !== null"
                class="user-bar"

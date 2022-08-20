@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter, createWebHistory, RouteRecordRaw,
+} from 'vue-router';
 import ProfileLayout from '@/layouts/ProfileLayout.vue';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
@@ -71,6 +73,25 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    const scrollEl = to.hash ? document.querySelector(to.hash) : null;
+    const faq = document.getElementById('faq');
+    // console.log(to);
+    // console.log(from);
+    // console.log(savedPosition);
+    if (scrollEl) {
+      return {
+        el: scrollEl,
+        top: 150,
+        behavior: 'smooth',
+      };
+    }
+    return {
+      left: 0,
+      top: 0,
+      behavior: 'smooth',
+    };
+  },
 });
 
 export default router;

@@ -181,6 +181,8 @@
   <FaqSection class="section--pt-medium section--pb-medium"/>
   <WorkExamplesGallerySection/>
   <ContactUsSection/>
+  <GoTopButton/>
+
 </template>
 
 <script lang="ts">
@@ -190,6 +192,7 @@ import ContactUsSection from '@/components/sections/ContactUsSection.vue';
 import CountersSection from '@/components/sections/CountersSection.vue';
 import WorkExamplesGallerySection from '@/components/sections/WorkExamplesGallerySection.vue';
 import OfferWorkSection from '@/components/sections/OfferWorkSection.vue';
+import GoTopButton from '@/components/GoTopButton.vue';
 
 @Options({
   components: {
@@ -198,6 +201,7 @@ import OfferWorkSection from '@/components/sections/OfferWorkSection.vue';
     ContactUsSection,
     FaqSection,
     WorkExamplesGallerySection,
+    GoTopButton,
   },
 })
 export default class About extends Vue {

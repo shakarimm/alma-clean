@@ -810,7 +810,7 @@
 		@include display-flex;
 		@include flex-direction(row);
 		@include justify-content(space-between);
-		@include align-items(center);
+		//@include align-items(center);
 		& + &{
 			margin-top: 3.5%;
 		}
@@ -832,13 +832,16 @@
 			display: none;
 			box-sizing: border-box;
 		}
-		&-error{
+		&-div-error{
 			text-transform: capitalize;
-			position: absolute;
-			bottom: -30px;
 			color: #cd1f1f;
 			font-size: 15px;
 			font-weight: 400;
+			margin-top: 4px;
+		}
+		&-red{
+			color: #cd1f1f;
+			border-color: #cd1f1f;
 		}
 	}
 	&__btns{
@@ -847,10 +850,17 @@
 		@include flex-direction(row);
 		@include justify-content(center);
 	}
-	&__btn{
+	&__btn-wrapper{
 		width: 40.5%;
 		font-weight: bold;
-		& + &{
+		box-sizing: border-box;
+		text-align: center;
+		.btn{
+			font-weight: bold;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		&+&{
 			margin-left: 3.2%;
 		}
 	}

@@ -50,26 +50,34 @@
           </div>
         </div>
         <div class="resume-form__btns">
-          <label class="resume-form__label resume-form__btn btn btn--primary-outline">
-            {{ form.resume ? form.resume.name : 'Прикрепить резюме' }}
-            <input
-              type="file"
-              ref="uploadInput"
-              accept="image/png, image/jpg, image/pdf, image/docx"
-              @input="onFileChanged"
-            />
-            <div class="resume-form__label-error"
-              v-if="!form.resume"
+          <div class="resume-form__btn-wrapper">
+            <div class="btn btn--primary-outline">
+              <label class="resume-form__label"
+                     :class="(form.resume) ? '': ''"
+              >
+                {{ form.resume ? form.resume.name : 'Прикрепить резюме' }}
+                <input
+                  type="file"
+                  ref='uploadInput'
+                  accept="image/png, image/jpg, .pdf, .docx"
+                  @input="onFileChanged"
+                />
+              </label>
+            </div>
+            <div class="resume-form__label-div-error"
+                 v-if="!form.resume"
             >
               {{ form.resumeErrors }}
             </div>
-          </label>
-          <AButton
-            type="submit"
-            class="resume-form__btn btn btn--primary"
-            :loading="form.loading"
-            text="Отправить заявку"
-          />
+          </div>
+          <div class="resume-form__btn-wrapper">
+            <AButton
+              type="submit"
+              class="resume-form__btn btn btn--primary"
+              :loading="form.loading"
+              text="Отправить заявку"
+            />
+          </div>
         </div>
       </form>
       <div class="success-box" v-else>
@@ -81,10 +89,6 @@
           <br>
           Наш менеджер скоро свяжется с Вами.
         </div>
-        <AButton
-          class="success-box__btn"
-          font-weight="bold"
-          text="Ok"/>
       </div>
     </div>
   </section>

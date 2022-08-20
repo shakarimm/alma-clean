@@ -24,9 +24,16 @@
             >
             </div>
             <div class="special-offer__text-btn-block">
-              <button type="button"
-                      class="btn btn--white special-offer__text-btn">Заказать услугу
-              </button>
+<!--              <button type="button"-->
+<!--                      class="btn btn&#45;&#45;white special-offer__text-btn">Заказать услугу-->
+<!--              </button>-->
+              <router-link custom to="/order"
+                           v-slot="{ navigate }">
+                <a href="#" @click="navigate" class="btn btn--white special-offer__text-btn"
+                >
+                  Заказать услугу
+                </a>
+              </router-link>
             </div>
           </div>
         </div>

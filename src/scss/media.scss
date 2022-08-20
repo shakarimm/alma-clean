@@ -91,6 +91,13 @@
       display: flex;
     }
   }
+  .menu{
+    &__item{
+      &+&{
+        margin-left: 1em;
+      }
+    }
+  }
 }
 
 // BREAKPOINT TABLET
@@ -406,6 +413,11 @@
       }
     }
   }
+  .s-offer-work{
+    .btn{
+      padding: 0.95em 2.4em;
+    }
+  }
 }
 
 // BREAKPOINT SM TABLET
@@ -614,7 +626,7 @@
     &::before{
       display: none;
     }
-    .input-control{
+    .input-block{
       box-sizing: border-box;
       margin-bottom: 20px;
     }
@@ -622,17 +634,12 @@
   .resume-form{
     &__row{
       @include flex-wrap(wrap);
-    }
-    &__input-block{
-      width: 100%;
-    }
-
-  }
-  .resume-form{
-    &__row{
       &+&{
         margin-top: 0;
       }
+    }
+    &__input-block{
+      width: 100%;
     }
     &__input-block--full{
       input{
@@ -643,7 +650,7 @@
       @include flex-wrap(wrap);
       margin-top: 3.5%;
     }
-    &__btn{
+    &__btn-wrapper{
       width: 100%;
       &+&{
         margin-top: 20px;

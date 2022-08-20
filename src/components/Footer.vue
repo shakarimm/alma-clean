@@ -10,17 +10,17 @@
           <ul class="footer__list">
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="onCleaningTypeClick"
+                 @click.prevent="onCleaningTypeClick('что входит в стандартную уборку?')"
               >Стандартная уборка</a>
             </li>
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="onCleaningTypeClick"
+                 @click.prevent="onCleaningTypeClick('что входит в генеральную уборку?')"
               >Генеральная уборка</a>
             </li>
             <li>
               <a href="#" class="link link--white"
-                 @click.prevent="onCleaningTypeClick"
+                 @click.prevent="onCleaningTypeClick('что входит в уборку после ремонта?');"
               >Уборка после ремонта</a>
             </li>
           </ul>
@@ -35,15 +35,29 @@
           <div class="footer__line"></div>
           <ul class="footer__list">
             <li><a href="#" class="link link--white">Контакты</a></li>
-            <li><a href="#faq" class="link link--white">Вопросы</a></li>
-            <li><a href="#reviews" class="link link--white">Отзывы</a></li>
+            <li>
+              <router-link to="#faq"
+                 class="link link--white"
+              >
+                Вопросы
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/#reviews" class="link link--white">Отзывы
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="footer__col footer__col--3">
           <div class="footer__title">Работа</div>
           <div class="footer__line"></div>
           <ul class="footer__list">
-            <li><a href="#offer" class="link link--white">Хочу стать клинером</a></li>
+            <li>
+              <router-link to="/about#offer"
+                           class="link link--white">
+                Хочу стать клинером
+              </router-link>
+            </li>
             <li><a href="#" class="link link--white">Вакансии</a></li>
           </ul>
         </div>
@@ -128,6 +142,7 @@
   <div class="gotop-btn">
     <i class="ac-icon ac-icon-arrow-down gotop-btn__icon"></i>
   </div>
+
   <Modal
     class="cleaning-type-modal"
     name="cleaning"
@@ -507,21 +522,25 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Modal from '@/components/Modal.vue';
+import AButton from '@/components/AButton.vue';
 
 type CleaningTypesTitleType =
   'что входит в стандартную уборку?'
   | 'что входит в генеральную уборку?'
-  | 'что входит в уборку после ремонта?'
+  | 'что входит в уборку после ремонта'
   | null;
 
 @Options({
   components: {
+    AButton,
     Modal,
   },
 })
 export default class Footer extends Vue {
   cleaningTypesTitleActive: CleaningTypesTitleType = null;
-  onCleaningTypeClick(): void {
+
+  onCleaningTypeClick(title: CleaningTypesTitleType): void {
+    this.cleaningTypesTitleActive = title;
     this.$store.dispatch('openModal', 'cleaning');
   }
 }
