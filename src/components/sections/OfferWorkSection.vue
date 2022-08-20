@@ -53,7 +53,6 @@
           <div class="resume-form__btn-wrapper">
             <div class="btn btn--primary-outline">
               <label class="resume-form__label"
-                     :class="(form.resume) ? '': ''"
               >
                 {{ form.resume ? form.resume.name : 'Прикрепить резюме' }}
                 <input

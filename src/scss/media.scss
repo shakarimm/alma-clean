@@ -63,6 +63,12 @@
     &__photo-block{
       padding-bottom: 70%;
     }
+    &__navigation-arrow-prev{
+      left: -3%;
+    }
+    &__navigation-arrow-next{
+      right: -3%;
+    }
   }
   .footer{
     &__info-item{
@@ -96,6 +102,14 @@
       &+&{
         margin-left: 1em;
       }
+    }
+  }
+  .work-examples-gallery-slider{
+    &__prev-button{
+      left: 25%;
+    }
+    &__next-button{
+      right: 25%;
     }
   }
 }
@@ -400,17 +414,62 @@
     margin-top: 20px;
   }
   .s-special-offer{
-    background: linear-gradient(to right, $color_yellow 20%, $color_yellow 20%, $color_primary 20%, $color_primary 20%);
+    background: linear-gradient(to right, $color_yellow 0%, $color_yellow 0%, $color_primary 0%, $color_primary 0%);
   }
   .special-offer{
     @include flex-wrap(wrap);
+    &__tabs{
+      .vertical-tab{
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    &__text{
+      padding: 0;
+      color: #424E68;
+      &-btn{
+        &-block{
+          display: none;
+          &--mobile{
+            display: block;
+            margin: 25px auto 35px;
+          }
+        }
+      }
+    }
     &__block{
+      background: #FFFFFF;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.151608);
+      border-radius: 8px;
+      color: #424E68;
+      padding: 40px 0;
       &--left{
         width: 100%;
+        position: relative;
+        z-index: 2;
+        &::after{
+          position: absolute;
+          content: '';
+          width: 1000%;
+          height: 100%;
+          top: 0;
+          left: -50%;
+          background: $color_yellow;
+          z-index: -1;
+        }
       }
-      &--rigth{
+      &--right{
         width: 100%;
+        padding: 30px;
+        margin-top: -20px;
+        z-index: 2;
       }
+    }
+    &__title, &__subtitle{
+      text-align: center;
+    }
+    &__subtitle{
+      margin-bottom: 30px;
     }
   }
   .s-offer-work{
@@ -753,6 +812,11 @@
       }
     }
   }
+  .special-offer{
+    &__title{
+      margin-bottom: 0;
+    }
+  }
 }
 
 // BREAKPOINT PHONE
@@ -967,6 +1031,9 @@
     border-radius: 8px;
     &::before, &::after{
       display: none;
+    }
+    &__label-wrapper{
+      padding-bottom: 0.3em;
     }
   }
   .s-profile-settings{

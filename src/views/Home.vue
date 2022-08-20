@@ -330,8 +330,6 @@
       </div>
       <div class="our-specialist__items">
         <swiper
-          loop
-          slidesPerView="3"
           :spaceBetween="30"
           autoHeight
           :navigation="{
@@ -341,27 +339,31 @@
           :modules="swiperModules"
           :breakpoints="{
             1339: {
-              slidesPerView: 3
+              slidesPerView: 3,
+              loop: false,
             },
             1029: {
-              slidesPerView: 2
+              slidesPerView: 2,
+              loop: true,
             },
             699: {
-              slidesPerView: 1
+              slidesPerView: 1,
+              loop: true,
             },
             1: {
-              slidesPerView: 1
+              slidesPerView: 1,
+              loop: true,
             },
           }"
         >
-          <swiper-slide>
-            <div class="our-specialist__item profile-card"
-                 v-for="item in [1]" :key="item">
+          <swiper-slide
+            v-for="item in ['1', '2', '3']" :key="item">
+            <div class="our-specialist__item profile-card">
               <div class="profile-card__photo-block">
                 <div class="profile-card__photo"
                      style="background-image: url(/images/cleaners/cleaner-01.jpg)"></div>
               </div>
-              <div class="profile-card__name">Татьяна</div>
+              <div class="profile-card__name">Татьяна {{ item }}</div>
               <div class="profile-card__rating rating">
                 <div class="rating__star-block">
                   <i class="ac-icon ac-icon-star rating__star"></i>

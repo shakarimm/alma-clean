@@ -32,22 +32,6 @@
         <div class="header__nav nav"
              :class="{ 'nav--opened': showMobileMenu }"
         >
-          <div class="header__city-selector header__city-selector--nav city-selector">
-            <div class="city-selector__current">
-              Город
-              <i class="ac-icon ac-icon-arrow-down city-selector__current-arrow"></i>
-            </div>
-            <div class="city-selector__items">
-              <a
-                v-for="city in citiesList" :key="city"
-                href="#"
-                @click.prevent="changeCity(city)"
-                class="link city-selector__item"
-                :class="{ 'city-selector__item--active': city.slug === locationCity.slug }">
-                {{ city.name }}
-              </a>
-            </div>
-          </div>
           <router-link custom to="/"
                        v-slot="{ navigate }">
             <a href="#"
@@ -100,8 +84,8 @@
           </router-link>
         </div>
         <div class="nav-btn"
-             :class="{ 'nav-btn--active': showMobileMenu }"
-             @click="showMobileMenu = !showMobileMenu"
+             :class="[showMobileMenu ? navBtnOpened : navBtnClosed]"
+             @click="onNavBtnClick"
         >
           <div class="nav-btn__line"></div>
           <div class="nav-btn__line"></div>
@@ -180,6 +164,13 @@ export default class Header extends Vue {
   readonly citiesList: CityInformation[] = citiesList;
   logoutLoading = false;
   showMobileMenu = false;
+  navBtnOpened = 'nav-btn--active';
+  navBtnClosed = '';
+
+  onNavBtnClick() {
+    this.showMobileMenu = !this.showMobileMenu;
+    this.navBtnClosed = 'nav-btn--closed';
+  }
 
   changeCity(city: CityInformation): void {
     this.$store.dispatch('setLocationCity', city.slug);

@@ -1298,13 +1298,11 @@ ul
 			top: 50%;
 		}
 		&--prev{
-			left: 0;
 			.ac-icon{
 				@include transform(translate(-50%, -50%) rotate(90deg));
 			}
 		}
 		&--next{
-			right: 0;
 			.ac-icon{
 				@include transform(translate(-50%, -50%) rotate(-90deg));
 			}
@@ -1915,6 +1913,9 @@ ul
 		&-btn{
 			&-block{
 				margin-top: 45px;
+				&--mobile{
+					display: none;
+				}
 			}
 		}
 		p{
@@ -1987,6 +1988,7 @@ ul
 	@include display-flex;
 	@include flex-direction(row);
 	@include justify-content(space-between);
+	position: relative;
 	.swiper{
 		padding: 10px;
 	}
