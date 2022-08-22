@@ -128,10 +128,9 @@
   }
   .nav{
     position: absolute;
-    bottom: -10px;
-    right: 2%;
-    transform: translateY(110%);
-    padding: 2.5% 4%;
+    top: 0;
+    right: 0;
+    padding: 13% 4% 4%;
     background-color: $bg_color;
     border-radius: 2%;
     visibility: hidden;
@@ -139,8 +138,7 @@
     transition: all 0.4s ease;
     &__item{
       display: block;
-      padding: 4% 0;
-      margin-left: 0 !important;
+      padding: 1.5% 0;
       &.content-tab--active{
         color: $item_active_color;
       }
@@ -148,7 +146,6 @@
     &--opened{
       visibility: visible;
       opacity: 1;
-      transform: translateY(100%);
     }
   }
 }

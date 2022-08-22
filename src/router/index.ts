@@ -75,11 +75,7 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     const scrollEl = to.hash ? document.querySelector(to.hash) : null;
-    const faq = document.getElementById('faq');
-    // console.log(to);
-    // console.log(from);
-    // console.log(savedPosition);
-    if (scrollEl) {
+    if (scrollEl && (to.path === '/' || to.path === '/about')) {
       return {
         el: scrollEl,
         top: 150,

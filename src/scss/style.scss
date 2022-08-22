@@ -57,6 +57,7 @@ ul
 
 .wrapper{
 	overflow: hidden;
+	position: relative;
 }
 
 .tab-content-js{
@@ -1076,6 +1077,9 @@ ul
 		min-width: 175px;
 		position: relative;
 		margin-right: 2.6rem;
+		&--mobile{
+			display: none;
+		}
 		&::after{
 			position: absolute;
 			right: -1.3rem;
@@ -1097,7 +1101,7 @@ ul
 		@include fs-small;
 	}
 	&__city-selector{
-		&--nav{
+		&--mobile{
 			display: none;
 		}
 	}
@@ -1194,6 +1198,9 @@ ul
 		}
 		&--info-items{
 			@include justify-content(flex-start);
+		}
+		&--mobile{
+			display: none;
 		}
 	}
 	&__title{
@@ -1940,6 +1947,9 @@ ul
 		font-size: 1.9rem;
 		color: $color_violet;
 		margin-bottom: 40px;
+	}
+	&--mobile{
+		display: none;
 	}
 }
 
@@ -2959,5 +2969,20 @@ ul
 .cleaning-type-modal{
 	.modal__window{
 		max-width: 770px;
+	}
+}
+.overlay{
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 4;
+	background: #000;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	pointer-events: none;
+	&--show{
+		opacity: 0.5;
+		pointer-events: auto;
 	}
 }

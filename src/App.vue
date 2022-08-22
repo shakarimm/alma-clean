@@ -1,12 +1,16 @@
 <template>
   <div class="wrapper">
-    <Header/>
+    <Header @mobileMenuChanged="onMobileMenuChanged"/>
     <router-view/>
     <Footer/>
     <AAlert/>
     <AppLoader/>
   </div>
   <FeedbackModal/>
+  <div
+    class="overlay"
+    :class="{ 'overlay--show': showOverlay }"
+  />
 </template>
 
 <script lang="ts">
@@ -29,8 +33,12 @@ import FeedbackModal from '@/components/modals/FeedbackModal.vue';
   },
 })
 export default class App extends Vue {
+  showOverlay = false;
   created(): void {
     this.$store.dispatch('initProfile');
+  }
+  onMobileMenuChanged(isOpened: boolean) {
+    this.showOverlay = isOpened;
   }
 }
 </script>

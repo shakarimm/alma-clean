@@ -32,6 +32,30 @@
         <div class="header__nav nav"
              :class="{ 'nav--opened': showMobileMenu }"
         >
+          <div class="header__logo header__logo--mobile logo-block">
+            <router-link custom to="/"
+                         v-slot="{ navigate }">
+              <a href="#" @click="navigate">
+                <img src="/images/logo.svg" alt="Almaclean" class="logo">
+              </a>
+            </router-link>
+          </div>
+          <div class="header__city-selector header__city-selector--mobile city-selector">
+            <div class="city-selector__current">
+              {{ locationCity.name }}
+              <i class="ac-icon ac-icon-arrow-down city-selector__current-arrow"></i>
+            </div>
+            <div class="city-selector__items">
+              <a
+                v-for="city in citiesList" :key="city"
+                href="#"
+                @click.prevent="changeCity(city)"
+                class="link city-selector__item"
+                :class="{ 'city-selector__item--active': city.slug === locationCity.slug }">
+                {{ city.name }}
+              </a>
+            </div>
+          </div>
           <router-link custom to="/"
                        v-slot="{ navigate }">
             <a href="#"
@@ -156,6 +180,7 @@ import Loader from '@/components/Loader.vue';
     profile: 'myProfile',
     profileLoading: 'profileLoading',
   }),
+  emits: ['mobileMenuChanged'],
 })
 export default class Header extends Vue {
   readonly profile!: null | ProfileData;
@@ -170,6 +195,7 @@ export default class Header extends Vue {
   onNavBtnClick() {
     this.showMobileMenu = !this.showMobileMenu;
     this.navBtnClosed = 'nav-btn--closed';
+    this.$emit('mobileMenuChanged', this.showMobileMenu);
   }
 
   changeCity(city: CityInformation): void {

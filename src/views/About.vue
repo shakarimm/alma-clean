@@ -181,7 +181,7 @@
   <FaqSection class="section--pt-medium section--pb-medium"/>
   <WorkExamplesGallerySection/>
   <ContactUsSection/>
-  <GoTopButton/>
+<!--  <GoTopButton/>-->
 
 </template>
 

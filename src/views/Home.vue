@@ -330,6 +330,7 @@
       </div>
       <div class="our-specialist__items">
         <swiper
+          loop
           :spaceBetween="30"
           autoHeight
           :navigation="{
@@ -517,7 +518,7 @@
     </div>
   </Modal>
 
-  <GoTopButton/>
+<!--  <GoTopButton/>-->
 </template>
 
 <script lang="ts">

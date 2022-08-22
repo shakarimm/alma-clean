@@ -45,6 +45,44 @@
         </div>
       </div>
       <Loader v-else color="white"/>
+      <CollapseGroup>
+        <div class="special-offer special-offer--mobile" v-if="specialOffers">
+          <div class="special-offer__block special-offer__block--left">
+            <div class="special-offer__title title">Специальные</div>
+            <div class="special-offer__subtitle">услуги и предложения</div>
+            <collapse :title="specialOffer.title"
+                      v-for="specialOffer in specialOffers" :key="specialOffer"
+                      @click="specialOfferActive = specialOffer">
+              <div class="special-offer__block special-offer__block--right">
+                <div class="special-offer__text">
+                  <div
+                    v-html="specialOfferActive.text"
+                  >
+                  </div>
+                  <div class="special-offer__text-btn-block">
+                    <router-link custom to="/order"
+                                 v-slot="{ navigate }">
+                      <a href="#" @click="navigate" class="btn btn--white special-offer__text-btn"
+                      >
+                        Заказать услугу
+                      </a>
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+              <div class="special-offer__text-btn-block special-offer__text-btn-block--mobile">
+                <router-link custom to="/order"
+                             v-slot="{ navigate }">
+                  <a href="#" @click="navigate" class="btn btn--white special-offer__text-btn"
+                  >
+                    Заказать услугу
+                  </a>
+                </router-link>
+              </div>
+            </collapse>
+          </div>
+        </div>
+      </CollapseGroup>
     </div>
     <img src="/images/backgrounds/special-offer-bg.png" alt="гостинная" class="s-special-offer__bg">
   </section>
@@ -54,6 +92,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import repositorySpecialOffers from '@/repositories/api/special-offers';
+import { Collapse, CollapseGroup } from '@/components/collapse';
 import Loader from '../Loader.vue';
 
 export interface SpecialOfferProps {
@@ -65,11 +104,14 @@ export interface SpecialOfferProps {
 @Options({
   components: {
     Loader,
+    Collapse,
+    CollapseGroup,
   },
 })
 export default class SpecialOfferSection extends Vue {
   specialOfferActive: SpecialOfferProps | null = null;
   specialOffers: SpecialOfferProps[] | null = null;
+
   created() {
     this.loadOffers();
   }

@@ -36,15 +36,10 @@
           <ul class="footer__list">
             <li><a href="#" class="link link--white">Контакты</a></li>
             <li>
-              <router-link to="#faq"
-                 class="link link--white"
-              >
-                Вопросы
-              </router-link>
+              <router-link to="#faq" class="link link--white">Вопросы</router-link>
             </li>
             <li>
-              <router-link to="/#reviews" class="link link--white">Отзывы
-              </router-link>
+              <router-link to="/#reviews" class="link link--white">Отзывы</router-link>
             </li>
           </ul>
         </div>
@@ -53,27 +48,79 @@
           <div class="footer__line"></div>
           <ul class="footer__list">
             <li>
-              <router-link to="/about#offer"
-                           class="link link--white">
-                Хочу стать клинером
+              <router-link to="/about#offer" class="link link--white">Хочу стать клинером
               </router-link>
             </li>
             <li><a href="#" class="link link--white">Вакансии</a></li>
           </ul>
         </div>
+        <CollapseGroup>
+          <ul class="footer__col footer__col--mobile footer__col--3">
+            <Collapse
+              title="Услуги">
+              <li>
+                <a href="#" class="link link--white"
+                   @click.prevent="onCleaningTypeClick('что входит в стандартную уборку?')"
+                >Стандартная уборка</a>
+              </li>
+              <li>
+                <a href="#" class="link link--white"
+                   @click.prevent="onCleaningTypeClick('что входит в генеральную уборку?')"
+                >Генеральная уборка</a>
+              </li>
+              <li>
+                <a href="#" class="link link--white"
+                   @click.prevent="onCleaningTypeClick('что входит в уборку после ремонта?');"
+                >Уборка после ремонта</a>
+              </li>
+              <li><a href="#" class="link link--white">Загородный дом</a></li>
+              <li><a href="#" class="link link--white">Квартира</a></li>
+              <li><a href="#" class="link link--white">Химчистка</a></li>
+            </Collapse>
+          </ul>
+        </CollapseGroup>
+        <CollapseGroup>
+          <ul class="footer__col footer__col--mobile footer__col--3">
+            <Collapse
+              title="О сервисе">
+              <li><a href="#" class="link link--white">Контакты</a></li>
+              <li>
+                <router-link to="#faq" class="link link--white">Вопросы</router-link>
+              </li>
+              <li>
+                <router-link to="/#reviews" class="link link--white">Отзывы</router-link>
+              </li>
+            </Collapse>
+          </ul>
+        </CollapseGroup>
+        <CollapseGroup>
+          <ul class="footer__col footer__col--mobile footer__col--3">
+            <Collapse
+              title="Работа">
+              <li>
+                <router-link to="/about#offer" class="link link--white">Хочу стать клинером
+                </router-link>
+              </li>
+              <li><a href="#" class="link link--white">Вакансии</a></li>
+            </Collapse>
+          </ul>
+        </CollapseGroup>
       </div>
 
       <div class="footer__row footer__row--info">
         <div class="footer__col footer__col--info-items footer__col--9">
-          <div class="footer__info-item">Мы работаем в: Алматы, Шымкент</div>
-          <div class="footer__info-item">Типы квартир: Однокомнатные, двухкомнатные,
-            <br>трёхкомнатная, четырёхкомнатная
+          <div class="footer__info-item">Мы работаем в: <span>Алматы, Шымкент</span></div>
+          <div class="footer__info-item">
+            <span class="footer__info-item-title">Типы квартир:
+            </span>
+            <span>Однокомнатные, двухкомнатные,
+            <br>трёхкомнатная, четырёхкомнатная</span>
           </div>
         </div>
         <div class="footer__col footer__col--3">
           <ul class="footer__list">
-            <li><a href="#" class="link">Пользовательское соглашение</a></li>
-            <li><a href="#" class="link">Карта сайта</a></li>
+            <li><a href="#" class="link"><span>Пользовательское соглашение</span></a></li>
+            <li><a href="#" class="link"><span>Карта сайта</span></a></li>
           </ul>
         </div>
       </div>
@@ -89,8 +136,8 @@
         </div>
         <div class="footer__col footer__col--3">
           <ul class="footer__list">
-            <li><a href="#" class="link link--white">+7 (777) 831-08-08</a></li>
-            <li><a href="#" class="link link--white">+7 (727) 327-32-05</a></li>
+            <li><a href="#" class="link link--white"><span>+7 (777) 831-08-08</span></a></li>
+            <li><a href="#" class="link link--white"><span>+7 (727) 327-32-05</span></a></li>
           </ul>
         </div>
         <div class="footer__col footer__col--3">
@@ -523,6 +570,7 @@
 import { Options, Vue } from 'vue-class-component';
 import Modal from '@/components/Modal.vue';
 import AButton from '@/components/AButton.vue';
+import { Collapse, CollapseGroup } from '@/components/collapse';
 
 type CleaningTypesTitleType =
   'что входит в стандартную уборку?'
@@ -534,6 +582,8 @@ type CleaningTypesTitleType =
   components: {
     AButton,
     Modal,
+    Collapse,
+    CollapseGroup,
   },
 })
 export default class Footer extends Vue {
