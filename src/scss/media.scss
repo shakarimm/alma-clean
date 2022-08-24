@@ -207,8 +207,13 @@
         }
       }
       &--user {
-        display: block;
+        display: block !important;
         color: #fff;
+        width: 80%;
+        margin: 0 auto;
+      }
+      &--user-bar {
+        display: block !important;
         width: 80%;
         margin: 0 auto;
       }

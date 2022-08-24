@@ -68,13 +68,13 @@
                @click="navigate" class="link link--gray menu__item nav__item">Компания</a>
           </router-link>
           <router-link to="#faq"
-             class="link link--gray menu__item nav__item"
+                       class="link link--gray menu__item nav__item"
           >
             Частые вопросы
           </router-link>
           <a href="#" class="link link--gray menu__item nav__item nav__item--app">Приложение</a>
           <div v-if="profile !== null"
-               class="user-bar"
+               class="user-bar nav__item--user-bar"
                :class="{
                 'user-bar--loading': logoutLoading,
              }">
@@ -192,9 +192,26 @@ export default class Header extends Vue {
   navBtnOpened = 'nav-btn--active';
   navBtnClosed = '';
 
-  onNavBtnClick() {
+  created() {
+    document.addEventListener('mousedown', this.onMouseDown);
+  }
+
+  unmounted() {
+    document.removeEventListener('mousedown', this.onMouseDown);
+  }
+
+  onMouseDown(event: any) {
+    if (!event.target.closest('.menu') || event.target.closest('.nav__item')) {
+      this.showMobileMenu = false;
+      this.$emit('mobileMenuChanged', this.showMobileMenu);
+    }
+  }
+
+  onNavBtnClick(event: any) {
     this.showMobileMenu = !this.showMobileMenu;
     this.navBtnClosed = 'nav-btn--closed';
+    this.onMouseDown(event);
+    console.log(this.showMobileMenu);
     this.$emit('mobileMenuChanged', this.showMobileMenu);
   }
 

@@ -492,8 +492,8 @@ ul
 
 .nav{
 	&__item{
-		&--user{
-			display: none;
+		&--user-bar{
+			display: none !important;
 		}
 		&--home{
 			display: none;
