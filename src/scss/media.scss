@@ -474,7 +474,7 @@
       }
     }
     &__block{
-      background: #FFFFFF;
+      background: none;
       color: #424E68;
       padding: 20px 0;
       &--left{
@@ -485,7 +485,7 @@
           position: absolute;
           content: '';
           width: 1000%;
-          height: 100%;
+          height: 50%;
           top: 0;
           left: -50%;
           background: $color_yellow;
