@@ -12,11 +12,16 @@
           </router-link>
         </div>
         <div class="header__city-selector city-selector">
-          <div class="city-selector__current">
+          <div class="city-selector__current"
+               @click="openCitiestList()"
+               :class="{ 'city-selector__current--active': isActive }"
+          >
             {{ locationCity.name }}
             <i class="ac-icon ac-icon-arrow-down city-selector__current-arrow"></i>
           </div>
-          <div class="city-selector__items">
+          <div class="city-selector__items"
+               :class="{ 'city-selector__items--active': isActive }"
+          >
             <a
               v-for="city in citiesList" :key="city"
               href="#"
@@ -40,7 +45,9 @@
               </a>
             </router-link>
           </div>
-          <div class="header__city-selector header__city-selector--mobile city-selector">
+          <div
+            class="header__city-selector header__city-selector--mobile city-selector"
+          >
             <div class="city-selector__current">
               {{ locationCity.name }}
               <i class="ac-icon ac-icon-arrow-down city-selector__current-arrow"></i>
@@ -67,7 +74,7 @@
             <a href="#"
                @click="navigate" class="link link--gray menu__item nav__item">Компания</a>
           </router-link>
-          <router-link to="#faq"
+          <router-link to="/#faq"
                        class="link link--gray menu__item nav__item"
           >
             Частые вопросы
@@ -90,12 +97,20 @@
             <div class="user-bar__links">
               <router-link custom to="/profile"
                            v-slot="{ navigate }">
-                <a href="#" @click="navigate" class="link user-bar__link">Личный кабинет</a>
+                <a href="#" @click="navigate" class="link user-bar__link nav__item">Личный
+                  кабинет</a>
               </router-link>
+              <router-link
+                v-for="menuItem in menuItems"
+                :key="menuItem"
+                :to="menuItem.path"
+                class="profile-menu__item profile-menu__item--mobile nav__item"
+                active-class="profile-menu__item--active"
+                v-text="menuItem.title"/>
               <div class="user-bar__link-delimiter"></div>
               <a href="#"
                  @click.prevent="logout"
-                 class="link user-bar__link">Выйти</a>
+                 class="link user-bar__link link user-bar__link--quit">Выйти</a>
             </div>
           </div>
           <div v-else-if="profileLoading" class="header__user-loading">
@@ -170,6 +185,11 @@ import { citiesList } from '@/app.config';
 import LoaderHor from '@/components/LoaderHor.vue';
 import Loader from '@/components/Loader.vue';
 
+interface MenuItem {
+  path: string,
+  title: string,
+}
+
 @Options({
   components: {
     Loader,
@@ -191,13 +211,38 @@ export default class Header extends Vue {
   showMobileMenu = false;
   navBtnOpened = 'nav-btn--active';
   navBtnClosed = '';
+  isActive = false;
+  menuItems: MenuItem[] = [
+    {
+      path: '/profile/orders',
+      title: 'Мои заказы',
+    },
+    {
+      path: '/profile/free-orders',
+      title: 'Бесплатные уборки',
+    },
+    // {
+    //   path: '/profile/settings/payment',
+    //   title: 'Оплата',
+    // },
+    {
+      path: '/profile/cleaners',
+      title: 'Мои клинеры',
+    },
+    {
+      path: '/profile/settings',
+      title: 'Личная информация',
+    },
+  ];
 
   created() {
     document.addEventListener('mousedown', this.onMouseDown);
+    document.addEventListener('mousedown', this.onMouseDownSecond);
   }
 
   unmounted() {
     document.removeEventListener('mousedown', this.onMouseDown);
+    document.removeEventListener('mousedown', this.onMouseDownSecond);
   }
 
   onMouseDown(event: any) {
@@ -211,12 +256,23 @@ export default class Header extends Vue {
     this.showMobileMenu = !this.showMobileMenu;
     this.navBtnClosed = 'nav-btn--closed';
     this.onMouseDown(event);
-    console.log(this.showMobileMenu);
     this.$emit('mobileMenuChanged', this.showMobileMenu);
   }
 
   changeCity(city: CityInformation): void {
     this.$store.dispatch('setLocationCity', city.slug);
+    this.isActive = false;
+  }
+
+  openCitiestList() {
+    this.isActive = !this.isActive;
+  }
+
+  onMouseDownSecond(event: any) {
+    console.log(event.target);
+    if (!event.target.closest('.city-selector')) {
+      this.isActive = false;
+    }
   }
 
   async logout(): Promise<void> {

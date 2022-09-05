@@ -36,7 +36,7 @@
           <ul class="footer__list">
             <li><a href="#" class="link link--white">Контакты</a></li>
             <li>
-              <router-link to="#faq" class="link link--white">Вопросы</router-link>
+              <router-link to="/#faq" class="link link--white">Вопросы</router-link>
             </li>
             <li>
               <router-link to="/#reviews" class="link link--white">Отзывы</router-link>
@@ -85,7 +85,7 @@
               title="О сервисе">
               <li><a href="#" class="link link--white">Контакты</a></li>
               <li>
-                <router-link to="#faq" class="link link--white">Вопросы</router-link>
+                <router-link to="/#faq" class="link link--white">Вопросы</router-link>
               </li>
               <li>
                 <router-link to="/#reviews" class="link link--white">Отзывы</router-link>
