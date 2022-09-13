@@ -11,7 +11,9 @@
             </a>
           </router-link>
         </div>
-        <div class="header__city-selector city-selector">
+        <div class="header__city-selector city-selector"
+             :class="{ 'city-selector--active': isActiveClass }"
+             @click="onCityClick">
           <div class="city-selector__current"
                @click="openCitiestList()"
                :class="{ 'city-selector__current--active': isActive }"
@@ -47,12 +49,19 @@
           </div>
           <div
             class="header__city-selector header__city-selector--mobile city-selector"
+            :class="{ 'city-selector--active': isActiveClass }"
+            @click="onCityClick"
           >
-            <div class="city-selector__current">
+            <div class="city-selector__current"
+            >
               {{ locationCity.name }}
-              <i class="ac-icon ac-icon-arrow-down city-selector__current-arrow"></i>
+              <i
+                class="ac-icon ac-icon-arrow-down city-selector__current-arrow"
+              >
+              </i>
             </div>
-            <div class="city-selector__items">
+            <div class="city-selector__items"
+            >
               <a
                 v-for="city in citiesList" :key="city"
                 href="#"
@@ -212,6 +221,7 @@ export default class Header extends Vue {
   navBtnOpened = 'nav-btn--active';
   navBtnClosed = '';
   isActive = false;
+  isActiveClass = false;
   menuItems: MenuItem[] = [
     {
       path: '/profile/orders',
@@ -234,15 +244,12 @@ export default class Header extends Vue {
       title: 'Личная информация',
     },
   ];
-
   created() {
     document.addEventListener('mousedown', this.onMouseDown);
-    document.addEventListener('mousedown', this.onMouseDownSecond);
   }
 
   unmounted() {
     document.removeEventListener('mousedown', this.onMouseDown);
-    document.removeEventListener('mousedown', this.onMouseDownSecond);
   }
 
   onMouseDown(event: any) {
@@ -250,6 +257,10 @@ export default class Header extends Vue {
       this.showMobileMenu = false;
       this.$emit('mobileMenuChanged', this.showMobileMenu);
     }
+  }
+
+  onCityClick() {
+    this.isActiveClass = !this.isActiveClass;
   }
 
   onNavBtnClick(event: any) {
@@ -261,18 +272,6 @@ export default class Header extends Vue {
 
   changeCity(city: CityInformation): void {
     this.$store.dispatch('setLocationCity', city.slug);
-    this.isActive = false;
-  }
-
-  openCitiestList() {
-    this.isActive = !this.isActive;
-  }
-
-  onMouseDownSecond(event: any) {
-    console.log(event.target);
-    if (!event.target.closest('.city-selector')) {
-      this.isActive = false;
-    }
   }
 
   async logout(): Promise<void> {
